@@ -7,7 +7,7 @@
 **语法：**
 
 ```
-i3bar_comand <command>
+i3bar_command <command>
 ```
 
 **例子：**
