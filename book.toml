@@ -1,0 +1,6 @@
+[book]
+authors = ["zjuyk"]
+language = "zh"
+multilingual = false
+src = "src"
+title = "i3wm 用户说明书"
