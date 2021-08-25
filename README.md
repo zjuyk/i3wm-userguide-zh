@@ -1,5 +1,4 @@
-# I3wm 简体中文使用说明书
-
+<h1 align="center">I3wm 简体中文使用说明书</h1>
 <p align="center">
 <img src="https://img.shields.io/github/workflow/status/zjuyk/i3wm-userguide-zh/Deploy mdbook/master" />
 <img src="https://img.shields.io/github/contributors/zjuyk/i3wm-userguide-zh" />
@@ -9,7 +8,7 @@
 ### 翻译进度：
 
 
-- [ ] [默认按键绑定](./src/默认按键绑定.md)
+- [x] [默认按键绑定](./src/默认按键绑定.md)
 - [ ] [使用 i3](./src/使用i3/使用i3.md)
 	- [ ] [打开终端和移动](./src/使用i3/打开终端和移动.md)
 	- [ ] [改变容器布局](./src/使用i3/改变容器布局.md)
