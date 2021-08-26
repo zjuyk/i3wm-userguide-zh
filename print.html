@@ -276,6 +276,9 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="多显示器环境下的有趣设置"><a class="header" href="#多显示器环境下的有趣设置">多显示器环境下的有趣设置</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="i3-和你的其他软件"><a class="header" href="#i3-和你的其他软件">i3 和你的其他软件</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="显示状态栏"><a class="header" href="#显示状态栏">显示状态栏</a></h1>
+<p>在大多数的窗口管理器用户中，一个非常常见的事情是屏幕某个角落的状态行。它通常是传统桌面环境任务栏中小部件的绝佳替代品。</p>
+<p>如果你还没有找到你最喜欢的方式来生成这样的状态行（自己编写的脚本，conky 等），那么推荐使用 i3status 这个工具。它是用 C 编写的，目的是使用尽可能少的系统调用来减少 CPU 从睡眠状态唤醒的时间。因为 i3status 只输出文本，所以你需要将它与其他一些工具结合起来，比如 i3bar。有关如何在 i3bar 中显示 i3status 的信息，请参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E7%8A%B6%E6%80%81%E6%A0%8F%E5%91%BD%E4%BB%A4.html">status_command</a>。</p>
+<p>无论你使用哪个应用程序来显示状态行，你都希望确保它使用 EWMH 提示注册为停靠窗口。i3 会将窗口定位在屏幕顶部或底部，具体取决于应用程序设置的提示。使用 i3bar，您可以配置其位置，参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E4%BD%8D%E7%BD%AE.html">i3bar_position</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="做展示多显示器"><a class="header" href="#做展示多显示器">做展示（多显示器）</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="高分辨率hidpi"><a class="header" href="#高分辨率hidpi">高分辨率（HIDPI）</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="贡献者"><a class="header" href="#贡献者">贡献者</a></h1>
