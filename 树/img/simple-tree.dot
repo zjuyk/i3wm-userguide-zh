@@ -1,0 +1,7 @@
+digraph {
+    A[shape=box, fontname="wqy-microhei", label="工作区 1", color=lime]
+    B[shape=box, fontname="wqy-microhei", label="左边的终端", color=blue]
+    C[shape=box, fontname="wqy-microhei", label="右边的终端", color=blue]
+    A->B;
+    A->C;
+}
