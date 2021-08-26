@@ -280,6 +280,18 @@
 <p>如果你还没有找到你最喜欢的方式来生成这样的状态行（自己编写的脚本，conky 等），那么推荐使用 i3status 这个工具。它是用 C 编写的，目的是使用尽可能少的系统调用来减少 CPU 从睡眠状态唤醒的时间。因为 i3status 只输出文本，所以你需要将它与其他一些工具结合起来，比如 i3bar。有关如何在 i3bar 中显示 i3status 的信息，请参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E7%8A%B6%E6%80%81%E6%A0%8F%E5%91%BD%E4%BB%A4.html">status_command</a>。</p>
 <p>无论你使用哪个应用程序来显示状态行，你都希望确保它使用 EWMH 提示注册为停靠窗口。i3 会将窗口定位在屏幕顶部或底部，具体取决于应用程序设置的提示。使用 i3bar，您可以配置其位置，参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E4%BD%8D%E7%BD%AE.html">i3bar_position</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="做展示多显示器"><a class="header" href="#做展示多显示器">做展示（多显示器）</a></h1>
+<p>在进行演示时，你通常希望观众看到你在屏幕上看到的内容，然后浏览一系列幻灯片（如果演示很简单）。对于更复杂的演示，你可能希望有一些只有你可以在屏幕上看到的注释，而观众只能看到幻灯片。</p>
+<h2 id="例子一每个人都得到相同的输出"><a class="header" href="#例子一每个人都得到相同的输出">例子一：每个人都得到相同的输出</a></h2>
+<p>这是简单的情况。你将计算机连接到视频投影仪，打开（计算机和视频投影仪）并配置 X 服务器以将计算机的内部平板克隆到视频输出：</p>
+<pre><code class="language-bash">xrandr --output VGA1 --mode 1024x768 --same-as LVDS1
+</code></pre>
+<p>然后 i3 将使用屏幕分辨率的最低通用子集，屏幕的其余部分将保持不变（它将显示 X 背景）。因此，在我们的示例中，这将是 1024x768（我的笔记本电脑有 1280x800）。</p>
+<h2 id="例子二你可以看到比你的观众更多的东西"><a class="header" href="#例子二你可以看到比你的观众更多的东西">例子二：你可以看到比你的观众更多的东西</a></h2>
+<p>这个更难的情况。首先，你应该在内部平板附近的某处配置 VGA 输出，例如输出右边部分：</p>
+<pre><code class="language-bash">xrandr --output VGA1 --mode 1024x768 --right-of LVDS1
+</code></pre>
+<p>现在，i3 将在新屏幕上放置一个新工作区（取决于您的设置），并且你将处于多显示器模式（参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8/%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8.html">multi_monitor</a>）。</p>
+<p>由于 i3 不是合成窗口管理器，因此无法同时在两个屏幕上显示一个窗口。然而，你的演示软件需要完成这项工作（即在每个屏幕上打开一个窗口）。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="高分辨率hidpi"><a class="header" href="#高分辨率hidpi">高分辨率（HIDPI）</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="贡献者"><a class="header" href="#贡献者">贡献者</a></h1>
 <p>以下排名不分先后：</p>
