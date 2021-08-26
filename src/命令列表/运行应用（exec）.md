@@ -4,7 +4,7 @@
 
 语法如下：
 ```
-exec [--no-startup-id] <command>
+exec [--no-startup-id] <命令>
 ```
 
 例如：
