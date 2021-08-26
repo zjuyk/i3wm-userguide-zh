@@ -293,6 +293,12 @@
 <p>现在，i3 将在新屏幕上放置一个新工作区（取决于您的设置），并且你将处于多显示器模式（参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8/%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8.html">multi_monitor</a>）。</p>
 <p>由于 i3 不是合成窗口管理器，因此无法同时在两个屏幕上显示一个窗口。然而，你的演示软件需要完成这项工作（即在每个屏幕上打开一个窗口）。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="高分辨率hidpi"><a class="header" href="#高分辨率hidpi">高分辨率（HIDPI）</a></h1>
+<p>有关如何在 Linux 桌面的各个部分启用缩放的详细信息，请参阅 <a href="https://wiki.archlinux.org/index.php/HiDPI">https://wiki.archlinux.org/index.php/HiDPI</a>。 i3 将从 Xft.dpi 属性读取所需的 DPI。 该属性默认为 96 DPI，因此要实现 200% 缩放，你需要在 ~/.Xresources 中设置 Xft.dpi: 192。</p>
+<p>如果你是刚得到新显示器的长期 i3 用户，请仔细检查：</p>
+<ul>
+<li>你在 i3 配置中使用了可缩放字体（以 &quot;pango:&quot; 开头）。</li>
+<li>你正在使用支持缩放的终端模拟器。你可以暂时切换到 gnome-terminal，它以支持开箱即用的扩展而闻名，直到你弄清楚如何在你最喜欢的终端模拟器中调整字体大小。</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="贡献者"><a class="header" href="#贡献者">贡献者</a></h1>
 <p>以下排名不分先后：</p>
 <ul>
