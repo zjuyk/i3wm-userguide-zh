@@ -546,23 +546,350 @@ hide_edge_borders vertical
 <div style="break-before: page; page-break-before: always;"></div><h1 id="在窗口装饰绘制标记"><a class="header" href="#在窗口装饰绘制标记">在窗口装饰绘制标记</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="连续行"><a class="header" href="#连续行">连续行</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="配置-i3bar"><a class="header" href="#配置-i3bar">配置 i3bar</a></h1>
+<p>你显示器底部的条栏是由一个叫 i3bar 的独立进程绘制的。将 “i3 用户界面” 的这一部分放在一个单独的进程中，有几个好处：</p>
+<ol>
+<li>
+<p>它是模块化的。如果你根本不需要工作区栏，或者你喜欢不同的工作区栏（dzen2、xmobar，甚至 gnome-panel？），
+你可以直接删除 i3bar 的配置，然后使用你喜欢的替代品。</p>
+</li>
+<li>
+<p>它遵循 UNIX 的理念，即 &quot;让每个程序做好一件事&quot;。i3 很擅长管理好你的每一个窗口，
+i3bar 则擅长在每个显示器上显示一个栏（除非你对它进行其他配置）。</p>
+</li>
+<li>
+<p>这使得我们可以有两个独立的、干净的代码库。如果你想了解 i3，你不需要费心去了解 i3bar 的细节，反之亦然。</p>
+</li>
+</ol>
+<p>尽管如此，i3bar 与 i3 的配置在同一个配置文件中。这是因为它与 i3 紧密耦合（与 i3lock 或 i3status 相反，它们对使用其他窗口管理器的人很有用）。
+因此，当我们已经有了一个好的配置基础结构时，在另一个地方配置是没有意义的。</p>
+<p>想要配置你的工作区栏，首先需要在配置文件中创建一个叫做 <code>bar</code> 的块。
+你可以有多个 <code>bar</code> 块来为不同的输出（显示器）使用不同的设置。</p>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    status_command i3status
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="i3bar-命令"><a class="header" href="#i3bar-命令">i3bar 命令</a></h1>
+<p>默认情况下，i3 会直接将 <code>i3bar</code> 传到你的 shell 来处理、搜索 <code>$PATH</code> 以找到正确的版本。如果你在某个地方有一个不同的 <code>i3bar</code> 或者二进制文件不在 <code>$PATH</code> 里，你可以告诉 i3 执行哪个文件。</p>
+<p>这个特定的命令会被传到 <code>sh -c</code> 执行，因此你可以使用 globbing，且必须使用正确的引号等。</p>
+<p><strong>语法：</strong></p>
+<pre><code>i3bar_command &lt;command&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    i3bar_command /home/user/bin/i3bar
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="状态栏命令"><a class="header" href="#状态栏命令">状态栏命令</a></h1>
+<p>i3bar 可以运行一个程序，把它的 <code>stdout</code> 的每一行显示在工作区栏的右边。这对显示系统信息很有用，比如你当前的 IP 地址、电池状态或日期/时间。</p>
+<p>这个特定的命令会被传到 <code>sh -c</code> 执行，因此你可以使用 globbing，且必须使用正确的引号等。注意，对于信号处理，取决你的 shell（已知 <code>dash(1)</code> 的用户会受到影响），你必须使用 shell 的 <code>exec</code> 命令。这样信号就会传递给你的程序而不是 shell。</p>
+<p><strong>语法：</strong></p>
+<p><code>status_command &lt;command&gt;</code></p>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    status_command i3status --config ~/.i3status.conf
+
+    # 想要信号处理正常工作的 dash(1) 用户：
+    status_command exec ~/.bin/my_status_command
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="显示模式"><a class="header" href="#显示模式">显示模式</a></h1>
+<p>你可以让 i3bar 在屏幕的一个边缘永久可见（<code>dock</code> 模式），或者让它在你按下修饰键时才显示出来（ <code>hide</code> 模式）。也可以强制 i3bar 始终保持隐藏状态（<code>invisible</code> 模式）。修饰键可以通过 <code>modifier</code> 选项进行配置。</p>
+<p>显示模式选项可以在运行期间通过 <code>bar mode</code> 命令改变。重新加载后，它会被恢复到配置的值。</p>
+<p><code>hide</code> 模式可以使屏幕空间被最大化利用，来显示实际的窗口内容。当工作区栏被隐藏时，为节省电池电量，i3bar 会向 <code>status_command</code> 进程发送 <code>SIGSTOP</code> 和 <code>SIGCONT</code> 信号。<code>status_command</code> 进程可以通过在其 JSON 头信息中设置适当的值来禁用该功能。</p>
+<p><code>invisible</code> 模式允许永久地最大化屏幕空间，也就是说工作区栏永远不会显示。因此，如果你不想被打扰，可以配置即使在紧急通知或修饰键被按下时，i3bar 也不弹出来。</p>
+<p>为了控制 i3bar 在 <code>hide</code> 模式下是隐藏还是显示，存在一个 <code>hidden_state</code> 选项，在 <code>dock</code> 模式或 <code>invisible</code> 模式下没有效果。它表明了当前的工作区栏的 <code>hideden_state</code>：（1）工作区栏和普通的 <code>hide</code> 模式一样是隐藏的，只有在有紧急通知或按下修饰键的情况下才会解除隐藏（<code>hide</code> 状态），或者（2）它被显示在当前可见工作区的上方（<code>show</code> 状态）。</p>
+<p>和显示模式一样，<code>hidden_state</code> 也可以通过 i3 控制。可以通过使用 <code>bar hidden_state</code> 命令来实现。</p>
+<p>默认的模式是 <code>dock</code> 模式；在 <code>hide</code> 模式下，默认的修饰键是 <code>Mod4</code>（通常是 windows 键）。<code>hidden_state</code> 的默认值是 <code>hide</code>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>mode dock|hide|invisible
+hidden_state hide|show
+modifier &lt;Modifier&gt;|none
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    mode hide
+    hidden_state hide
+    modifier Mod1
+}
+</code></pre>
+<p>可以使用的修饰符有 <code>Mod1</code> - <code>Mod5</code>，<code>Shift</code>，<code>Control</code>（详见 <code>xmodmap(1)</code>）。如果你不想要任何的修饰符触发这个行为，你也可以使用 <code>none</code> 。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="鼠标按键命令"><a class="header" href="#鼠标按键命令">鼠标按键命令</a></h1>
+<p>鼠标按键在 i3bar 上被按下时运行的命令可以被指定来覆盖默认行为。这很有用，例如，用于禁用滚轮动作或运行脚本来实现自定义功能</p>
+<p>一个按钮总是被命名为 <code>button&lt;n&gt;</code>，其中 1 到 7 是如下的默认按键，更高的数字是有更多按键的设备上的特殊按键。</p>
+<ul>
+<li>
+<p>button1
+鼠标左键</p>
+</li>
+<li>
+<p>button2
+鼠标中键</p>
+</li>
+<li>
+<p>button3
+鼠标右键</p>
+</li>
+<li>
+<p>button4
+滚轮向上</p>
+</li>
+<li>
+<p>button5
+滚轮向下</p>
+</li>
+<li>
+<p>button6
+滚轮向右</p>
+</li>
+<li>
+<p>button7
+滚轮向左</p>
+</li>
+</ul>
+<p>请注意老的 <code>wheel_up_cmd</code> 和 <code>wheel_down_cmd</code> 命令已经被废弃，且会在将来的版本中被移除。我们强烈建议使用更通用的 <code>binsym</code> 配合 <code>button4</code> 和 <code>button5</code> 来替代。</p>
+<p><strong>语法：</strong></p>
+<pre><code>bindsym [--release] button&lt;n&gt; &lt;command&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    # 禁用点击工作区按键
+    bindsym button1 nop
+
+    # 通过右键工作区栏来截图
+    bindsym --release button3 exec --no-startup-id import /tmp/latest-screenshot.png
+
+    # 向下滚动时执行自定义脚本
+    bindsym button5 exec ~/.i3/scripts/custom_wheel_down
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="bar-编号"><a class="header" href="#bar-编号">Bar 编号</a></h1>
+<p>为配置的工作区栏指定编号。如果缺少这个选项，ID 会被设置为 <code>bar-x</code>，其中 x 对配置文件中 <code>bar</code> 块所在的位置（<code>bar-0</code>，<code>bar-1</code>。。。）</p>
+<p><strong>语法：</strong></p>
+<pre><code>id &lt;bar_id&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    id bar-1
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="位置"><a class="header" href="#位置">位置</a></h1>
+<p>这个选项决定了 i3bar 会被显示在屏幕的哪个边上。</p>
+<p>默认是底边。</p>
+<p><strong>语法：</strong></p>
+<pre><code>position top|bottom
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    position top
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="输出"><a class="header" href="#输出">输出</a></h1>
+<p>你可以将 i3bar 限制在一个或多个输出（显示器）。默认是处理所有的输出。如果你想要对不同的输出使用不同的选项，你可以使用多个 <code>bar</code> 块，这个时候限制输出就很有用了。</p>
+<p>要使一个特定的 i3bar 实例处理多个输出，请多次使用 <code>output</code> 指令。</p>
+<p>这些输出名称有特殊含义：</p>
+<p><code>primary</code></p>
+<p>选择在 X 服务器中被配置为主要的输出。</p>
+<p><code>nonprimary</code></p>
+<p>选择每一个在 X 服务器中没有被配置为主要的输出。</p>
+<p><strong>语法：</strong></p>
+<pre><code>output primary|nonprimary|&lt;output&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 一个大显示器显示所有内容
+bar {
+    # 显示器可能通过 HDMI 或者 DisplayPort 连接
+    output HDMI2
+    output DP2
+    status_command i3status
+}
+
+# 笔记本显示器：使用亮色和 i3status，少量的模块
+bar {
+    output LVDS1
+    status_command i3status --config ~/.i3status-small.conf
+    colors {
+        background #000000
+        statusline #ffffff
+    }
+}
+
+# 把工作区栏同时显示在主显示器和 HDMI2 上
+bar {
+    output primary
+    output HDMI2
+    status_command i3status
+}
+</code></pre>
+<p>注意你可能没有配置主输出。想要配置，运行：</p>
+<pre><code>xrandr --output &lt;output&gt; --primary
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="托盘输出"><a class="header" href="#托盘输出">托盘输出</a></h1>
+<p>i3bar 默认情况下提供一个系统托盘以供类似于 NetworkManager, VLC, Pidgin 的程序可以在这里放一个小图标。</p>
+<p>你可以配置这些小图标应该被显示在哪个输出上，又或者你可以把这个功能完全禁用。</p>
+<p>你也可以在你的配置文件里使用多个 <code>tray_output</code> 指令来指定一系列你想要显示托盘的输出。这个列表里按顺序第一个可用输出将会被用来显示托盘。</p>
+<p><strong>语法：</strong></p>
+<pre><code>tray_output none|primary|&lt;output&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 禁用系统托盘
+bar {
+    tray_output none
+}
+
+# 在主显示器上显示托盘图标
+bar {
+    tray_output primary
+}
+
+# 在大显示器上显示托盘图标
+bar {
+    tray_output HDMI2
+}
+</code></pre>
+<p>注意你可能没有配置主输出。想要配置，运行：</p>
+<pre><code>xrandr --output &lt;output&gt; --primary
+</code></pre>
+<p>注意如果你有多个 bar 配置块，你要么在每个块里都指定 <code>tray_output primary</code>，要么显式地在你不想要显示托盘的 bar 块里指定 <code>tray_output none</code>。否则不同的实例为了显示图标可能会产生竞争。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="托盘内边距"><a class="header" href="#托盘内边距">托盘内边距</a></h1>
+<p>托盘会显示工作区栏的右侧。默认情况下，在图标的上、右、下侧和托盘间会有一个 2 个像素的内边距。</p>
+<p><strong>语法：</strong></p>
+<pre><code>tray_padding &lt;px&gt; [px]
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 遵循费兹法则
+tray_padding 0
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="字体-1"><a class="header" href="#字体-1">字体</a></h1>
+<p>指定 bar 使用的自体。详见 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E5%AD%97%E4%BD%93.html">字体</a></p>
+<p><strong>语法：</strong></p>
+<pre><code>font &lt;font&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+    font pango:DejaVu Sans Mono 10
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="自定义分隔符"><a class="header" href="#自定义分隔符">自定义分隔符</a></h1>
+<p>如果你不喜欢默认的一像素宽的竖直分隔符，你可以自定义一个符号作为分隔符。</p>
+<p><strong>语法：</strong></p>
+<pre><code>separator_symbol &lt;symbol&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    separator_symbol &quot;:|:&quot;
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="工作区按钮"><a class="header" href="#工作区按钮">工作区按钮</a></h1>
+<p>指定是否需要显示工作区按钮。如果你想要一个可以显示额外信息的、只有状态栏的工作区栏的话，这会很有用。</p>
+<p>默认会显示工作区按钮。</p>
+<p><strong>语法：</strong></p>
+<pre><code>workspace_buttons yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    workspace_buttons no
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="工作区按钮最小宽度"><a class="header" href="#工作区按钮最小宽度">工作区按钮最小宽度</a></h1>
+<p>默认情况下，工作区按钮的宽度是被工作区名字的宽度决定的。如果工作区的名字非常短，比如说一个字母，那工作区按钮可能会看起来太小。</p>
+<p>这个选项指定了工作区按钮的最小宽度。如果工作区名太短没有办法撑满整个按钮，文本的两边会被加上额外的内边距以使文本居中。</p>
+<p>默认值是 0，也就是不会加任何额外的内边距。</p>
+<p>这个设置对 “绑定模式指示器” 也有效。</p>
+<p>注意这里的像素指的是逻辑像素，在高分辨率屏幕下可能会被转换成更多的实际像素。</p>
+<p><strong>语法：</strong></p>
+<pre><code>workspace_min_width &lt;px&gt; [px]
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    workspace_min_width 40
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="去除工作区数字和名字"><a class="header" href="#去除工作区数字和名字">去除工作区数字和名字</a></h1>
+<p>这个设置指定了工作区按钮是否应该显示工作区编号。如果你想要工作区可以按顺序排列，同时又不想要编号前缀的话，这个设置会很有用。</p>
+<p>当 <code>strip_workspace_numbers</code> 被设置为 <code>yes</code> 时，任何的被命名为 <code>[n][:][NAME]</code> 格式的工作区只会显示名字。举个例子，你可以使用罗马数字来替代普通数字作为你的工作区名，像是 <code>1:I</code>, <code>2:II</code>, <code>3:III</code>, <code>4:IV</code>。</p>
+<p>当 <code>strip_workspace_name</code> 被设置为 <code>yes</code> 时，任何的被命名为 <code>[n][:][NAME]</code> 格式的工作区只会显示编号。</p>
+<p>默认情况下会在工作区按钮中显示整个名字。注意工作区名中的冒号是可选的，也就是说 <code>[n][NAME]</code> 也会被正确地去除名字和编号。</p>
+<p><strong>语法：</strong></p>
+<pre><code>strip_workspace_numbers yes|no
+strip_workspace_name yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    strip_workspace_numbers yes
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="绑定模式指示器"><a class="header" href="#绑定模式指示器">绑定模式指示器</a></h1>
+<p>指定是否显示绑定模式指示器。如果你想要隐藏工作区按钮但是仍然能够看见绑定模式指示器的话，这个选项会很有用。关于什么是模式以及如何使用，详见 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%BC%8F.html">绑定模式</a>。</p>
+<p>默认情况下会显示绑定模式指示器。</p>
+<p><strong>语法：</strong></p>
+<pre><code>binding_mode_indicator yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    binding_mode_indicator no
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="颜色"><a class="header" href="#颜色">颜色</a></h1>
+<p>与 i3 一样，颜色使用 HTML 的十六进制格式 (#rrggbb)。目前，这些颜色可以被设置：</p>
+<p><code>background</code></p>
+<p>工作区栏的背景颜色</p>
+<p><code>statusline</code></p>
+<p>状态栏的文字颜色</p>
+<p><code>separator</code></p>
+<p>分隔符的文字颜色</p>
+<p><code>focused_background</code></p>
+<p>当前聚焦显示器输出的工作区栏的背景颜色。如果没有被设置，这个颜色会取 <code>background</code>。</p>
+<p><code>focused_statusline</code></p>
+<p>当前聚焦显示器输出的状态栏的文字颜色。如果没有被设置，这个颜色会取 <code>statusline</code>。</p>
+<p><code>focused_separator</code></p>
+<p>当前聚焦显示器输出的分隔符的文字颜色。如果没有被设置，这个颜色会取 <code>separator</code>。</p>
+<p><code>focused_workspace</code></p>
+<p>聚焦工作区的按钮的边界，背景和文字颜色。</p>
+<p><code>active_workspace</code></p>
+<p>活跃且可见但没有被聚焦的工作区的按钮的边界、背景和文字颜色。仅当你有多个显示器时你才能区分这个和聚焦工作区的区别。</p>
+<p><code>inactive_workspace</code></p>
+<p>没有被聚焦，不活跃但可见的工作区的按钮的边界、背景和文字颜色。这是大部分工作区的状态。</p>
+<p><code>urgent_workspace</code></p>
+<p>当一个工作区中的窗口有紧急通知时的按钮的边界、背景和文字颜色。</p>
+<p><code>binding_mode</code></p>
+<p>绑定模式指示器的边界、背景和文字颜色。如果没有被设置，这个颜色会取 <code>urgent_workspace</code>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>colors {
+    background &lt;color&gt;
+    statusline &lt;color&gt;
+    separator &lt;color&gt;
+
+    &lt;colorclass&gt; &lt;border&gt; &lt;background&gt; &lt;text&gt;
+}
+
+Example (default colors):
+</code></pre>
+<p><strong>例子（默认颜色）：</strong></p>
+<pre><code>bar {
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="透明度"><a class="header" href="#透明度">透明度</a></h1>
+<p>i3bar 支持通过在配置中使用 <code>--transparency</code> flag 来启用透明：</p>
+<p><strong>语法：</strong></p>
+<pre><code>bar {
+    i3bar_command i3bar --transparency
+}
+</code></pre>
+<p>在 i3bar 颜色配置和 i3bar 状态配置的颜色属性中你可以使用 RGBA 格式的颜色，也就是使用最后两位十六进制数字来指定透明度。举个例子，<code>#00000000</code> 是完全透明，而 <code>#000000FF</code> 则是完全不透明的黑色（和 <code>#000000</code> 是一样的）。</p>
+<p>请注意由于托盘配置的工作方式，启用这个配置将会导致托盘图标的背景变成透明的。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="命令列表"><a class="header" href="#命令列表">命令列表</a></h1>
 <p>命令是你绑定在特定按键组合上的东西。你也可以通过使用 IPC 接口在运行时运行命令，而不需要按下一个键，一个简单的方法是使用 <code>i3-msg</code> 工具。</p>
 <p>举例：</p>
@@ -949,6 +1276,7 @@ bindsym $mod+x move container to output primary
 <p>以下排名不分先后：</p>
 <ul>
 <li><a href="https://github.com/zjuyk">zjuyk</a></li>
+<li><a href="https://github.com/George-Miao">George Miao</a></li>
 </ul>
 
                     </main>

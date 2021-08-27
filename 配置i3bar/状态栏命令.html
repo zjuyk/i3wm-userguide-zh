@@ -144,6 +144,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="状态栏命令"><a class="header" href="#状态栏命令">状态栏命令</a></h1>
+<p>i3bar 可以运行一个程序，把它的 <code>stdout</code> 的每一行显示在工作区栏的右边。这对显示系统信息很有用，比如你当前的 IP 地址、电池状态或日期/时间。</p>
+<p>这个特定的命令会被传到 <code>sh -c</code> 执行，因此你可以使用 globbing，且必须使用正确的引号等。注意，对于信号处理，取决你的 shell（已知 <code>dash(1)</code> 的用户会受到影响），你必须使用 shell 的 <code>exec</code> 命令。这样信号就会传递给你的程序而不是 shell。</p>
+<p><strong>语法：</strong></p>
+<p><code>status_command &lt;command&gt;</code></p>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    status_command i3status --config ~/.i3status.conf
+
+    # 想要信号处理正常工作的 dash(1) 用户：
+    status_command exec ~/.bin/my_status_command
+}
+</code></pre>
 
                     </main>
 

@@ -144,6 +144,55 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="颜色"><a class="header" href="#颜色">颜色</a></h1>
+<p>与 i3 一样，颜色使用 HTML 的十六进制格式 (#rrggbb)。目前，这些颜色可以被设置：</p>
+<p><code>background</code></p>
+<p>工作区栏的背景颜色</p>
+<p><code>statusline</code></p>
+<p>状态栏的文字颜色</p>
+<p><code>separator</code></p>
+<p>分隔符的文字颜色</p>
+<p><code>focused_background</code></p>
+<p>当前聚焦显示器输出的工作区栏的背景颜色。如果没有被设置，这个颜色会取 <code>background</code>。</p>
+<p><code>focused_statusline</code></p>
+<p>当前聚焦显示器输出的状态栏的文字颜色。如果没有被设置，这个颜色会取 <code>statusline</code>。</p>
+<p><code>focused_separator</code></p>
+<p>当前聚焦显示器输出的分隔符的文字颜色。如果没有被设置，这个颜色会取 <code>separator</code>。</p>
+<p><code>focused_workspace</code></p>
+<p>聚焦工作区的按钮的边界，背景和文字颜色。</p>
+<p><code>active_workspace</code></p>
+<p>活跃且可见但没有被聚焦的工作区的按钮的边界、背景和文字颜色。仅当你有多个显示器时你才能区分这个和聚焦工作区的区别。</p>
+<p><code>inactive_workspace</code></p>
+<p>没有被聚焦，不活跃但可见的工作区的按钮的边界、背景和文字颜色。这是大部分工作区的状态。</p>
+<p><code>urgent_workspace</code></p>
+<p>当一个工作区中的窗口有紧急通知时的按钮的边界、背景和文字颜色。</p>
+<p><code>binding_mode</code></p>
+<p>绑定模式指示器的边界、背景和文字颜色。如果没有被设置，这个颜色会取 <code>urgent_workspace</code>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>colors {
+    background &lt;color&gt;
+    statusline &lt;color&gt;
+    separator &lt;color&gt;
+
+    &lt;colorclass&gt; &lt;border&gt; &lt;background&gt; &lt;text&gt;
+}
+
+Example (default colors):
+</code></pre>
+<p><strong>例子（默认颜色）：</strong></p>
+<pre><code>bar {
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+}
+</code></pre>
 
                     </main>
 

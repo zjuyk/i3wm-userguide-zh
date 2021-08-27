@@ -144,6 +144,26 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="显示模式"><a class="header" href="#显示模式">显示模式</a></h1>
+<p>你可以让 i3bar 在屏幕的一个边缘永久可见（<code>dock</code> 模式），或者让它在你按下修饰键时才显示出来（ <code>hide</code> 模式）。也可以强制 i3bar 始终保持隐藏状态（<code>invisible</code> 模式）。修饰键可以通过 <code>modifier</code> 选项进行配置。</p>
+<p>显示模式选项可以在运行期间通过 <code>bar mode</code> 命令改变。重新加载后，它会被恢复到配置的值。</p>
+<p><code>hide</code> 模式可以使屏幕空间被最大化利用，来显示实际的窗口内容。当工作区栏被隐藏时，为节省电池电量，i3bar 会向 <code>status_command</code> 进程发送 <code>SIGSTOP</code> 和 <code>SIGCONT</code> 信号。<code>status_command</code> 进程可以通过在其 JSON 头信息中设置适当的值来禁用该功能。</p>
+<p><code>invisible</code> 模式允许永久地最大化屏幕空间，也就是说工作区栏永远不会显示。因此，如果你不想被打扰，可以配置即使在紧急通知或修饰键被按下时，i3bar 也不弹出来。</p>
+<p>为了控制 i3bar 在 <code>hide</code> 模式下是隐藏还是显示，存在一个 <code>hidden_state</code> 选项，在 <code>dock</code> 模式或 <code>invisible</code> 模式下没有效果。它表明了当前的工作区栏的 <code>hideden_state</code>：（1）工作区栏和普通的 <code>hide</code> 模式一样是隐藏的，只有在有紧急通知或按下修饰键的情况下才会解除隐藏（<code>hide</code> 状态），或者（2）它被显示在当前可见工作区的上方（<code>show</code> 状态）。</p>
+<p>和显示模式一样，<code>hidden_state</code> 也可以通过 i3 控制。可以通过使用 <code>bar hidden_state</code> 命令来实现。</p>
+<p>默认的模式是 <code>dock</code> 模式；在 <code>hide</code> 模式下，默认的修饰键是 <code>Mod4</code>（通常是 windows 键）。<code>hidden_state</code> 的默认值是 <code>hide</code>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>mode dock|hide|invisible
+hidden_state hide|show
+modifier &lt;Modifier&gt;|none
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    mode hide
+    hidden_state hide
+    modifier Mod1
+}
+</code></pre>
+<p>可以使用的修饰符有 <code>Mod1</code> - <code>Mod5</code>，<code>Shift</code>，<code>Control</code>（详见 <code>xmodmap(1)</code>）。如果你不想要任何的修饰符触发这个行为，你也可以使用 <code>none</code> 。</p>
 
                     </main>
 

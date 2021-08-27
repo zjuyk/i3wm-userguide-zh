@@ -144,6 +144,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="i3bar-命令"><a class="header" href="#i3bar-命令">i3bar 命令</a></h1>
+<p>默认情况下，i3 会直接将 <code>i3bar</code> 传到你的 shell 来处理、搜索 <code>$PATH</code> 以找到正确的版本。如果你在某个地方有一个不同的 <code>i3bar</code> 或者二进制文件不在 <code>$PATH</code> 里，你可以告诉 i3 执行哪个文件。</p>
+<p>这个特定的命令会被传到 <code>sh -c</code> 执行，因此你可以使用 globbing，且必须使用正确的引号等。</p>
+<p><strong>语法：</strong></p>
+<pre><code>i3bar_command &lt;command&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    i3bar_command /home/user/bin/i3bar
+}
+</code></pre>
 
                     </main>
 

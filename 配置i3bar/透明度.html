@@ -144,6 +144,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="透明度"><a class="header" href="#透明度">透明度</a></h1>
+<p>i3bar 支持通过在配置中使用 <code>--transparency</code> flag 来启用透明：</p>
+<p><strong>语法：</strong></p>
+<pre><code>bar {
+    i3bar_command i3bar --transparency
+}
+</code></pre>
+<p>在 i3bar 颜色配置和 i3bar 状态配置的颜色属性中你可以使用 RGBA 格式的颜色，也就是使用最后两位十六进制数字来指定透明度。举个例子，<code>#00000000</code> 是完全透明，而 <code>#000000FF</code> 则是完全不透明的黑色（和 <code>#000000</code> 是一样的）。</p>
+<p>请注意由于托盘配置的工作方式，启用这个配置将会导致托盘图标的背景变成透明的。</p>
 
                     </main>
 

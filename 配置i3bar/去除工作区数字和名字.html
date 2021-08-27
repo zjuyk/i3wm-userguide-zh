@@ -144,6 +144,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="去除工作区数字和名字"><a class="header" href="#去除工作区数字和名字">去除工作区数字和名字</a></h1>
+<p>这个设置指定了工作区按钮是否应该显示工作区编号。如果你想要工作区可以按顺序排列，同时又不想要编号前缀的话，这个设置会很有用。</p>
+<p>当 <code>strip_workspace_numbers</code> 被设置为 <code>yes</code> 时，任何的被命名为 <code>[n][:][NAME]</code> 格式的工作区只会显示名字。举个例子，你可以使用罗马数字来替代普通数字作为你的工作区名，像是 <code>1:I</code>, <code>2:II</code>, <code>3:III</code>, <code>4:IV</code>。</p>
+<p>当 <code>strip_workspace_name</code> 被设置为 <code>yes</code> 时，任何的被命名为 <code>[n][:][NAME]</code> 格式的工作区只会显示编号。</p>
+<p>默认情况下会在工作区按钮中显示整个名字。注意工作区名中的冒号是可选的，也就是说 <code>[n][NAME]</code> 也会被正确地去除名字和编号。</p>
+<p><strong>语法：</strong></p>
+<pre><code>strip_workspace_numbers yes|no
+strip_workspace_name yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    strip_workspace_numbers yes
+}
+</code></pre>
 
                     </main>
 

@@ -144,6 +144,54 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="鼠标按键命令"><a class="header" href="#鼠标按键命令">鼠标按键命令</a></h1>
+<p>鼠标按键在 i3bar 上被按下时运行的命令可以被指定来覆盖默认行为。这很有用，例如，用于禁用滚轮动作或运行脚本来实现自定义功能</p>
+<p>一个按钮总是被命名为 <code>button&lt;n&gt;</code>，其中 1 到 7 是如下的默认按键，更高的数字是有更多按键的设备上的特殊按键。</p>
+<ul>
+<li>
+<p>button1
+鼠标左键</p>
+</li>
+<li>
+<p>button2
+鼠标中键</p>
+</li>
+<li>
+<p>button3
+鼠标右键</p>
+</li>
+<li>
+<p>button4
+滚轮向上</p>
+</li>
+<li>
+<p>button5
+滚轮向下</p>
+</li>
+<li>
+<p>button6
+滚轮向右</p>
+</li>
+<li>
+<p>button7
+滚轮向左</p>
+</li>
+</ul>
+<p>请注意老的 <code>wheel_up_cmd</code> 和 <code>wheel_down_cmd</code> 命令已经被废弃，且会在将来的版本中被移除。我们强烈建议使用更通用的 <code>binsym</code> 配合 <code>button4</code> 和 <code>button5</code> 来替代。</p>
+<p><strong>语法：</strong></p>
+<pre><code>bindsym [--release] button&lt;n&gt; &lt;command&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    # 禁用点击工作区按键
+    bindsym button1 nop
+
+    # 通过右键工作区栏来截图
+    bindsym --release button3 exec --no-startup-id import /tmp/latest-screenshot.png
+
+    # 向下滚动时执行自定义脚本
+    bindsym button5 exec ~/.i3/scripts/custom_wheel_down
+}
+</code></pre>
 
                     </main>
 

@@ -144,6 +144,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="工作区按钮最小宽度"><a class="header" href="#工作区按钮最小宽度">工作区按钮最小宽度</a></h1>
+<p>默认情况下，工作区按钮的宽度是被工作区名字的宽度决定的。如果工作区的名字非常短，比如说一个字母，那工作区按钮可能会看起来太小。</p>
+<p>这个选项指定了工作区按钮的最小宽度。如果工作区名太短没有办法撑满整个按钮，文本的两边会被加上额外的内边距以使文本居中。</p>
+<p>默认值是 0，也就是不会加任何额外的内边距。</p>
+<p>这个设置对 “绑定模式指示器” 也有效。</p>
+<p>注意这里的像素指的是逻辑像素，在高分辨率屏幕下可能会被转换成更多的实际像素。</p>
+<p><strong>语法：</strong></p>
+<pre><code>workspace_min_width &lt;px&gt; [px]
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>bar {
+    workspace_min_width 40
+}
+</code></pre>
 
                     </main>
 
