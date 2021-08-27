@@ -7,7 +7,7 @@ move container to output left|right|down|up|current|primary|<显示输出>
 move workspace to output left|right|down|up|current|primary|<显示输出>
 ```
 
-例如：
+举例：
 ```
 # 移动目前工作区到下一个输出（如果你只有两个输出，相当于在两个输出之间切换）
 bindsym $mod+x move workspace to output right
