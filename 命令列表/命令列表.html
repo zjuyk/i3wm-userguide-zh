@@ -144,6 +144,62 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="命令列表"><a class="header" href="#命令列表">命令列表</a></h1>
+<p>命令是你绑定在特定按键组合上的东西。你也可以通过使用 IPC 接口在运行时运行命令，而不需要按下一个键，一个简单的方法是使用 <code>i3-msg</code> 工具。</p>
+<p>举例：</p>
+<pre><code># 在你的 shell 中执行这个命令，去除当前的容器的边界
+i3-msg border none
+</code></pre>
+<p>多个命令可以用 <code>;</code>（分号）连接。所以，如果想要将一个窗口移动到一个工作区中并立即切换到这个工作区，你可以配置如下的按键绑定：</p>
+<pre><code>bindsym $mod+x move container to workspace 3; workspace 3
+</code></pre>
+<p>另外，你还可以更改命令的作用域——即哪些容器会受到该命令的影响。判断标准在命令之前用一对方括号指定，用空格隔开。</p>
+<p>当作用域用于多条命令时，应使用 <code>,</code>（逗号）而不是分号来分隔它们。判断标准只适用到下一个分号之前，所以如果你使用分号来分隔命令，只有第一个命令会对被匹配的窗口执行。</p>
+<p>举例：</p>
+<pre><code># 如果你想杀死所有 class 是 Firefox 的窗口，使用：
+bindsym $mod+x [class=&quot;Firefox&quot;] kill
+
+# 同上，除了匹配时忽略大小写
+bindsym $mod+x [class=&quot;(?i)firefox&quot;] kill
+
+# 只杀死 Firefox 的关于对话框
+bindsym $mod+x [class=&quot;Firefox&quot; window_role=&quot;About&quot;] kill
+
+# 打开浮动模式并移动容器到工作区 4
+for_window [class=&quot;^evil-app$&quot;] floating enable, move container to workspace 4
+
+# 移动所有浮动窗口到 scratchpad
+bindsym $mod+x [floating] move scratchpad
+</code></pre>
+<p>目前已实现的判断标准有：<span id="criteria"></span></p>
+<p><strong>class</strong>:<br>
+比较 window class（WM_CLASS 的第二部分）。使用特殊值 <code>__focused__</code> 匹配 window class 和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>instance</strong>:<br>
+比较 window instance（WM_CLASS 的第二部分）。使用特殊值 <code>__focused__</code> 匹配 window instance 和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>window_role</strong>:<br>
+比较 window role（WM_WINDOW_ROLE）。使用特殊值 <code>__focused__</code> 匹配 window role 和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>window_type</strong>:<br>
+比较 window type（_NET_WM_WINDOW_TYPE）。合法值有 <code>normal</code>, <code>dialog</code>, <code>utility</code>, <code>toolbar</code>, <code>splash</code>, <code>menu</code>, <code>dropdown_menu</code>, <code>popup_menu</code>, <code>tooltip</code> 和 <code>notification</code>。</p>
+<p><strong>id</strong>:<br>
+比较 X11 window ID，你可以使用 <code>xwininfo</code> 获得 ID。</p>
+<p><strong>title</strong>:<br>
+比较 X11 窗口标题（_NET_WM_NAME 或者默认值 WM_NAME）。使用特殊值 <code>__focused__</code> 匹配窗口标题和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>urgent</strong>:<br>
+比较窗口的紧急状况。值可以是 &quot;latest&quot; 或者 &quot;oldest&quot;，分别匹配最新的和最旧的紧急窗口。</p>
+<p><strong>workspace</strong>:<br>
+比较窗口所在工作区的名字。使用特殊值 <code>__focused__</code> 匹配目前拥有焦点的工作区中的所有窗口。</p>
+<p><strong>con_mark</strong>:<br>
+比较此容器的标记，见<a href="%E7%B1%BB%E4%BC%BCVIM%E7%9A%84%E6%A0%87%E8%AE%B0%EF%BC%88mark%E5%92%8Cgoto%EF%BC%89.html">类似 VIM 的标记</a>。如果一个容器的多个标记中有一个标记被匹配，这个容器就会被匹配。</p>
+<p><strong>con_id</strong>:<br>
+比较 i3 内部的容器 ID，你可通过 IPC 接口获得 ID。写脚本时使用它比较方便。使用特殊值 <code>__focused__</code> 匹配目前拥有焦点的那个窗口。</p>
+<p><strong>floating</strong>:<br>
+只匹配浮动窗口。这个判断标准没有值。</p>
+<p><strong>floating_from</strong>:<br>
+和 <code>floating</code> 相似但这个判断标准有两个可能的值：&quot;auto&quot; 和 &quot;user&quot;。当值是 &quot;auto&quot; 时，只有打开时就自动是浮动状态的窗口会被匹配。当值是 &quot;user&quot; 时，只有被用户改变为浮动的窗口会被匹配。</p>
+<p><strong>tiling</strong>:<br>
+只匹配平铺窗口。这个判断标准没有值。</p>
+<p><strong>tiling_from</strong>:<br>
+和 <code>tiling</code> 相似但这个判断标准有两个可能的值：&quot;auto&quot; 和 &quot;user&quot;。当值是 &quot;auto&quot; 时，只有打开时就自动是平铺状态的窗口会被匹配。当值是 &quot;user&quot; 时，只有被用户改变为平铺的窗口会被匹配。</p>
+<p>判断标准 <code>class</code>, <code>instance</code>, <code>role</code>, <code>title</code>, <code>workspace</code> 和 <code>mark</code> 都是正则表达式（PCRE）。如何使用请见 <code>pcresyntax(3)</code> 或 <code>perldoc perlre</code>。</p>
 
                     </main>
 

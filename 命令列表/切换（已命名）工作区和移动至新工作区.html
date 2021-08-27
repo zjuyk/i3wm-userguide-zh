@@ -144,6 +144,74 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="切换已命名工作区和移动至新工作区"><a class="header" href="#切换已命名工作区和移动至新工作区">切换（已命名）工作区和移动至新工作区</a></h1>
+<p>要切换到一个工作区，应使用 <code>workspace</code> 命令，加上工作区的编号或名字。加上可选的选项 <code>--no-auto-back-and-forth</code> 以对本次命令禁用<a href="../%E9%85%8D%E7%BD%AEi3/%E5%BD%93%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%97%B6%E8%87%AA%E5%8A%A8%E6%9D%A5%E5%9B%9E%E5%88%87%E6%8D%A2.html">自动来回切换</a>。</p>
+<p>要移动容器到一个工作区，使用 <code>move container to workspace</code>。</p>
+<p>你也可以通过命令 <code>workspace next</code> 和 <code>workspace prev</code> 切换到下一个和上一个工作区。例如，如果你有工作区 1、3、4 和 9，然后你想用一个组合键循环浏览它们，用这两个命令就这很方便。如果要将这些限制在当前的输出，可以使用 <code>workspace next_on_output</code> 和 <code>workspace prev_on_output</code>。同样，你可以使用 <code>move container to workspace next</code>、<code>move container to workspace prev</code> 来将一个容器移动到下一个/上一个工作区，以及 <code>move container to workspace current</code>（最后一个命令只有在与判断标准一起使用时才有意义）。</p>
+<p><code>workspace next</code> 可在编号的或命名的工作区中循环。但当它到达最后一个编号的/命名的工作区时，它在遍历完编号的工作区后会寻找命名的工作区，在遍历完命名的工作区后会寻找编号的工作区。</p>
+<p>对于如何移动容器/工作区到一个不同的 RandR 输出，见<a href="%E7%A7%BB%E5%8A%A8%E5%AE%B9%E5%99%A8%E6%88%96%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%88%B0RandR%E8%BE%93%E5%87%BA.html">移动容器或工作区到 RandR 输出</a>。</p>
+<p>工作区的名字会以 <a href="https://developer.gnome.org/pango/stable/pango-Markup.html">Pango 标记</a> 的格式被 i3bar 解析。</p>
+<p>要切换回之前聚焦的工作区，使用 <code>workspace back_and_forth</code>；类似地你可以用 <code>move container to workspace back_and_forth</code> 来将一个容器移动到之前聚焦的工作区。</p>
+<p>格式：</p>
+<pre><code>workspace next|prev|next_on_output|prev_on_output
+workspace back_and_forth
+workspace [--no-auto-back-and-forth] &lt;名字&gt;
+workspace [--no-auto-back-and-forth] number &lt;名字&gt;
+
+move [--no-auto-back-and-forth] [window|container] [to] workspace &lt;名字&gt;
+move [--no-auto-back-and-forth] [window|container] [to] workspace number &lt;名字&gt;
+move [window|container] [to] workspace prev|next|current
+</code></pre>
+<p>举例：</p>
+<pre><code>bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3:&lt;span foreground=&quot;red&quot;&gt;vim&lt;/span&gt;
+...
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+...
+
+# 在当前聚焦的和上一个聚焦的工作区之间切换
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth
+
+# 移动整个工作间到右边的显示输出
+bindsym $mod+x move workspace to output right
+
+# 移动 firefox 到当前工作区
+bindsym $mod+F1 [class=&quot;Firefox&quot;] move workspace current
+</code></pre>
+<h2 id="命名的工作区"><a class="header" href="#命名的工作区">命名的工作区</a></h2>
+<p>工作区用名字来标识。所以你可以可以在 workspace 命令中使用任意名字，而不只是数字：</p>
+<pre><code>bindsym $mod+1 workspace mail
+...
+</code></pre>
+<p>如果你想让工作区<strong>同时</strong>有编号和名字，你可以在名字前面添加编号，像这样：</p>
+<pre><code>bindsym $mod+1 workspace 1: mail
+bindsym $mod+2 workspace 2: www
+...
+</code></pre>
+<p>注意，在这种情况下工作区将被命名为 &quot;1: mail&quot;。i3 以一种稍微特殊的方式处理以数字开头的工作区名称。通常情况下，命名的工作区是按照它们出现的顺序排序的。当它们以数字开头时，i3 将按数字排序。另外，你能用 <code>workspace number 1</code> 来切换到以数字 1 开头的工作区，而不管它的名字是什么。这在你动态改变工作区名称的情况下非常有用。要结合两个命令，你可以使用 <code>workspace number 1: mail</code> 来指定一个默认名字，如果目前没有以 &quot;1&quot; 开头的工作区的话。</p>
+<h2 id="重命名工作区"><a class="header" href="#重命名工作区">重命名工作区</a></h2>
+<p>你可以重命名工作区。如果你从默认的编号的工作区开始做你的工作，并在之后重命名工作区以反映它们上的实际内容，这可能是有用的。你也可以省略旧的名字来重命名当前聚焦的工作区，如果你想在 <code>i3-input</code> 中使用重命名命令，这很方便。</p>
+<p>格式：</p>
+<pre><code>rename workspace &lt;旧名字&gt; to &lt;新名字&gt;
+rename workspace to &lt;新名字&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code>i3-msg 'rename workspace 5 to 6'
+i3-msg 'rename workspace 1 to &quot;1: www&quot;'
+i3-msg 'rename workspace &quot;1: www&quot; to &quot;10: www&quot;'
+i3-msg 'rename workspace to &quot;2: mail&quot;'
+bindsym $mod+r exec i3-input -F 'rename workspace to &quot;%s&quot;' -P 'New name: '
+</code></pre>
+<p>如果你想在保持切换命令稳定的同时按需重命名工作空间，你可以使用这样的设置。</p>
+<pre><code>bindsym $mod+1 workspace number &quot;1: www&quot;
+bindsym $mod+2 workspace number &quot;2: mail&quot;
+...
+</code></pre>
+<p>如果工作区不存在，命令 <code>workspace number &quot;1: mail&quot;</code> 将会创建名为 &quot;1: mail&quot; 的工作区。</p>
+<p>如果编号为 1 的工作区存在，此命令将切换到这个工作区并忽略名字。所以即使这个工作区被重命名为了 &quot;1: web&quot;，上面的命令仍然会切换到它。</p>
 
                     </main>
 

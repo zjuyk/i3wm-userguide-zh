@@ -144,6 +144,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="固定浮动窗口"><a class="header" href="#固定浮动窗口">固定浮动窗口</a></h1>
+<p>如果你想让一个窗口固定在显示器上，即使你切换到另一个工作区，它还留在屏幕上，那么你可以使用 <code>sticky</code> 命令。例如，这对记事本、媒体播放器或视频聊天窗口很有用。</p>
+<p>请注意，虽然任何窗口都可以通过这个命令变成固定的，但只有在窗口是浮动的情况下才会生效。</p>
+<p>格式：</p>
+<pre><code>sticky enable|disable|toggle
+</code></pre>
+<p>举例：</p>
+<pre><code># 固定启动为记事本的终端
+for_window [instance=notepad] sticky enable
+</code></pre>
 
                     </main>
 

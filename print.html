@@ -564,17 +564,348 @@ hide_edge_borders vertical
 <div style="break-before: page; page-break-before: always;"></div><h1 id="颜色"><a class="header" href="#颜色">颜色</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="透明度"><a class="header" href="#透明度">透明度</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="命令列表"><a class="header" href="#命令列表">命令列表</a></h1>
+<p>命令是你绑定在特定按键组合上的东西。你也可以通过使用 IPC 接口在运行时运行命令，而不需要按下一个键，一个简单的方法是使用 <code>i3-msg</code> 工具。</p>
+<p>举例：</p>
+<pre><code># 在你的 shell 中执行这个命令，去除当前的容器的边界
+i3-msg border none
+</code></pre>
+<p>多个命令可以用 <code>;</code>（分号）连接。所以，如果想要将一个窗口移动到一个工作区中并立即切换到这个工作区，你可以配置如下的按键绑定：</p>
+<pre><code>bindsym $mod+x move container to workspace 3; workspace 3
+</code></pre>
+<p>另外，你还可以更改命令的作用域——即哪些容器会受到该命令的影响。判断标准在命令之前用一对方括号指定，用空格隔开。</p>
+<p>当作用域用于多条命令时，应使用 <code>,</code>（逗号）而不是分号来分隔它们。判断标准只适用到下一个分号之前，所以如果你使用分号来分隔命令，只有第一个命令会对被匹配的窗口执行。</p>
+<p>举例：</p>
+<pre><code># 如果你想杀死所有 class 是 Firefox 的窗口，使用：
+bindsym $mod+x [class=&quot;Firefox&quot;] kill
+
+# 同上，除了匹配时忽略大小写
+bindsym $mod+x [class=&quot;(?i)firefox&quot;] kill
+
+# 只杀死 Firefox 的关于对话框
+bindsym $mod+x [class=&quot;Firefox&quot; window_role=&quot;About&quot;] kill
+
+# 打开浮动模式并移动容器到工作区 4
+for_window [class=&quot;^evil-app$&quot;] floating enable, move container to workspace 4
+
+# 移动所有浮动窗口到 scratchpad
+bindsym $mod+x [floating] move scratchpad
+</code></pre>
+<p>目前已实现的判断标准有：<span id="criteria"></span></p>
+<p><strong>class</strong>:<br>
+比较 window class（WM_CLASS 的第二部分）。使用特殊值 <code>__focused__</code> 匹配 window class 和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>instance</strong>:<br>
+比较 window instance（WM_CLASS 的第二部分）。使用特殊值 <code>__focused__</code> 匹配 window instance 和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>window_role</strong>:<br>
+比较 window role（WM_WINDOW_ROLE）。使用特殊值 <code>__focused__</code> 匹配 window role 和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>window_type</strong>:<br>
+比较 window type（_NET_WM_WINDOW_TYPE）。合法值有 <code>normal</code>, <code>dialog</code>, <code>utility</code>, <code>toolbar</code>, <code>splash</code>, <code>menu</code>, <code>dropdown_menu</code>, <code>popup_menu</code>, <code>tooltip</code> 和 <code>notification</code>。</p>
+<p><strong>id</strong>:<br>
+比较 X11 window ID，你可以使用 <code>xwininfo</code> 获得 ID。</p>
+<p><strong>title</strong>:<br>
+比较 X11 窗口标题（_NET_WM_NAME 或者默认值 WM_NAME）。使用特殊值 <code>__focused__</code> 匹配窗口标题和目前拥有焦点的窗口相同的所有窗口。</p>
+<p><strong>urgent</strong>:<br>
+比较窗口的紧急状况。值可以是 &quot;latest&quot; 或者 &quot;oldest&quot;，分别匹配最新的和最旧的紧急窗口。</p>
+<p><strong>workspace</strong>:<br>
+比较窗口所在工作区的名字。使用特殊值 <code>__focused__</code> 匹配目前拥有焦点的工作区中的所有窗口。</p>
+<p><strong>con_mark</strong>:<br>
+比较此容器的标记，见<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%B1%BB%E4%BC%BCVIM%E7%9A%84%E6%A0%87%E8%AE%B0%EF%BC%88mark%E5%92%8Cgoto%EF%BC%89.html">类似 VIM 的标记</a>。如果一个容器的多个标记中有一个标记被匹配，这个容器就会被匹配。</p>
+<p><strong>con_id</strong>:<br>
+比较 i3 内部的容器 ID，你可通过 IPC 接口获得 ID。写脚本时使用它比较方便。使用特殊值 <code>__focused__</code> 匹配目前拥有焦点的那个窗口。</p>
+<p><strong>floating</strong>:<br>
+只匹配浮动窗口。这个判断标准没有值。</p>
+<p><strong>floating_from</strong>:<br>
+和 <code>floating</code> 相似但这个判断标准有两个可能的值：&quot;auto&quot; 和 &quot;user&quot;。当值是 &quot;auto&quot; 时，只有打开时就自动是浮动状态的窗口会被匹配。当值是 &quot;user&quot; 时，只有被用户改变为浮动的窗口会被匹配。</p>
+<p><strong>tiling</strong>:<br>
+只匹配平铺窗口。这个判断标准没有值。</p>
+<p><strong>tiling_from</strong>:<br>
+和 <code>tiling</code> 相似但这个判断标准有两个可能的值：&quot;auto&quot; 和 &quot;user&quot;。当值是 &quot;auto&quot; 时，只有打开时就自动是平铺状态的窗口会被匹配。当值是 &quot;user&quot; 时，只有被用户改变为平铺的窗口会被匹配。</p>
+<p>判断标准 <code>class</code>, <code>instance</code>, <code>role</code>, <code>title</code>, <code>workspace</code> 和 <code>mark</code> 都是正则表达式（PCRE）。如何使用请见 <code>pcresyntax(3)</code> 或 <code>perldoc perlre</code>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="运行应用exec"><a class="header" href="#运行应用exec">运行应用（exec）</a></h1>
+<p>如果你不能实际启动任何应用程序，那么窗口管理器有什么用呢？exec 命令通过将你指定的命令传递给 shell 来启动一个应用程序。这意味着你可以使用通配符，并将会在 <code>$PATH</code> 中搜索程序。</p>
+<p>格式：</p>
+<pre><code>exec [--no-startup-id] &lt;命令&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code># 打开 GIMP
+bindsym $mod+g exec gimp
+
+# 打开还不支持启动通知的终端模拟器 urxvt
+bindsym $mod+Return exec --no-startup-id urxvt
+</code></pre>
+<p><code>--no-startup-id</code> 参数禁用了对这个 exec 命令的启动通知支持。通过使用启动通知，i3 可以确保程序的窗口在你使用 exec 命令时所在的工作区中出现。同时，它还会在应用程序启动时将 X11 光标改为 watch（一个时钟）。所以，如果一个应用程序没有支持启动通知（不过大多数使用 GTK 和 Qt 的应用程序似乎都支持），将会出现 60 秒的时钟光标。</p>
+<p>如果要执行的命令包含 <code>;</code>（分号）或 <code>,</code>（逗号），那么整个命令必须被引号包裹。例如，要为 shell 命令 <code>notify-send Hello, i3</code> 设置一个绑定，你可以在你的配置文件中添加这样一个条目：</p>
+<pre><code># 运行一个包含逗号的命令
+bindsym $mod+p exec &quot;notify-send Hello, i3&quot;
+</code></pre>
+<p>如果一个带有逗号和/或分号的命令本身需要引号，你必须用双反斜线转义内部引号，像这样：</p>
+<pre><code># 运行一个包含逗号、分号和引号的命令
+bindsym $mod+p exec &quot;notify-send \\&quot;Hello, i3; from $USER\\&quot;&quot;
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="切分容器"><a class="header" href="#切分容器">切分容器</a></h1>
+<p>split 命令使当前窗口成为一个分割容器。分割容器可以包含多个窗口。根据分割容器的布局，新的窗口会被放在当前窗口的右边（splith 横向分割），或者下面（splitv 纵向分割）。</p>
+<p>如果你将这个命令应用于具有相同方向的分割容器，那么什么也不会发生。如果你应用于不同的方向，分割容器的方向将被改变（如果它没有一个以上的窗口）。如果分割容器只包含一个窗口，<code>toggle</code> 选项将切换分割容器的方向。否则，它将使当前窗口成为和父容器方向相反的分割容器。使用 <code>layout toggle split</code> 来改变分割容器的布局，从纵向分割变为横向分割或者反过来。你也可以自定义一个布局序列然后用 <code>layout toggle</code> 来在其中循环切换，见 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E6%93%8D%E7%BA%B5%E5%B8%83%E5%B1%80.html">操纵布局</a>。</p>
+<p>格式：</p>
+<pre><code>split vertical|horizontal|toggle
+</code></pre>
+<p>举例：</p>
+<pre><code>bindsym $mod+v split vertical
+bindsym $mod+h split horizontal
+bindsym $mod+t split toggle
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="操纵布局"><a class="header" href="#操纵布局">操纵布局</a></h1>
+<p>分别使用 <code>layout toggle split</code>, <code>layout stacking</code>, <code>layout tabbed</code>, <code>layout splitv</code> 或 <code>layout splith</code> 来改变当前容器的布局为横向分割/纵向分割、堆叠、标签、纵向分割或横向分割。</p>
+<p>在 <code>layout toggle</code> 之后指定最多 4 个布局来在他们之间循环切换。每次执行该命令时，当前布局之后的布局将被应用。如果当前布局不在列表中，列表中的第一个布局将被激活。</p>
+<p>要使当前窗口全屏，请使用 <code>fullscreen enable</code>（或全局模式的 <code>fullscreen enable global</code>)，要离开任一全屏模式，请使用 <code>fullscreen disable</code>，要在这两种状态之间切换，请使用 <code>fullscreen toggle</code>（或 <code>fullscreen toggle global</code>）。</p>
+<p>同样，要使当前窗口浮动或平铺，请分别使用 <code>floating enable</code> 和 <code>floating disable</code>（或 <code>floating toggle</code>）。</p>
+<p>格式：</p>
+<pre><code>layout default|tabbed|stacking|splitv|splith
+layout toggle [split|all]
+layout toggle [split|tabbed|stacking|splitv|splith] [split|tabbed|stacking|splitv|splith]…
+</code></pre>
+<p>举例：</p>
+<pre><code>bindsym $mod+s layout stacking
+bindsym $mod+l layout toggle split
+bindsym $mod+w layout tabbed
+
+# 在堆叠/标签/分割之间切换
+bindsym $mod+x layout toggle
+
+# 在堆叠/标签/横向分割/纵向分割之间切换
+bindsym $mod+x layout toggle all
+
+# 在堆叠/标签/横向分割之间切换
+bindsym $mod+x layout toggle stacking tabbed splith
+
+# 在纵向分割/标签之间切换
+bindsym $mod+x layout toggle splitv tabbed
+
+# 在上一个分割布局/标签/堆叠之间切换
+bindsym $mod+x layout toggle split tabbed stacking
+
+# 切换全屏
+bindsym $mod+f fullscreen toggle
+
+# 切换浮动/平铺
+bindsym $mod+t floating toggle
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="聚焦容器"><a class="header" href="#聚焦容器">聚焦容器</a></h1>
+<p>要更改焦点，你可以使用 <code>focus</code> 命令，它有以下的选项：</p>
+<p><strong>&lt;criteria&gt;</strong><br>
+聚焦于满足判断标准的容器。见 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#criteria">判断标准</a>。</p>
+<p><strong>left|right|up|down</strong><br>
+聚焦于对应方向最近的容器。</p>
+<p><strong>parent</strong><br>
+聚焦于当前容器的父容器上。</p>
+<p><strong>child</strong><br>
+<code>focus parent</code> 的反操作。聚焦于最后一个拥有焦点的子容器。</p>
+<p><strong>next|prev</strong><br>
+自动聚焦到相邻的容器上。如果在命令后加上了 <code>sibling</code>，该命令将聚焦于确切的同级容器，包括非叶子容器，如分割容器。否则，它是一个在父容器的方向上的自动版本的 <code>focus left|right|up|down</code>。</p>
+<p><strong>floating</strong><br>
+聚焦于上一个拥有焦点的浮动容器。</p>
+<p><strong>tiling</strong><br>
+聚焦于上一个拥有焦点的平铺容器。</p>
+<p><strong>mode_toggle</strong><br>
+在浮动/平铺容器之间切换。</p>
+<p><strong>output</strong><br>
+加上一个方向或显示输出名称作为参数，将聚焦到对应的显示输出。</p>
+<p>格式：</p>
+<pre><code>&lt;criteria&gt; focus
+focus left|right|down|up
+focus parent|child|floating|tiling|mode_toggle
+focus next|prev [sibling]
+focus output left|right|up|down|primary|&lt;output&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code># 聚焦于 firefox
+bindsym $mod+F1 [class=&quot;Firefox&quot;] focus
+
+# 聚焦于左、下、上、右边的容器
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# 聚焦于父容器
+bindsym $mod+u focus parent
+
+# 聚焦于上一个拥有焦点的浮动/平铺容器
+bindsym $mod+g focus mode_toggle
+
+# 聚焦于右边的显示输出
+bindsym $mod+x focus output right
+
+# 聚焦于显示输出 HDMI-2
+bindsym $mod+x focus output HDMI-2
+
+# 聚焦于主显示输出
+bindsym $mod+x focus output primary
+</code></pre>
+<p>注意，你可能还没有一个主显示输出。运行以下命令以指定一个：</p>
+<pre><code class="language-sh">xrandr --output &lt;显示输出&gt; --primary
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="移动容器"><a class="header" href="#移动容器">移动容器</a></h1>
+<p>使用 <code>move</code> 命令来移动一个容器。</p>
+<p>格式：</p>
+<pre><code># 向给定的方向移动容器。可选的 px 参数表示如果容器是浮动的，
+# 它应移动多远，默认为 10 像素。可选的 ppt 参数的意思是百分
+# 点（percentage points），如果使用则表示如果容器是浮动的，
+# 它应移动多少百分点，而不是像素值。
+move &lt;left|right|down|up&gt; [&lt;amount&gt; [px|ppt]]
+
+# 移动容器到屏幕上指定的 (pos_x, pos_y) 坐标。
+move position &lt;pos_x&gt; [px|ppt] &lt;pos_y&gt; [px|ppt]
+
+# 移动容器到屏幕中心。如果使用了 'absolute' 参数，容器将被
+# 移动到所有显示输出的中心。
+move [absolute] position center
+
+# 移动容器到当前光标的位置，只会移动浮动的容器。
+move position mouse
+</code></pre>
+<p>举例：</p>
+<pre><code># 将容器向左、下、上、右边移动
+bindsym $mod+j move left
+bindsym $mod+k move down
+bindsym $mod+l move up
+bindsym $mod+semicolon move right
+
+# 移动容器，但让浮动容器移动多余默认值的距离
+bindsym $mod+j move left 20 px
+
+# 移动容器到所有显示输出的中心
+bindsym $mod+c move absolute position center
+
+# 移动容器到当前光标的位置
+bindsym $mod+m move position mouse
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="交换容器"><a class="header" href="#交换容器">交换容器</a></h1>
+<p>两个容器可以通过使用 <code>swap</code> 命令进行交换（即移动到对方的位置）。它们将继承与之互换的容器的位置和尺寸。</p>
+<p>参与交换的第一个容器可以通过正常的命令判断标准过程来选择，如果没有指定标准，正在聚焦的窗口是通常的默认窗口。第二个容器可以通过以下方法之一来选择：</p>
+<p><strong>id</strong><br>
+窗口的 X11 窗口 ID。</p>
+<p><strong>con_id</strong><br>
+容器的 i3 容器 ID。</p>
+<p><strong>mark</strong><br>
+拥有一个标记的容器，见<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%B1%BB%E4%BC%BCVIM%E7%9A%84%E6%A0%87%E8%AE%B0%EF%BC%88mark%E5%92%8Cgoto%EF%BC%89.html">类似 VIM 的标记</a>。</p>
+<p>注意，不是所有容器都可交换。例如无法交换拥有父子关系的容器。</p>
+<p>格式：</p>
+<pre><code>swap container with id|con_id|mark &lt;参数&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code># 交换聚焦的容器和标记为 &quot;swapee&quot; 的容器
+swap container with mark swapee
+
+# 交换标记为 &quot;A&quot; 和 &quot;B&quot; 的容器
+[con_mark=&quot;^A$&quot;] swap container with mark B
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="固定浮动窗口"><a class="header" href="#固定浮动窗口">固定浮动窗口</a></h1>
+<p>如果你想让一个窗口固定在显示器上，即使你切换到另一个工作区，它还留在屏幕上，那么你可以使用 <code>sticky</code> 命令。例如，这对记事本、媒体播放器或视频聊天窗口很有用。</p>
+<p>请注意，虽然任何窗口都可以通过这个命令变成固定的，但只有在窗口是浮动的情况下才会生效。</p>
+<p>格式：</p>
+<pre><code>sticky enable|disable|toggle
+</code></pre>
+<p>举例：</p>
+<pre><code># 固定启动为记事本的终端
+for_window [instance=notepad] sticky enable
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="切换已命名工作区和移动至新工作区"><a class="header" href="#切换已命名工作区和移动至新工作区">切换（已命名）工作区和移动至新工作区</a></h1>
+<p>要切换到一个工作区，应使用 <code>workspace</code> 命令，加上工作区的编号或名字。加上可选的选项 <code>--no-auto-back-and-forth</code> 以对本次命令禁用<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/../%E9%85%8D%E7%BD%AEi3/%E5%BD%93%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%97%B6%E8%87%AA%E5%8A%A8%E6%9D%A5%E5%9B%9E%E5%88%87%E6%8D%A2.html">自动来回切换</a>。</p>
+<p>要移动容器到一个工作区，使用 <code>move container to workspace</code>。</p>
+<p>你也可以通过命令 <code>workspace next</code> 和 <code>workspace prev</code> 切换到下一个和上一个工作区。例如，如果你有工作区 1、3、4 和 9，然后你想用一个组合键循环浏览它们，用这两个命令就这很方便。如果要将这些限制在当前的输出，可以使用 <code>workspace next_on_output</code> 和 <code>workspace prev_on_output</code>。同样，你可以使用 <code>move container to workspace next</code>、<code>move container to workspace prev</code> 来将一个容器移动到下一个/上一个工作区，以及 <code>move container to workspace current</code>（最后一个命令只有在与判断标准一起使用时才有意义）。</p>
+<p><code>workspace next</code> 可在编号的或命名的工作区中循环。但当它到达最后一个编号的/命名的工作区时，它在遍历完编号的工作区后会寻找命名的工作区，在遍历完命名的工作区后会寻找编号的工作区。</p>
+<p>对于如何移动容器/工作区到一个不同的 RandR 输出，见<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%A7%BB%E5%8A%A8%E5%AE%B9%E5%99%A8%E6%88%96%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%88%B0RandR%E8%BE%93%E5%87%BA.html">移动容器或工作区到 RandR 输出</a>。</p>
+<p>工作区的名字会以 <a href="https://developer.gnome.org/pango/stable/pango-Markup.html">Pango 标记</a> 的格式被 i3bar 解析。</p>
+<p>要切换回之前聚焦的工作区，使用 <code>workspace back_and_forth</code>；类似地你可以用 <code>move container to workspace back_and_forth</code> 来将一个容器移动到之前聚焦的工作区。</p>
+<p>格式：</p>
+<pre><code>workspace next|prev|next_on_output|prev_on_output
+workspace back_and_forth
+workspace [--no-auto-back-and-forth] &lt;名字&gt;
+workspace [--no-auto-back-and-forth] number &lt;名字&gt;
+
+move [--no-auto-back-and-forth] [window|container] [to] workspace &lt;名字&gt;
+move [--no-auto-back-and-forth] [window|container] [to] workspace number &lt;名字&gt;
+move [window|container] [to] workspace prev|next|current
+</code></pre>
+<p>举例：</p>
+<pre><code>bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3:&lt;span foreground=&quot;red&quot;&gt;vim&lt;/span&gt;
+...
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+...
+
+# 在当前聚焦的和上一个聚焦的工作区之间切换
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth
+
+# 移动整个工作间到右边的显示输出
+bindsym $mod+x move workspace to output right
+
+# 移动 firefox 到当前工作区
+bindsym $mod+F1 [class=&quot;Firefox&quot;] move workspace current
+</code></pre>
+<h2 id="命名的工作区"><a class="header" href="#命名的工作区">命名的工作区</a></h2>
+<p>工作区用名字来标识。所以你可以可以在 workspace 命令中使用任意名字，而不只是数字：</p>
+<pre><code>bindsym $mod+1 workspace mail
+...
+</code></pre>
+<p>如果你想让工作区<strong>同时</strong>有编号和名字，你可以在名字前面添加编号，像这样：</p>
+<pre><code>bindsym $mod+1 workspace 1: mail
+bindsym $mod+2 workspace 2: www
+...
+</code></pre>
+<p>注意，在这种情况下工作区将被命名为 &quot;1: mail&quot;。i3 以一种稍微特殊的方式处理以数字开头的工作区名称。通常情况下，命名的工作区是按照它们出现的顺序排序的。当它们以数字开头时，i3 将按数字排序。另外，你能用 <code>workspace number 1</code> 来切换到以数字 1 开头的工作区，而不管它的名字是什么。这在你动态改变工作区名称的情况下非常有用。要结合两个命令，你可以使用 <code>workspace number 1: mail</code> 来指定一个默认名字，如果目前没有以 &quot;1&quot; 开头的工作区的话。</p>
+<h2 id="重命名工作区"><a class="header" href="#重命名工作区">重命名工作区</a></h2>
+<p>你可以重命名工作区。如果你从默认的编号的工作区开始做你的工作，并在之后重命名工作区以反映它们上的实际内容，这可能是有用的。你也可以省略旧的名字来重命名当前聚焦的工作区，如果你想在 <code>i3-input</code> 中使用重命名命令，这很方便。</p>
+<p>格式：</p>
+<pre><code>rename workspace &lt;旧名字&gt; to &lt;新名字&gt;
+rename workspace to &lt;新名字&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code>i3-msg 'rename workspace 5 to 6'
+i3-msg 'rename workspace 1 to &quot;1: www&quot;'
+i3-msg 'rename workspace &quot;1: www&quot; to &quot;10: www&quot;'
+i3-msg 'rename workspace to &quot;2: mail&quot;'
+bindsym $mod+r exec i3-input -F 'rename workspace to &quot;%s&quot;' -P 'New name: '
+</code></pre>
+<p>如果你想在保持切换命令稳定的同时按需重命名工作空间，你可以使用这样的设置。</p>
+<pre><code>bindsym $mod+1 workspace number &quot;1: www&quot;
+bindsym $mod+2 workspace number &quot;2: mail&quot;
+...
+</code></pre>
+<p>如果工作区不存在，命令 <code>workspace number &quot;1: mail&quot;</code> 将会创建名为 &quot;1: mail&quot; 的工作区。</p>
+<p>如果编号为 1 的工作区存在，此命令将切换到这个工作区并忽略名字。所以即使这个工作区被重命名为了 &quot;1: web&quot;，上面的命令仍然会切换到它。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="移动工作区到另一不同屏幕"><a class="header" href="#移动工作区到另一不同屏幕">移动工作区到另一不同屏幕</a></h1>
+<p>对于如何移动容器/工作区到一个不同的 RandR 输出，见<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%A7%BB%E5%8A%A8%E5%AE%B9%E5%99%A8%E6%88%96%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%88%B0RandR%E8%BE%93%E5%87%BA.html">移动容器或工作区到 RandR 输出</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="移动容器或工作区到-randr-输出"><a class="header" href="#移动容器或工作区到-randr-输出">移动容器或工作区到 RandR 输出</a></h1>
+<p>要移动一个容器到另一个 RandR 输出（用类似 <code>LVDS1</code> 和 <code>VGA1</code> 的名字标识），或者用方向标识的 RandR 输出，有两个命令可用：</p>
+<pre><code>move container to output left|right|down|up|current|primary|&lt;显示输出&gt;
+move workspace to output left|right|down|up|current|primary|&lt;显示输出&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code># 移动目前工作区到下一个输出（如果你只有两个输出，相当于在两个输出之间切换）
+bindsym $mod+x move workspace to output right
+
+# 将此窗口移动到投影仪输出
+bindsym $mod+x move container to output VGA1
+
+# 将此窗口移到主输出
+bindsym $mod+x move container to output primary
+</code></pre>
+<p>注意，你可能还没有一个主显示输出。运行以下命令以指定一个：</p>
+<pre><code>xrandr --output &lt;显示输出&gt; --primary
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="移动容器和窗口到标记区"><a class="header" href="#移动容器和窗口到标记区">移动容器和窗口到标记区</a></h1>
+<p>要把一个容器移到另一个有特定标记的容器上（见<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%B1%BB%E4%BC%BCVIM%E7%9A%84%E6%A0%87%E8%AE%B0%EF%BC%88mark%E5%92%8Cgoto%EF%BC%89.html">类似 VIM 的标记</a>），你可以使用以下命令。</p>
+<p>窗口将被移到树中被标记的容器之后，也就是说，它最后的位置与你在标记的容器拥有焦点时打开一个新窗口的位置相同。如果标记是在一个分割容器上，那么窗口将作为一个新的子节点出现在该容器内当前拥有焦点的子节点之后。</p>
+<p>格式：</p>
+<pre><code>move window|container to mark &lt;标记&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code>for_window [instance=&quot;tabme&quot;] move window to mark target
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变窗口和容器大小"><a class="header" href="#改变窗口和容器大小">改变窗口和容器大小</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="跳转到特定窗口"><a class="header" href="#跳转到特定窗口">跳转到特定窗口</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="类似-vim-的标记mark-和-goto"><a class="header" href="#类似-vim-的标记mark-和-goto">类似 VIM 的标记（mark 和 goto）</a></h1>

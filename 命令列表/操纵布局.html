@@ -144,6 +144,41 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="操纵布局"><a class="header" href="#操纵布局">操纵布局</a></h1>
+<p>分别使用 <code>layout toggle split</code>, <code>layout stacking</code>, <code>layout tabbed</code>, <code>layout splitv</code> 或 <code>layout splith</code> 来改变当前容器的布局为横向分割/纵向分割、堆叠、标签、纵向分割或横向分割。</p>
+<p>在 <code>layout toggle</code> 之后指定最多 4 个布局来在他们之间循环切换。每次执行该命令时，当前布局之后的布局将被应用。如果当前布局不在列表中，列表中的第一个布局将被激活。</p>
+<p>要使当前窗口全屏，请使用 <code>fullscreen enable</code>（或全局模式的 <code>fullscreen enable global</code>)，要离开任一全屏模式，请使用 <code>fullscreen disable</code>，要在这两种状态之间切换，请使用 <code>fullscreen toggle</code>（或 <code>fullscreen toggle global</code>）。</p>
+<p>同样，要使当前窗口浮动或平铺，请分别使用 <code>floating enable</code> 和 <code>floating disable</code>（或 <code>floating toggle</code>）。</p>
+<p>格式：</p>
+<pre><code>layout default|tabbed|stacking|splitv|splith
+layout toggle [split|all]
+layout toggle [split|tabbed|stacking|splitv|splith] [split|tabbed|stacking|splitv|splith]…
+</code></pre>
+<p>举例：</p>
+<pre><code>bindsym $mod+s layout stacking
+bindsym $mod+l layout toggle split
+bindsym $mod+w layout tabbed
+
+# 在堆叠/标签/分割之间切换
+bindsym $mod+x layout toggle
+
+# 在堆叠/标签/横向分割/纵向分割之间切换
+bindsym $mod+x layout toggle all
+
+# 在堆叠/标签/横向分割之间切换
+bindsym $mod+x layout toggle stacking tabbed splith
+
+# 在纵向分割/标签之间切换
+bindsym $mod+x layout toggle splitv tabbed
+
+# 在上一个分割布局/标签/堆叠之间切换
+bindsym $mod+x layout toggle split tabbed stacking
+
+# 切换全屏
+bindsym $mod+f fullscreen toggle
+
+# 切换浮动/平铺
+bindsym $mod+t floating toggle
+</code></pre>
 
                     </main>
 

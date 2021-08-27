@@ -144,6 +144,23 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="移动容器或工作区到-randr-输出"><a class="header" href="#移动容器或工作区到-randr-输出">移动容器或工作区到 RandR 输出</a></h1>
+<p>要移动一个容器到另一个 RandR 输出（用类似 <code>LVDS1</code> 和 <code>VGA1</code> 的名字标识），或者用方向标识的 RandR 输出，有两个命令可用：</p>
+<pre><code>move container to output left|right|down|up|current|primary|&lt;显示输出&gt;
+move workspace to output left|right|down|up|current|primary|&lt;显示输出&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code># 移动目前工作区到下一个输出（如果你只有两个输出，相当于在两个输出之间切换）
+bindsym $mod+x move workspace to output right
+
+# 将此窗口移动到投影仪输出
+bindsym $mod+x move container to output VGA1
+
+# 将此窗口移到主输出
+bindsym $mod+x move container to output primary
+</code></pre>
+<p>注意，你可能还没有一个主显示输出。运行以下命令以指定一个：</p>
+<pre><code>xrandr --output &lt;显示输出&gt; --primary
+</code></pre>
 
                     </main>
 

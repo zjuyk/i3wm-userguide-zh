@@ -144,6 +144,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="移动容器和窗口到标记区"><a class="header" href="#移动容器和窗口到标记区">移动容器和窗口到标记区</a></h1>
+<p>要把一个容器移到另一个有特定标记的容器上（见<a href="%E7%B1%BB%E4%BC%BCVIM%E7%9A%84%E6%A0%87%E8%AE%B0%EF%BC%88mark%E5%92%8Cgoto%EF%BC%89.html">类似 VIM 的标记</a>），你可以使用以下命令。</p>
+<p>窗口将被移到树中被标记的容器之后，也就是说，它最后的位置与你在标记的容器拥有焦点时打开一个新窗口的位置相同。如果标记是在一个分割容器上，那么窗口将作为一个新的子节点出现在该容器内当前拥有焦点的子节点之后。</p>
+<p>格式：</p>
+<pre><code>move window|container to mark &lt;标记&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code>for_window [instance=&quot;tabme&quot;] move window to mark target
+</code></pre>
 
                     </main>
 

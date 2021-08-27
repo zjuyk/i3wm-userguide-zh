@@ -144,6 +144,40 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="移动容器"><a class="header" href="#移动容器">移动容器</a></h1>
+<p>使用 <code>move</code> 命令来移动一个容器。</p>
+<p>格式：</p>
+<pre><code># 向给定的方向移动容器。可选的 px 参数表示如果容器是浮动的，
+# 它应移动多远，默认为 10 像素。可选的 ppt 参数的意思是百分
+# 点（percentage points），如果使用则表示如果容器是浮动的，
+# 它应移动多少百分点，而不是像素值。
+move &lt;left|right|down|up&gt; [&lt;amount&gt; [px|ppt]]
+
+# 移动容器到屏幕上指定的 (pos_x, pos_y) 坐标。
+move position &lt;pos_x&gt; [px|ppt] &lt;pos_y&gt; [px|ppt]
+
+# 移动容器到屏幕中心。如果使用了 'absolute' 参数，容器将被
+# 移动到所有显示输出的中心。
+move [absolute] position center
+
+# 移动容器到当前光标的位置，只会移动浮动的容器。
+move position mouse
+</code></pre>
+<p>举例：</p>
+<pre><code># 将容器向左、下、上、右边移动
+bindsym $mod+j move left
+bindsym $mod+k move down
+bindsym $mod+l move up
+bindsym $mod+semicolon move right
+
+# 移动容器，但让浮动容器移动多余默认值的距离
+bindsym $mod+j move left 20 px
+
+# 移动容器到所有显示输出的中心
+bindsym $mod+c move absolute position center
+
+# 移动容器到当前光标的位置
+bindsym $mod+m move position mouse
+</code></pre>
 
                     </main>
 

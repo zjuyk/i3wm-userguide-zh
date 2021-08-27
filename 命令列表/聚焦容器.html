@@ -144,6 +144,60 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="聚焦容器"><a class="header" href="#聚焦容器">聚焦容器</a></h1>
+<p>要更改焦点，你可以使用 <code>focus</code> 命令，它有以下的选项：</p>
+<p><strong>&lt;criteria&gt;</strong><br>
+聚焦于满足判断标准的容器。见 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#criteria">判断标准</a>。</p>
+<p><strong>left|right|up|down</strong><br>
+聚焦于对应方向最近的容器。</p>
+<p><strong>parent</strong><br>
+聚焦于当前容器的父容器上。</p>
+<p><strong>child</strong><br>
+<code>focus parent</code> 的反操作。聚焦于最后一个拥有焦点的子容器。</p>
+<p><strong>next|prev</strong><br>
+自动聚焦到相邻的容器上。如果在命令后加上了 <code>sibling</code>，该命令将聚焦于确切的同级容器，包括非叶子容器，如分割容器。否则，它是一个在父容器的方向上的自动版本的 <code>focus left|right|up|down</code>。</p>
+<p><strong>floating</strong><br>
+聚焦于上一个拥有焦点的浮动容器。</p>
+<p><strong>tiling</strong><br>
+聚焦于上一个拥有焦点的平铺容器。</p>
+<p><strong>mode_toggle</strong><br>
+在浮动/平铺容器之间切换。</p>
+<p><strong>output</strong><br>
+加上一个方向或显示输出名称作为参数，将聚焦到对应的显示输出。</p>
+<p>格式：</p>
+<pre><code>&lt;criteria&gt; focus
+focus left|right|down|up
+focus parent|child|floating|tiling|mode_toggle
+focus next|prev [sibling]
+focus output left|right|up|down|primary|&lt;output&gt;
+</code></pre>
+<p>举例：</p>
+<pre><code># 聚焦于 firefox
+bindsym $mod+F1 [class=&quot;Firefox&quot;] focus
+
+# 聚焦于左、下、上、右边的容器
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# 聚焦于父容器
+bindsym $mod+u focus parent
+
+# 聚焦于上一个拥有焦点的浮动/平铺容器
+bindsym $mod+g focus mode_toggle
+
+# 聚焦于右边的显示输出
+bindsym $mod+x focus output right
+
+# 聚焦于显示输出 HDMI-2
+bindsym $mod+x focus output HDMI-2
+
+# 聚焦于主显示输出
+bindsym $mod+x focus output primary
+</code></pre>
+<p>注意，你可能还没有一个主显示输出。运行以下命令以指定一个：</p>
+<pre><code class="language-sh">xrandr --output &lt;显示输出&gt; --primary
+</code></pre>
 
                     </main>
 
