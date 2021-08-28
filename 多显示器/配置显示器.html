@@ -144,6 +144,48 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="配置显示器"><a class="header" href="#配置显示器">配置显示器</a></h1>
+<p>如果你以前从未使用过多显示器，为了帮助你开始工作，这里有一个关于xrandr选项的简短概述，你可能会感兴趣。获取当前屏幕配置的概览总是很有用的。只要运行 &quot;xrandr&quot;，你就会得到类似的输出：</p>
+<pre><code>$ xrandr
+Screen 0: minimum 320 x 200, current 1280 x 800, maximum 8192 x 8192
+VGA1 disconnected (normal left inverted right x axis y axis)
+LVDS1 connected 1280x800+0+0 (normal left inverted right x axis y axis) 261mm x 163mm
+   1280x800       60.0*+   50.0
+   1024x768       85.0     75.0     70.1     60.0
+   832x624        74.6
+   800x600        85.1     72.2     75.0     60.3     56.2
+   640x480        85.0     72.8     75.0     59.9
+   720x400        85.0
+   640x400        85.1
+   640x350        85.1
+</code></pre>
+<p>这里有几件事很重要。你可以看到 <code>LVDS1</code> 被连接了（当然，它是内部显示器），但 <code>VGA1</code> 没有。如果你有一个显示器连接到了端口，但 xrandr 仍然显示 &quot;disconnected&quot;，你应该检查你的连接线、显示器或图形驱动程序。</p>
+<p>下面假设你连接了 <code>VGA1</code>，想把它作为一个额外的屏幕使用：</p>
+<pre><code>xrandr --output VGA1 --auto --left-of LVDS1
+</code></pre>
+<p>这个命令使 xrandr 尝试找到 <code>VGA1</code> 设备的原始分辨率，并将其配置在你的内部显示器的左边。当再次运行 &quot;xrandr&quot; 时，输出将看起来像这样：</p>
+<pre><code>$ xrandr
+Screen 0: minimum 320 x 200, current 2560 x 1024, maximum 8192 x 8192
+VGA1 connected 1280x1024+0+0 (normal left inverted right x axis y axis) 338mm x 270mm
+   1280x1024      60.0*+   75.0
+   1280x960       60.0
+   1152x864       75.0
+   1024x768       75.1     70.1     60.0
+   832x624        74.6
+   800x600        72.2     75.0     60.3     56.2
+   640x480        72.8     75.0     66.7     60.0
+   720x400        70.1
+LVDS1 connected 1280x800+1280+0 (normal left inverted right x axis y axis) 261mm x 163mm
+   1280x800       60.0*+   50.0
+   1024x768       85.0     75.0     70.1     60.0
+   832x624        74.6
+   800x600        85.1     72.2     75.0     60.3     56.2
+   640x480        85.0     72.8     75.0     59.9
+   720x400        85.0
+   640x400        85.1
+   640x350        85.1
+</code></pre>
+<p>请注意 i3 和 xrandr 使用相同的 API，所以 i3 识别的显示器和 xrandr 命令显示的一样。</p>
+<p>在<a href="../i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/%E5%81%9A%E5%B1%95%E7%A4%BA%EF%BC%88%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8%EF%BC%89.html">做展示</a>一节可以看到更多关于多显示器的配置。</p>
 
                     </main>
 
