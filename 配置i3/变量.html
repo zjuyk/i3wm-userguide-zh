@@ -144,6 +144,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="变量"><a class="header" href="#变量">变量</a></h1>
+<p>正如你在关于键盘绑定的部分中学到的那样，你将必须配置大量包含修饰键的绑定。
+如果你想节省一些输入时间并能够更改你以后使用的修饰符，变量会很方便。</p>
+<p>语法：</p>
+<pre><code>set $&lt;name&gt; &lt;value&gt;
+</code></pre>
+<p>例子：</p>
+<pre><code>set $m Mod1
+bindsym $m+Shift+r restart
+</code></pre>
+<p>解析时直接替换文件中的变量。变量扩展不是递归的，因此不可能使用包含另一个变量的值来定义变量。
+没有花哨的处理，也绝对没有改变这一点的计划。
+如果你需要更动态的配置，你应该创建一个小脚本来生成配置文件并在启动 i3 之前运行它（例如在你的 <code>~/.xsession</code> 文件中）。</p>
+<p>另请参阅 <a href="./X%E8%B5%84%E6%BA%90.html">xresources</a> 以了解如何根据从 X 资源数据库加载的资源创建变量。</p>
 
                     </main>
 

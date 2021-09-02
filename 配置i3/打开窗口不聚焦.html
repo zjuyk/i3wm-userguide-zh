@@ -144,6 +144,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="打开窗口不聚焦"><a class="header" href="#打开窗口不聚焦">打开窗口不聚焦</a></h1>
+<p>当一个新窗口出现时，它将被聚焦。<code>no_focus</code> 指令可以防止这种情况发生，并且必须与 <a href="../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">command_criteria</a> 结合使用。</p>
+<p>请注意，这并不适用于所有情况，例如，当将数据提供给正在运行的应用程序导致它请求被聚焦时。
+要配置这种情况下的行为，请参阅 <a href="../%E9%85%8D%E7%BD%AEi3/%E8%81%9A%E7%84%A6%E7%AA%97%E5%8F%A3%E6%B4%BB%E5%8A%A8.html">focus_on_window_activation</a>。</p>
+<p><code>no_focus</code> 对于工作区上的第一个窗口也将被忽略，因为在这种情况下不应该有理由不聚焦窗口。
+这可以跟 <code>workspace_layout</code> 结合使用以获得更好的可用性。</p>
+<p><strong>语法：</strong></p>
+<pre><code>no_focus &lt;criteria&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>no_focus [window_role=&quot;pop-up&quot;]
+</code></pre>
 
                     </main>
 
