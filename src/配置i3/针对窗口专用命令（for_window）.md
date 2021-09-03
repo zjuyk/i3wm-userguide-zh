@@ -22,4 +22,4 @@ for_window [class="urxvt"] border pixel 1
 for_window [title="x200: ~/work"] floating enable
 ```
 
-有效标准与命令的标准相同，请参阅 [command_criteria](../命令列表/命令列表.md)。在运行时只能执行命令，不能执行配置指令，请参阅 [list_of_commands](../命令列表/命令列表.md)。
+有效标准与命令的标准相同，请参阅 [命令列表#命令条件](https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E6%9D%A1%E4%BB%B6)。在运行时只能执行命令，不能执行配置指令，请参阅 [命令列表](../命令列表/命令列表.md)。
