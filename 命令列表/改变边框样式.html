@@ -144,6 +144,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="改变边框样式"><a class="header" href="#改变边框样式">改变边框样式</a></h1>
+<p>要更改当前客户端的边框，可以使用 <code>border normal</code> 使用普通边框（包括窗口标题），<code>border pixel 1</code> 使用 1 像素边框（无窗口标题）和 <code>border none</code> 使客户端无边框。</p>
+<p>还有 <code>border toggle</code> 可以切换不同的边框样式。可选的像素参数可用于在切换到普通和像素样式时指定边框宽度。</p>
+<p>请注意，“像素”是指逻辑像素。在 HiDPI 显示器上，一个逻辑像素由多个物理像素表示，因此 <code>pixel 1</code> 可能不一定转换为单个像素行宽边框。</p>
+<p><strong>语法：</strong></p>
+<pre><code>border normal|pixel|toggle [&lt;n&gt;]
+border none
+
+# 旧语法，相当于 &quot;border pixel 1&quot;
+border 1pixel
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 使用窗口标题，但没有边框
+bindsym $mod+t border normal 0
+# 不使用窗口标题和粗边框
+bindsym $mod+y border pixel 3
+# 既不使用窗口标题也不使用边框
+bindsym $mod+u border none
+</code></pre>
 
                     </main>
 

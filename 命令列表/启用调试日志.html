@@ -144,6 +144,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="启用调试日志"><a class="header" href="#启用调试日志">启用调试日志</a></h1>
+<p><code>debuglog</code> 命令允许你在运行时启用或禁用调试日志记录。
+调试日志记录比非调试日志记录详细得多。
+此命令不会激活共享内存日志记录 (shmlog)，因此很可能与上述 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%90%AF%E7%94%A8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%97%A5%E5%BF%97.html">shmlog</a> 命令结合使用。</p>
+<p><strong>语法：</strong></p>
+<pre><code>debuglog on|off|toggle
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 启用/禁用日志记录
+bindsym $mod+x debuglog toggle
+</code></pre>
 
                     </main>
 

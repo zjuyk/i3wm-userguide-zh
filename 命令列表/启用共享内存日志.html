@@ -144,6 +144,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="启用共享内存日志"><a class="header" href="#启用共享内存日志">启用共享内存日志</a></h1>
+<p>如 https://i3wm.org/docs/debugging.html 中所述，i3 可以记录到共享内存缓冲区，你可以使用 <code>i3-dump-log</code> 转储该缓冲区。<code>shmlog</code> 命令允许你在运行时启用或禁用共享内存日志记录。</p>
+<p>注意在使用 <code>shmlog &lt;size_in_bytes&gt;</code> 时，当前的日志会被丢弃并启动一个新的日志。</p>
+<p><strong>语法：</strong></p>
+<pre><code>shmlog &lt;size_in_bytes&gt;
+shmlog on|off|toggle
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 启用/禁用日志记录
+bindsym $mod+x shmlog toggle
+
+# 或者，从终端：
+# 将共享内存日志缓冲区增加到 50 MiB
+i3-msg shmlog $((50*1024*1024))
+</code></pre>
 
                     </main>
 

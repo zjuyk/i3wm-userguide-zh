@@ -144,6 +144,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="nop"><a class="header" href="#nop">Nop</a></h1>
+<p>有一个无操作命令 <code>nop</code> 允许你覆盖默认行为。这对于禁用鼠标中键单击时的焦点更改很有用。</p>
+<p>可选的注释参数被忽略，但会被打印到日志文件中以供调试。</p>
+<p>语法：</p>
+<pre><code>nop [&lt;comment&gt;]
+</code></pre>
+<p>例子：</p>
+<pre><code># 禁用点击标题栏的焦点变化
+# 使用鼠标中键
+bindsym button2 nop
+</code></pre>
 
                     </main>
 

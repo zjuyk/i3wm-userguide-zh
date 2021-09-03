@@ -144,6 +144,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="改变窗口和容器大小"><a class="header" href="#改变窗口和容器大小">改变窗口和容器大小</a></h1>
+<p>如果要使用键盘调整容器/窗口的大小，可以使用 <code>resize</code> 命令：</p>
+<p><strong>语法：</strong></p>
+<pre><code>resize grow|shrink &lt;direction&gt; [&lt;px&gt; px [or &lt;ppt&gt; ppt]]
+resize set [width] &lt;width&gt; [px | ppt]
+resize set height &lt;height&gt; [px | ppt]
+resize set [width] &lt;width&gt; [px | ppt] [height] &lt;height&gt; [px | ppt]
+</code></pre>
+<p>方向可以是 <code>up</code>, <code>down</code>, <code>left</code> 或 <code>right</code> 之一。或者你可以不那么具体并使用 <code>width</code> 或 <code>height</code>，在这种情况下，i3 将从所有其他容器中获取/提供空间。
+可选的 pixel 参数指定容器应增大或缩小的像素数（默认值为 10 像素）。 选的 ppt 参数表示“百分比点”，如果指定，它表示平铺容器应该增长或缩小那么多点，而不是 px 值。</p>
+<p>注意 <code>resize set</code>: <width> 或 <height> 的值为 0 表示“不沿此方向调整大小”。</p>
+<p>建议在专用绑定模式下定义用于调整大小的绑定。有关更多上下文，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%BC%8F.html">绑定模式</a> 和 i3 <a href="https://github.com/i3/i3/blob/next/etc/config.keycodes">默认配置</a>中的示例。</p>
+<p><strong>例子：</strong></p>
+<pre><code>for_window [class=&quot;urxvt&quot;] resize set 640 480
+</code></pre>
 
                     </main>
 

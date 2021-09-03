@@ -144,6 +144,29 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="窗口标题格式"><a class="header" href="#窗口标题格式">窗口标题格式</a></h1>
+<p>默认情况下，i3 将简单地打印 X11 窗口标题。
+使用 <code>title_format</code>，可以通过将格式设置为所需的输出来自定义。
+该指令支持 <a href="https://developer.gnome.org/pango/stable/pango-Markup.html">Pango markup</a> 和以下将被替换的占位符：</p>
+<p><code>%title</code></p>
+<p>对于普通窗口，这是 X11 窗口标题（_NET_WM_NAME 或 WM_NAME 作为后备）。当在没有窗口的容器上使用时（例如，选项卡式/堆叠布局内的拆分容器），这将是容器的树表示（例如，“H[xterm xterm]”）。</p>
+<p><code>%class</code></p>
+<p>X11 窗口类（WM_CLASS 的第二部分）。这对应于 <code>class</code> 标准，请参阅 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#class">命令标准</a>。</p>
+<p><code>%instance</code></p>
+<p>X11 窗口实例（WM_CLASS 的第一部分）。这对应于 <code>instance</code> 标准，请参阅 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#instance">命令标准</a>。</p>
+<p>使用 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E9%92%88%E5%AF%B9%E7%AA%97%E5%8F%A3%E4%B8%93%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88for_window%EF%BC%89.html">for_window</a> 指令，你可以根据 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#for_window">命令标准</a> 为任何窗口设置标题格式。</p>
+<p><strong>语法：</strong></p>
+<pre><code>title_format &lt;format&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 给焦点窗口一个前缀
+bindsym $mod+p title_format &quot;Important | %title&quot;
+
+# 以粗体打印所有窗口标题
+for_window [class=&quot;.*&quot;] title_format &quot;&lt;b&gt;%title&lt;/b&gt;&quot;
+
+# 以红色打印 Firefox 窗口的窗口标题
+for_window [class=&quot;(?i)firefox&quot;] title_format &quot;&lt;span foreground='red'&gt;%title&lt;/span&gt;&quot;
+</code></pre>
 
                     </main>
 

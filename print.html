@@ -1332,7 +1332,7 @@ bindsym $mod+t floating toggle
 <div style="break-before: page; page-break-before: always;"></div><h1 id="聚焦容器"><a class="header" href="#聚焦容器">聚焦容器</a></h1>
 <p>要更改焦点，你可以使用 <code>focus</code> 命令，它有以下的选项：</p>
 <p><strong>&lt;criteria&gt;</strong><br>
-聚焦于满足判断标准的容器。见 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#criteria">判断标准</a>。</p>
+聚焦于满足判断标准的容器。见 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#criteria">命令标准</a>。</p>
 <p><strong>left|right|up|down</strong><br>
 聚焦于对应方向最近的容器。</p>
 <p><strong>parent</strong><br>
@@ -1548,16 +1548,205 @@ bindsym $mod+x move container to output primary
 <pre><code>for_window [instance=&quot;tabme&quot;] move window to mark target
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变窗口和容器大小"><a class="header" href="#改变窗口和容器大小">改变窗口和容器大小</a></h1>
+<p>如果要使用键盘调整容器/窗口的大小，可以使用 <code>resize</code> 命令：</p>
+<p><strong>语法：</strong></p>
+<pre><code>resize grow|shrink &lt;direction&gt; [&lt;px&gt; px [or &lt;ppt&gt; ppt]]
+resize set [width] &lt;width&gt; [px | ppt]
+resize set height &lt;height&gt; [px | ppt]
+resize set [width] &lt;width&gt; [px | ppt] [height] &lt;height&gt; [px | ppt]
+</code></pre>
+<p>方向可以是 <code>up</code>, <code>down</code>, <code>left</code> 或 <code>right</code> 之一。或者你可以不那么具体并使用 <code>width</code> 或 <code>height</code>，在这种情况下，i3 将从所有其他容器中获取/提供空间。
+可选的 pixel 参数指定容器应增大或缩小的像素数（默认值为 10 像素）。 选的 ppt 参数表示“百分比点”，如果指定，它表示平铺容器应该增长或缩小那么多点，而不是 px 值。</p>
+<p>注意 <code>resize set</code>: <width> 或 <height> 的值为 0 表示“不沿此方向调整大小”。</p>
+<p>建议在专用绑定模式下定义用于调整大小的绑定。有关更多上下文，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%BC%8F.html">绑定模式</a> 和 i3 <a href="https://github.com/i3/i3/blob/next/etc/config.keycodes">默认配置</a>中的示例。</p>
+<p><strong>例子：</strong></p>
+<pre><code>for_window [class=&quot;urxvt&quot;] resize set 640 480
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="跳转到特定窗口"><a class="header" href="#跳转到特定窗口">跳转到特定窗口</a></h1>
+<p>通常在多显示器环境中，你会希望快速跳转到特定窗口。例如，在工作区 3 上工作时，你可能想要跳转到邮件客户端，向你的老板发送电子邮件，告知你已经实现了一些重要目标。与其弄清楚如何导航到邮件客户端，不如使用快捷方式。你可以使用 <code>focus</code> 命令。</p>
+<p><strong>语法：</strong></p>
+<pre><code>[class=&quot;class&quot;] focus
+[title=&quot;title&quot;] focus
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 进入下一个打开的 VIM 实例
+bindsym $mod+a [class=&quot;urxvt&quot; title=&quot;VIM&quot;] focus
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="类似-vim-的标记mark-和-goto"><a class="header" href="#类似-vim-的标记mark-和-goto">类似 VIM 的标记（mark 和 goto）</a></h1>
+<p>此功能类似于跳转功能：它允许你直接跳转到特定窗口（这意味着切换到适当的工作区并将焦点设置到窗口）。
+但是，你可以使用任意标签直接标记特定窗口，然后再使用它。
+你可以使用 unmark 命令以相同的方式取消标记标签。
+如果你不指定标签，取消标记将删除所有标记。
+你不需要确保你的窗口具有唯一的类或标题，也不需要更改你的配置文件。</p>
+<p>由于该命令需要包含要用于标记窗口的标签，因此不能简单地将其绑定到一个键。
+<code>i3-input</code> 是为此目的创建的工具：它允许你输入命令并将命令发送到 i3。
+它还可以为该命令添加前缀并为输入对话框显示自定义提示。</p>
+<p>如果窗口已经有这个标记，附加的 <code>--toggle</code> 选项将删除该标记，否则将添加它。
+请注意，你可能需要将此与 <code>--add</code>（见下文）结合使用，否则任何其他标记都将被删除。</p>
+<p><code>--replace</code> 参数使 i3 删除任何现有标记，这也是默认行为。
+你可以使用 <code>--add</code> 标志在窗口上放置多个标记。</p>
+<p>如果你不想在窗口装饰中显示标记，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E5%9C%A8%E7%AA%97%E5%8F%A3%E8%A3%85%E9%A5%B0%E7%BB%98%E5%88%B6%E6%A0%87%E8%AE%B0.html">显示标记</a>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>mark [--add|--replace] [--toggle] &lt;identifier&gt;
+[con_mark=&quot;identifier&quot;] focus
+unmark &lt;identifier&gt;
+</code></pre>
+<p>你可以使用 <code>i3-input</code> 提示输入标记名称，然后使用 <code>mark</code> 和 <code>focus</code> 命令创建并跳转到自定义标记：</p>
+<p><strong>例子：</strong></p>
+<pre><code># 读取 1 个字符并用该字符标记当前窗口
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+# 读取 1 个字符并转到带有该字符的窗口
+bindsym $mod+g exec i3-input -F '[con_mark=&quot;%s&quot;] focus' -l 1 -P 'Goto: '
+</code></pre>
+<p>或者，如果你不想弄乱 <code>i3-input</code>，你可以为一组特定的标签创建单独的绑定，然后只使用这些标签：</p>
+<p><strong>例子（在终端）：</strong></p>
+<pre><code># 标记焦点容器
+mark irssi
+
+# 从任何有它的容器中删除标记“irssi”
+'[con_mark=&quot;irssi&quot;] focus'
+
+# remove the mark &quot;irssi&quot; from whichever container has it
+unmark irssi
+
+# 删除所有 firefox 窗口上的所有标记
+[class=&quot;(?i)firefox&quot;] unmark
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="窗口标题格式"><a class="header" href="#窗口标题格式">窗口标题格式</a></h1>
+<p>默认情况下，i3 将简单地打印 X11 窗口标题。
+使用 <code>title_format</code>，可以通过将格式设置为所需的输出来自定义。
+该指令支持 <a href="https://developer.gnome.org/pango/stable/pango-Markup.html">Pango markup</a> 和以下将被替换的占位符：</p>
+<p><code>%title</code></p>
+<p>对于普通窗口，这是 X11 窗口标题（_NET_WM_NAME 或 WM_NAME 作为后备）。当在没有窗口的容器上使用时（例如，选项卡式/堆叠布局内的拆分容器），这将是容器的树表示（例如，“H[xterm xterm]”）。</p>
+<p><code>%class</code></p>
+<p>X11 窗口类（WM_CLASS 的第二部分）。这对应于 <code>class</code> 标准，请参阅 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#class">命令标准</a>。</p>
+<p><code>%instance</code></p>
+<p>X11 窗口实例（WM_CLASS 的第一部分）。这对应于 <code>instance</code> 标准，请参阅 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#instance">命令标准</a>。</p>
+<p>使用 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E9%92%88%E5%AF%B9%E7%AA%97%E5%8F%A3%E4%B8%93%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88for_window%EF%BC%89.html">for_window</a> 指令，你可以根据 <a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#for_window">命令标准</a> 为任何窗口设置标题格式。</p>
+<p><strong>语法：</strong></p>
+<pre><code>title_format &lt;format&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 给焦点窗口一个前缀
+bindsym $mod+p title_format &quot;Important | %title&quot;
+
+# 以粗体打印所有窗口标题
+for_window [class=&quot;.*&quot;] title_format &quot;&lt;b&gt;%title&lt;/b&gt;&quot;
+
+# 以红色打印 Firefox 窗口的窗口标题
+for_window [class=&quot;(?i)firefox&quot;] title_format &quot;&lt;span foreground='red'&gt;%title&lt;/span&gt;&quot;
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变边框样式"><a class="header" href="#改变边框样式">改变边框样式</a></h1>
+<p>要更改当前客户端的边框，可以使用 <code>border normal</code> 使用普通边框（包括窗口标题），<code>border pixel 1</code> 使用 1 像素边框（无窗口标题）和 <code>border none</code> 使客户端无边框。</p>
+<p>还有 <code>border toggle</code> 可以切换不同的边框样式。可选的像素参数可用于在切换到普通和像素样式时指定边框宽度。</p>
+<p>请注意，“像素”是指逻辑像素。在 HiDPI 显示器上，一个逻辑像素由多个物理像素表示，因此 <code>pixel 1</code> 可能不一定转换为单个像素行宽边框。</p>
+<p><strong>语法：</strong></p>
+<pre><code>border normal|pixel|toggle [&lt;n&gt;]
+border none
+
+# 旧语法，相当于 &quot;border pixel 1&quot;
+border 1pixel
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 使用窗口标题，但没有边框
+bindsym $mod+t border normal 0
+# 不使用窗口标题和粗边框
+bindsym $mod+y border pixel 3
+# 既不使用窗口标题也不使用边框
+bindsym $mod+u border none
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="启用共享内存日志"><a class="header" href="#启用共享内存日志">启用共享内存日志</a></h1>
+<p>如 https://i3wm.org/docs/debugging.html 中所述，i3 可以记录到共享内存缓冲区，你可以使用 <code>i3-dump-log</code> 转储该缓冲区。<code>shmlog</code> 命令允许你在运行时启用或禁用共享内存日志记录。</p>
+<p>注意在使用 <code>shmlog &lt;size_in_bytes&gt;</code> 时，当前的日志会被丢弃并启动一个新的日志。</p>
+<p><strong>语法：</strong></p>
+<pre><code>shmlog &lt;size_in_bytes&gt;
+shmlog on|off|toggle
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 启用/禁用日志记录
+bindsym $mod+x shmlog toggle
+
+# 或者，从终端：
+# 将共享内存日志缓冲区增加到 50 MiB
+i3-msg shmlog $((50*1024*1024))
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="启用调试日志"><a class="header" href="#启用调试日志">启用调试日志</a></h1>
+<p><code>debuglog</code> 命令允许你在运行时启用或禁用调试日志记录。
+调试日志记录比非调试日志记录详细得多。
+此命令不会激活共享内存日志记录 (shmlog)，因此很可能与上述 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%90%AF%E7%94%A8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%97%A5%E5%BF%97.html">shmlog</a> 命令结合使用。</p>
+<p><strong>语法：</strong></p>
+<pre><code>debuglog on|off|toggle
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 启用/禁用日志记录
+bindsym $mod+x debuglog toggle
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="重载重启和退出"><a class="header" href="#重载重启和退出">重载重启和退出</a></h1>
+<p>你可以使用 <code>reload</code> 使 i3 重新加载其配置文件。
+你还可以使用 <code>restart</code> 命令就地重新启动 i3 以使其摆脱某种奇怪的状态（如果应该发生的话）或执行升级而不必重新启动 X 会话。
+要正确退出 i3，你可以使用 <code>exit</code> 命令（简单地终止您的 X 会话也可以）。</p>
+<p><strong>例子：</strong></p>
+<pre><code>bindsym $mod+Shift+r restart
+bindsym $mod+Shift+w reload
+bindsym $mod+Shift+e exit
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="scratchpad"><a class="header" href="#scratchpad">Scratchpad</a></h1>
+<p>有两个命令可以将任何现有窗口用作便笺窗口。<code>move scratchpad</code> 将一个窗口移动到暂存器工作区。
+这将使它不可见，直到你再次显示它。你将无法打开该工作区。
+相反，当使用 <code>scratchpad show</code> 时，窗口将再次显示为浮动窗口，以你当前的工作区为中心（在可见的便签簿窗口上使用 <code>scratchpad show</code> 将使其再次隐藏，因此你可以使用键绑定来切换）。
+请注意，这只是一个普通的浮动窗口，因此如果你想“将其从便笺窗口中删除”，你可以简单地使其再次平铺（<code>floating toggle</code>）。</p>
+<p>顾名思义，这对于拥有一个随时可用的带有你最喜欢的编辑器的窗口很有用。
+但是，你也可以将它用于你不想一直看到的其他永久运行的应用程序：你的音乐播放器、alsamixer，甚至是邮件客户端……？</p>
+<p>语法：</p>
+<pre><code>move scratchpad
+
+scratchpad show
+</code></pre>
+<p>例子：</p>
+<pre><code># 使当前聚焦的窗口成为便笺簿
+bindsym $mod+Shift+minus move scratchpad
+
+# 显示第一个便笺簿窗口
+bindsym $mod+minus scratchpad show
+
+# 显示 sup-mail 暂存窗口，如果有的话。
+bindsym mod4+s [title=&quot;^Sup ::&quot;] scratchpad show
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nop"><a class="header" href="#nop">Nop</a></h1>
+<p>有一个无操作命令 <code>nop</code> 允许你覆盖默认行为。这对于禁用鼠标中键单击时的焦点更改很有用。</p>
+<p>可选的注释参数被忽略，但会被打印到日志文件中以供调试。</p>
+<p>语法：</p>
+<pre><code>nop [&lt;comment&gt;]
+</code></pre>
+<p>例子：</p>
+<pre><code># 禁用点击标题栏的焦点变化
+# 使用鼠标中键
+bindsym button2 nop
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="i3bar-控制"><a class="header" href="#i3bar-控制">i3bar 控制</a></h1>
+<p>每个 i3bar 实例的配置中有两个选项可以在运行时通过 i3 调用命令来更改。
+命令 <code>bar hidden_​​state</code> 和 <code>bar mode</code> 允许分别设置每个 bar 的当前 hidden_​​state 模式选项。
+还可以在隐藏状态和显示状态以及停靠模式和隐藏模式之间切换。
+每个 i3bar 实例都可以通过指定 bar_id 来单独控制，如果没有给出，则对所有 bar 实例执行该命令。</p>
+<p><strong>语法：</strong></p>
+<pre><code>bar hidden_state hide|show|toggle [&lt;bar_id&gt;]
+
+bar mode dock|hide|invisible|toggle [&lt;bar_id&gt;]
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 在隐藏状态和显示状态之间切换
+bindsym $mod+m bar hidden_state toggle
+
+# 在停靠模式和隐藏模式之间切换
+bindsym $mod+n bar mode toggle
+
+# 设置id为'bar-1'的bar实例切换到隐藏模式
+bindsym $mod+b bar mode hide bar-1
+
+# 将 id 为 'bar-1' 的 bar 实例设置为始终隐藏
+bindsym $mod+Shift+b bar mode invisible bar-1
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="多显示器"><a class="header" href="#多显示器">多显示器</a></h1>
 <p>正如你在网站上的目标列表中所看到的，i3 在开发时特别考虑了对多显示器的支持。本节将解释如何处理多显示器。</p>
 <p>当你只有一个显示器时，事情很简单。你通常从显示器上的工作区 1 开始，然后根据需要打开新的工作区。</p>
@@ -1579,6 +1768,7 @@ LVDS1 connected 1280x800+0+0 (normal left inverted right x axis y axis) 261mm x 
    640x350        85.1
 </code></pre>
 <p>这里有几件事很重要。你可以看到 <code>LVDS1</code> 被连接了（当然，它是内部显示器），但 <code>VGA1</code> 没有。如果你有一个显示器连接到了端口，但 xrandr 仍然显示 &quot;disconnected&quot;，你应该检查你的连接线、显示器或图形驱动程序。</p>
+<p>你可以在第一行末尾看到的最大分辨率是显示器的最大组合分辨率。默认情况下，它通常太低，必须通过编辑 <code>/etc/X11/xorg.conf</code> 来更改。</p>
 <p>下面假设你连接了 <code>VGA1</code>，想把它作为一个额外的屏幕使用：</p>
 <pre><code>xrandr --output VGA1 --auto --left-of LVDS1
 </code></pre>
@@ -1625,8 +1815,8 @@ LVDS1 connected 1280x800+1280+0 (normal left inverted right x axis y axis) 261mm
 <div style="break-before: page; page-break-before: always;"></div><h1 id="i3-和你的其他软件"><a class="header" href="#i3-和你的其他软件">i3 和你的其他软件</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="显示状态栏"><a class="header" href="#显示状态栏">显示状态栏</a></h1>
 <p>在大多数的窗口管理器用户中，一个非常常见的事情是屏幕某个角落的状态行。它通常是传统桌面环境任务栏中小部件的绝佳替代品。</p>
-<p>如果你还没有找到你最喜欢的方式来生成这样的状态行（自己编写的脚本，conky 等），那么推荐使用 i3status 这个工具。它是用 C 编写的，目的是使用尽可能少的系统调用来减少 CPU 从睡眠状态唤醒的时间。因为 i3status 只输出文本，所以你需要将它与其他一些工具结合起来，比如 i3bar。有关如何在 i3bar 中显示 i3status 的信息，请参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E7%8A%B6%E6%80%81%E6%A0%8F%E5%91%BD%E4%BB%A4.html">status_command</a>。</p>
-<p>无论你使用哪个应用程序来显示状态行，你都希望确保它使用 EWMH 提示注册为停靠窗口。i3 会将窗口定位在屏幕顶部或底部，具体取决于应用程序设置的提示。使用 i3bar，您可以配置其位置，参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E4%BD%8D%E7%BD%AE.html">i3bar_position</a>。</p>
+<p>如果你还没有找到你最喜欢的方式来生成这样的状态行（自己编写的脚本，conky 等），那么推荐使用 i3status 这个工具。它是用 C 编写的，目的是使用尽可能少的系统调用来减少 CPU 从睡眠状态唤醒的时间。因为 i3status 只输出文本，所以你需要将它与其他一些工具结合起来，比如 i3bar。有关如何在 i3bar 中显示 i3status 的信息，请参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E7%8A%B6%E6%80%81%E6%A0%8F%E5%91%BD%E4%BB%A4.html">状态栏命令</a>。</p>
+<p>无论你使用哪个应用程序来显示状态行，你都希望确保它使用 EWMH 提示注册为停靠窗口。i3 会将窗口定位在屏幕顶部或底部，具体取决于应用程序设置的提示。使用 i3bar，您可以配置其位置，参阅 <a href="i3%E5%92%8C%E4%BD%A0%E7%9A%84%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6/../%E9%85%8D%E7%BD%AEi3bar/%E4%BD%8D%E7%BD%AE.html">i3bar 位置</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="做展示多显示器"><a class="header" href="#做展示多显示器">做展示（多显示器）</a></h1>
 <p>在进行演示时，你通常希望观众看到你在屏幕上看到的内容，然后浏览一系列幻灯片（如果演示很简单）。对于更复杂的演示，你可能希望有一些只有你可以在屏幕上看到的注释，而观众只能看到幻灯片。</p>
 <h2 id="例子一每个人都得到相同的输出"><a class="header" href="#例子一每个人都得到相同的输出">例子一：每个人都得到相同的输出</a></h2>

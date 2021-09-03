@@ -144,6 +144,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="跳转到特定窗口"><a class="header" href="#跳转到特定窗口">跳转到特定窗口</a></h1>
+<p>通常在多显示器环境中，你会希望快速跳转到特定窗口。例如，在工作区 3 上工作时，你可能想要跳转到邮件客户端，向你的老板发送电子邮件，告知你已经实现了一些重要目标。与其弄清楚如何导航到邮件客户端，不如使用快捷方式。你可以使用 <code>focus</code> 命令。</p>
+<p><strong>语法：</strong></p>
+<pre><code>[class=&quot;class&quot;] focus
+[title=&quot;title&quot;] focus
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 进入下一个打开的 VIM 实例
+bindsym $mod+a [class=&quot;urxvt&quot; title=&quot;VIM&quot;] focus
+</code></pre>
 
                     </main>
 

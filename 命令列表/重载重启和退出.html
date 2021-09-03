@@ -144,6 +144,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="重载重启和退出"><a class="header" href="#重载重启和退出">重载重启和退出</a></h1>
+<p>你可以使用 <code>reload</code> 使 i3 重新加载其配置文件。
+你还可以使用 <code>restart</code> 命令就地重新启动 i3 以使其摆脱某种奇怪的状态（如果应该发生的话）或执行升级而不必重新启动 X 会话。
+要正确退出 i3，你可以使用 <code>exit</code> 命令（简单地终止您的 X 会话也可以）。</p>
+<p><strong>例子：</strong></p>
+<pre><code>bindsym $mod+Shift+r restart
+bindsym $mod+Shift+w reload
+bindsym $mod+Shift+e exit
+</code></pre>
 
                     </main>
 
