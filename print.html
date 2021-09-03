@@ -155,18 +155,19 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="默认按键绑定"><a class="header" href="#默认按键绑定">默认按键绑定</a></h1>
 <p>对于嫌太长不愿意看的用户，这里有一份默认按键绑定的概览：</p>
 <p>与 $mod（Alt）相关的按键：</p>
-<p><img src="https://i3wm.org/docs/keyboard-layer1.png" alt="" /></p>
+<p><img src="./keyboard-layer1.png" alt="" /></p>
 <p>与 Shift+$mod 相关的按键：</p>
-<p><img src="https://i3wm.org/docs/keyboard-layer2.png" alt="" /></p>
+<p><img src="./keyboard-layer2.png" alt="" /></p>
 <p>红色按键是默认需要按下的前导键，蓝色是后需要按下的自定义键。</p>
-<p>当你没有配置文件运行 i3wm 时，i3-config-wizard 会帮你生成一份与上面按键位置相同的配置文件，不管你是用的是什么键盘布局。如果你更想要一份和上面按键一致的的配置文件，那么拒绝 i3-config-wizard 的自动生成然后在 <code>/etc/i3/config</code> 的基础上自定义。</p>
+<p>当你没有配置文件运行 i3wm 时，i3-config-wizard 会帮你生成一份与上面按键位置相同的配置文件，不管你是用的是什么键盘布局。
+如果你更想要一份和上面按键一致的的配置文件，那么拒绝 i3-config-wizard 的自动生成然后在 <code>/etc/i3/config</code> 的基础上自定义。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="使用-i3"><a class="header" href="#使用-i3">使用 i3</a></h1>
 <p>在本指南中，我们使用关键字 <code>$mod</code> 指代配置好的修饰符键。默认情况下，它指的是 Alt 键（<code>Mod1</code>），而一个流行的备选按键是 Windows 键（<code>Mod4</code>），使用后者可在很大程度上防止与应用程序定义的快捷方式发生冲突。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="打开终端和移动焦点"><a class="header" href="#打开终端和移动焦点">打开终端和移动焦点</a></h1>
 <p>打开新终端是一个非常基本的操作。默认情况下，这个操作的按键绑定是 <code>$mod + Enter</code>，即默认配置中的 Alt + Enter（<code>Mod1 + Enter</code>）。按下 <code>$mod + Enter</code> 打开一个新终端，它将填满屏幕上的整个可用空间。</p>
-<p><img src="https://i3wm.org/docs/single_terminal.png" alt="" /></p>
+<p><img src="%E4%BD%BF%E7%94%A8i3/./single_terminal.png" alt="" /></p>
 <p>如果此时打开另一个终端，i3 会将其放置在当前终端的旁边，并将屏幕大小分成两半。i3 会取决显示器的设置，将创建的窗口放在现有窗口的旁边（宽屏显示器）或其下方（旋转显示器）。</p>
-<p><img src="https://i3wm.org/docs/two_terminals.png" alt="" /></p>
+<p><img src="%E4%BD%BF%E7%94%A8i3/./two_terminals.png" alt="" /></p>
 <p>要在两个终端之间移动焦点，可以使用你可能从 <code>vi</code> 编辑器那儿知道的方向快捷键。然而，在 i3 中，这类快捷键将使用八基本键（也称导位键，即 <code>A</code>、<code>S</code>、<code>D</code>、<code>F</code> 和 <code>J</code>、<code>K</code>、<code>L</code>、<code>;</code> 这一排八个按键 —— 译者注；在 <code>vi</code> 中，为了和大多数键盘布局兼容，这些快捷键向左移了一位）。因此，<code>$mod + j</code> 是往左，<code>$mod + k</code> 是往下，<code>$mod + l</code> 是往上而 <code>$mod + ;</code> 是往右。所以，要在终端间切换，请使用 <code>$mod + k</code> 或 <code>$mod + l</code>。当然，箭头方向键也是可以使用的。</p>
 <p>现在，工作区（它包含两个终端）已经在特定方向上被拆分了（默认为水平）。就像工作区一样，每个窗口都可以再次被水平或垂直地拆分。“窗口”这个术语是指实际包含了 X11 窗口（如终端或浏览器）的容器，“拆分容器”则表示包含了一个或多个窗口的容器。</p>
 <p>TODO：“树”的图片</p>
@@ -180,7 +181,7 @@
 <p><code>tabbed</code>（标签化）：</p>
 <p>原理和 <code>stacking</code> 相同，但是顶部的窗口列表只有一条垂直分割的行。</p>
 <p>要切换模式，请按下 <code>$mod + e</code> 使用 splith/splitv（重复按下可在两者间切换），按下 <code>$mod + s</code> 使用 stacking，按下 <code>$mod + w</code> 使用 tabbed。</p>
-<p><img src="https://i3wm.org/docs/modes.png" alt="" /></p>
+<p><img src="%E4%BD%BF%E7%94%A8i3/./modes.png" alt="" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="为窗口切换全屏模式"><a class="header" href="#为窗口切换全屏模式">为窗口切换全屏模式</a></h1>
 <p>要以全屏模式显示窗口或再次退出全屏模式，请按下 <code>$mod + f</code>。</p>
 <p>i3 中还有一个全局全屏模式，该模式下，客户端将跨越所有可用的输出（命令是 <code>fullscrenn toggle global</code>）。（如果有多个显示器，该模式会将所有显示器看作一个，将窗口跨越多个显示器全屏显示 —— 译者注）</p>
@@ -222,7 +223,7 @@
 我们以一个简单的工作区为例：
 i3 启动在一个单显示器，单工作区的环境中。
 你打开了两个终端窗口，你会看到：</p>
-<p><img src="https://i3wm.org/docs/tree-shot4.png" alt="一个标准的工作区内有两个终端" /></p>
+<p><img src="%E6%A0%91/./tree-shot4.png" alt="一个标准的工作区内有两个终端" /></p>
 <p>他们构成的树像这样：</p>
 <p><img src="%E6%A0%91/./img/simple-tree.svg" alt="树的示意图" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="方向与切分容器"><a class="header" href="#方向与切分容器">方向与切分容器</a></h1>
@@ -237,7 +238,7 @@ i3 启动在一个单显示器，单工作区的环境中。
 （因为现在大多数屏幕都是横向的），如果我们把它改成垂直切分
 （在默认配置文件中是 <code>$mod+v</code>），并且打开两个终端，
 i3 会这样处理你的两个窗口：</p>
-<p><img src="https://i3wm.org/docs/tree-shot2.png" alt="" /></p>
+<p><img src="%E6%A0%91/./tree-shot2.png" alt="" /></p>
 <p>一个关于 i3 自 4 版本以来的有趣的特性是你可以分割几乎所有东西。
 假设你现在有两个终端水平切分（也就是水平方向）在一个工作区内，
 移动焦点到右边的终端。
@@ -246,7 +247,7 @@ i3 会这样处理你的两个窗口：</p>
 你需要按下 <code>$mod+v</code>，来使用垂直切分处理右边的容器
 （如果需要水平切分，则使用 <code>$mod+h</code>）。
 现在你可以打开一个新的终端，它会在刚刚焦点所在的终端的下方：</p>
-<p><img src="https://i3wm.org/docs/tree-shot1.png" alt="" /></p>
+<p><img src="%E6%A0%91/./tree-shot1.png" alt="" /></p>
 <p>此时的树形示意图如下（其中的红色表示你目前的焦点）：</p>
 <p><img src="%E6%A0%91/./img/splitv-tree.svg" alt="" /></p>
 <p>你可能已经猜到了，你的切分容器的深度没有限制。</p>
@@ -260,7 +261,8 @@ i3 会这样处理你的两个窗口：</p>
 这个例子中，你将会聚焦在垂直分割容器上，
 它是水平分割的工作区的子容器。
 现在，新创建的终端将会出现在垂直分割容器的右边。</p>
-<p><img src="https://i3wm.org/docs/tree-shot3.png" alt="" /></p>
+<p><img src="%E6%A0%91/./tree-shot3.png" alt="" />
+图四：聚焦父容器，然后打开新终端</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="隐式容器"><a class="header" href="#隐式容器">隐式容器</a></h1>
 <p>在一些情况下，i3 需要隐式地创建一个容器来完成你的命令。</p>
 <p>考虑这样的情况：你在一个单屏幕单工作区的环境中打开 i3，
@@ -542,11 +544,11 @@ for_window [class=&quot;urxvt&quot;] border pixel 1
 # 当我切换到 `~/work` 目录时使所有的窗口浮动
 for_window [title=&quot;x200: ~/work&quot;] floating enable
 </code></pre>
-<p>有效标准与命令的标准相同，请参阅 <a href="%E9%85%8D%E7%BD%AEi3/../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">command_criteria</a>。在运行时只能执行命令，不能执行配置指令，请参阅 <a href="%E9%85%8D%E7%BD%AEi3/../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">list_of_commands</a>。</p>
+<p>有效标准与命令的标准相同，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E6%9D%A1%E4%BB%B6">命令列表#命令条件</a>。在运行时只能执行命令，不能执行配置指令，请参阅 <a href="%E9%85%8D%E7%BD%AEi3/../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">命令列表</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="打开窗口不聚焦"><a class="header" href="#打开窗口不聚焦">打开窗口不聚焦</a></h1>
-<p>当一个新窗口出现时，它将被聚焦。<code>no_focus</code> 指令可以防止这种情况发生，并且必须与 <a href="%E9%85%8D%E7%BD%AEi3/../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">command_criteria</a> 结合使用。</p>
+<p>当一个新窗口出现时，它将被聚焦。<code>no_focus</code> 指令可以防止这种情况发生，并且必须与 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E6%9D%A1%E4%BB%B6">命令列表#命令条件</a> 结合使用。</p>
 <p>请注意，这并不适用于所有情况，例如，当将数据提供给正在运行的应用程序导致它请求被聚焦时。
-要配置这种情况下的行为，请参阅 <a href="%E9%85%8D%E7%BD%AEi3/../%E9%85%8D%E7%BD%AEi3/%E8%81%9A%E7%84%A6%E7%AA%97%E5%8F%A3%E6%B4%BB%E5%8A%A8.html">focus_on_window_activation</a>。</p>
+要配置这种情况下的行为，请参阅 <a href="%E9%85%8D%E7%BD%AEi3/../%E9%85%8D%E7%BD%AEi3/%E8%81%9A%E7%84%A6%E7%AA%97%E5%8F%A3%E6%B4%BB%E5%8A%A8.html">聚焦窗口活动</a>。</p>
 <p><code>no_focus</code> 对于工作区上的第一个窗口也将被忽略，因为在这种情况下不应该有理由不聚焦窗口。
 这可以跟 <code>workspace_layout</code> 结合使用以获得更好的可用性。</p>
 <p><strong>语法：</strong></p>
@@ -588,20 +590,275 @@ bindsym $m+Shift+r restart
 set_from_resource $black i3wm.color0 #000000
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="自动将客户端放到指定工作区"><a class="header" href="#自动将客户端放到指定工作区">自动将客户端放到指定工作区</a></h1>
+<p>要自动在特定工作区上显示特定窗口，你可以直接分配。
+你可以使用任何标准来匹配窗口，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E6%9D%A1%E4%BB%B6">命令列表#命令条件</a>。
+<code>assign</code> 和 <code>for_window &lt;criteria&gt; move to workspace</code> 的区别在于
+前者只会在应用程序映射窗口时执行（映射意味着实际将其显示在屏幕上）而后者将在符合指定条件的窗口将其属性更改为某些内容时执行。</p>
+<p>因此，建议你尽可能匹配窗口类（和实例，如果合适）而不是窗口标题，因为某些应用程序首先创建它们的窗口，然后担心设置正确的标题。
+例如 Vimperator 的 Firefox，
+窗口启动时被命名为 Firefox，只有当 Vimperator 被加载时，标题才会改变。
+由于 i3 会在应用程序映射窗口后立即获取标题，因此在这种情况下，你必须在 <code>Firefox</code> 上进行匹配。
+另一个已知问题是 Spotify，它在映射窗口时不会设置类提示，这意味着你必须使用 <code>for_window</code> 规则将 Spotify 分配给特定的工作区。
+最后，不支持使用 <code>assign [tiling]</code> 和 <code>assign [floating]</code>。</p>
+<p>你还可以指定一个窗口以显示在特定输出上。
+你可以使用 RandR 名称（例如 <code>VGA1</code>）或与当前聚焦的工作区（例如 <code>left</code> 和 <code>down</code>）的输出相关的名称。</p>
+<p>分配由 i3 按照它们在配置文件中出现的顺序进行处理。
+第一次匹配窗口的分配规则直接生效，不考虑后面的分配。</p>
+<p><strong>语法：</strong></p>
+<pre><code>assign &lt;criteria&gt; [→] [workspace] [number] &lt;workspace&gt;
+assign &lt;criteria&gt; [→] output left|right|up|down|primary|&lt;output&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 将 URxvt 终端分配到第二个工作空间
+assign [class=&quot;URxvt&quot;] 2
+
+# 相同但更精确（精确匹配而不是子字符串）
+assign [class=&quot;^URxvt$&quot;] 2
+
+# 相同但有个漂亮的箭头 :)
+assign [class=&quot;^URxvt$&quot;] → 2
+
+# 分配到已命名的工作空间
+assign [class=&quot;^URxvt$&quot;] → work
+
+# 分配到第二个工作空间，不考虑名字
+assign [class=&quot;^URxvt$&quot;] → number 2
+
+# 你也可以指定数字+名字。如果第二个工作空间存在的话
+# assign will skip the text part.
+assign [class=&quot;^URxvt$&quot;] → number &quot;2: work&quot;
+
+# 启动 urxvt -name irssi
+assign [class=&quot;^URxvt$&quot; instance=&quot;^irssi$&quot;] → 3
+
+# 将 URxvt 分配给当前的输出屏幕右侧
+assign [class=&quot;^URxvt$&quot;] → output right
+
+# 将 URxvt 分配到主输出屏幕
+assign [class=&quot;^URxvt$&quot;] → output primary
+</code></pre>
+<p>请注意，你可能尚未配置主输出。为此，请运行：</p>
+<pre><code>xrandr --output &lt;output&gt; --primary
+</code></pre>
+<p>此外，箭头不是必需的，它看起来不错:-)。如果你决定使用它，它必须是一个 UTF-8 编码的箭头，而不是 -&gt; 或类似的东西。</p>
+<p>要获取类和实例，你可以使用 <code>xprop</code>。单击窗口后，你将看到以下输出：</p>
+<p><strong>xprop:</strong></p>
+<pre><code>WM_CLASS(STRING) = &quot;irssi&quot;, &quot;URxvt&quot;
+</code></pre>
+<p>WM_CLASS 的第一部分是实例（本例中为“irssi”），第二部分是类（本例中为“URxvt”）。</p>
+<p>如果你在分配时遇到任何问题，请务必先检查 i3 日志文件（请参阅 https://i3wm.org/docs/debugging.html）。它包括有关匹配过程的更多详细信息以及启动时窗口的实际类、实例和标题。</p>
+<p>请注意，如果你只想在特定工作区上启动应用程序一次，但不想永久分配它的所有实例，
+则可以在配置文件中使用 i3 的启动通知支持（请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%88exec%EF%BC%89.html">exec</a>）通过以下方式：</p>
+<p><strong>在工作区 3 上启动 iceweasel（一次）：</strong></p>
+<pre><code># 在工作区 3 上启动 iceweasel，然后切换回工作区 1
+# (作为命令行工具，i3-msg 不支持启动通知，因此请使用 exec --no-startup-id。)
+# (使用 i3 的 exec 命令启动 iceweasel 使 i3 创建一个启动通知上下文，如果没有它，iceweasel 窗口
+# 不能匹配到启动命令的工作区。）
+exec --no-startup-id i3-msg 'workspace 3; exec iceweasel; workspace 1'
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="在-i3-启动时自动运行应用"><a class="header" href="#在-i3-启动时自动运行应用">在 i3 启动时自动运行应用</a></h1>
+<p>通过在按键绑定时使用 <code>exec</code> 关键字，你可以配置 i3 在初始启动时将执行哪些命令。
+<code>exec</code> 命令不会在重新启动 i3 时运行，如果你需要在重新启动 i3 时也运行命令，则应使用 <code>exec_always</code> 关键字。这些命令将按顺序运行。</p>
+<p>有关 ; （分号）和 ,（逗号）的特殊含义的详细信息，请参见 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E9%93%BE%E6%8E%A5">命令列表#命令链接</a>：它们在 i3 中将命令链接在一起，因此如果它们出现在你的命令中，你需要使用带引号的字符串（如 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%88exec%EF%BC%89.html">exec_quoting</a> 中所示）。</p>
+<p><strong>语法：</strong></p>
+<pre><code>exec [--no-startup-id] &lt;command&gt;
+exec_always [--no-startup-id] &lt;command&gt;
+</code></pre>
+<p><strong>示例：</strong></p>
+<pre><code>exec chromium
+exec_always ~/my_script.sh
+
+# 执行终端仿真器 urxvt，忽略启动通知
+exec --no-startup-id urxvt
+</code></pre>
+<p>参数 --no-startup-id 在 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%88exec%EF%BC%89.html">exec</a> 有详细介绍。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="自动将工作区放到指定显示屏"><a class="header" href="#自动将工作区放到指定显示屏">自动将工作区放到指定显示屏</a></h1>
+<p>如果你习惯于将客户端分配到工作区，其实将工作区放在特定屏幕上可能会更方便。
+此外，将工作区分配给屏幕将决定 i3 在添加屏幕或启动时将哪个工作区用于新屏幕（例如，默认情况下，它将为第一个屏幕使用 1，为第二个屏幕使用 2，依此类推）。</p>
+<p><strong>语法：</strong></p>
+<pre><code>workspace &lt;workspace&gt; output &lt;output1&gt; [output2]…
+</code></pre>
+<p>输出是你将屏幕附加到的 RandR 输出的名称。
+在笔记本电脑上，你可能将 VGA1 和 LVDS1 作为输出名称。
+你可以通过运行 <code>xrandr --current</code> 来查看现在的输出屏幕。</p>
+<p>如果你的 X 服务器支持 RandR 1.5 或更新版本，i3 将使用 RandR 监视器对象而不是输出对象。
+运行 <code>xrandr --listmonitors</code> 以查看列表。
+通常，一个监视器对象只包含一个输出，并且与输出具有相同的名称；
+但如果不是这种情况，你可以在 i3 的配置中指定监视器或输出的名称。
+例如，Dell UP2414Q 内部使用两个定标器，因此其输出名称可能是“DP1”和“DP2”，但显示器名称是“Dell UP2414Q”。</p>
+<p>（请注意，即使你指定了不跨越整个监视器的输出名称，i3 仍将使用包含监视器的整个区域，而不仅仅是输出的区域。）</p>
+<p>你可以指定多个输出。i3 将使用第一个可用的输出屏幕。</p>
+<p>如果你使用命名工作区，则必须引用它们：</p>
+<p><strong>例子：</strong></p>
+<pre><code>workspace 1 output LVDS1
+workspace 2 output primary
+workspace 5 output VGA1 LVDS1
+workspace &quot;2: vim&quot; output VGA1
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变颜色"><a class="header" href="#改变颜色">改变颜色</a></h1>
+<p>你可以更改 i3 用于绘制窗口装饰的所有颜色。</p>
+<p><strong>语法：</strong></p>
+<pre><code>&lt;colorclass&gt; &lt;border&gt; &lt;background&gt; &lt;text&gt; &lt;indicator&gt; &lt;child_border&gt;
+</code></pre>
+<p>colorclass 可以是以下之一：</p>
+<p><code>client.focused</code></p>
+<p>当前具有焦点的客户端。</p>
+<p><code>client.focused_inactive</code></p>
+<p>客户端是其容器的焦点之一，但目前没有焦点。</p>
+<p><code>client.unfocused</code></p>
+<p>不是其容器的焦点之一的客户端。</p>
+<p><code>client.urgent</code></p>
+<p>已激活紧急提示的客户端</p>
+<p><code>client.placeholder</code></p>
+<p>背景和文本颜色用于绘制占位符窗口内容（恢复布局时）。边框和指示器被忽略</p>
+<p><code>client.background </code></p>
+<p>背景颜色将用于绘制客户端窗口的背景，客户端将在其上呈现。只有未覆盖此窗口整个区域的客户端才会显示颜色。请注意，此颜色类仅采用单一颜色。</p>
+<p>颜色采用 HTML 十六进制格式 (#rrggbb)，请参见以下示例：</p>
+<p><strong>例子（默认颜色）：</strong></p>
+<pre><code># class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+</code></pre>
+<p>请注意，对于窗口装饰，子窗口周围的颜色是“child_border”，而“边框”颜色只是标题栏周围的两条细线。</p>
+<p>指示器颜色用于指示将在何处打开新窗口。对于水平拆分容器，右边框将绘制为指示色，对于垂直拆分容器，底部边框将绘制。这仅适用于拆分容器内的单个窗口，否则与拆分容器外的单个窗口无法区分。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="进程通信"><a class="header" href="#进程通信">进程通信</a></h1>
+<p>i3 使用 Unix 套接字来提供 IPC 接口。这允许第三方程序从 i3 获取信息，例如当前工作区（以显示工作区栏），并控制 i3。</p>
+<p>IPC 套接字默认启用，如果目录可用，将在 <code>$XDG_RUNTIME_DIR/i3/ipc-socket.%p</code> 中创建，如果没有则使用 <code>/tmp/i3-%u.XXXXXX/ipc-socket.%p</code>，其中 <code>%u</code> 是你的 UNIX 用户名，<code>%p</code> 是 i3 的 PID，XXXXXX 是来自可移植文件名字符集的随机字符串（请参阅 mkdtemp(3)）。</p>
+<p>你可以通过环境变量 I3SOCK 或指定 ipc-socket 指令来覆盖默认路径。但是，这是不提倡，因为 i3 默认情况下会做正确的事情。
+如果你决定更改它，强烈建议将其设置为你的主目录中的某个位置，以免其他用户无法创建该目录。</p>
+<p><strong>例子：</strong></p>
+<pre><code>ipc-socket ~/.i3/i3-ipc.sock
+</code></pre>
+<p>然后，你可以使用 <code>i3-msg</code> 应用程序执行 <a href="%E9%85%8D%E7%BD%AEi3/../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">命令列表</a> 中列出的任何命令。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="焦点跟随鼠标"><a class="header" href="#焦点跟随鼠标">焦点跟随鼠标</a></h1>
+<p>默认情况下，当鼠标穿过窗口边界时，窗口焦点会跟随鼠标移动。
+但是，如果你的设置让你的鼠标变得碍事（例如你不想完全禁用的笔记本电脑上的触摸板），你可能希望禁用鼠标跟随鼠标并仅使用键盘控制焦点。
+鼠标在当前活动窗口内仍然有用（例如单击浏览器窗口中的链接）。</p>
+<p><strong>语法：</strong></p>
+<pre><code>focus_follows_mouse yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>focus_follows_mouse no
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="鼠标活动"><a class="header" href="#鼠标活动">鼠标活动</a></h1>
+<p>默认情况下，当将焦点切换到不同输出上的窗口时（例如，将工作区 3 上的窗口聚焦到输出 VGA-1 上，来自 LVDS-1 上的工作区 2），鼠标光标会聚焦到该窗口的中心。</p>
+<p>使用 <code>mouse_warping</code> 选项，你可以控制鼠标光标何时应该变形。<code>none</code> 完全禁用变形，而输出是上述默认行为。</p>
+<p><strong>语法：</strong></p>
+<pre><code>mouse_warping output|none
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>mouse_warping none
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="全屏模式下的弹出窗口"><a class="header" href="#全屏模式下的弹出窗口">全屏模式下的弹出窗口</a></h1>
+<p>当处于全屏模式时，某些应用程序仍会打开弹出窗口（以 Xpdf 为例）。这是因为这些应用程序可能不知道它们处于全屏模式（它们不检查相应的提示）。在这种情况下，可以做三件事：</p>
+<ol>
+<li>
+<p>如果仅属于全屏应用程序，则显示弹出窗口。这是默认设置，对于大多数用户来说应该是合理的行为。</p>
+</li>
+<li>
+<p>只需忽略弹出窗口（不要映射它）。当你处于全屏模式时，这不会打扰你。但是，某些应用程序可能对此反应不佳（死锁，直到你退出全屏）。</p>
+</li>
+<li>
+<p>离开全屏模式。</p>
+</li>
+</ol>
+<p><strong>语法：</strong></p>
+<pre><code>popup_during_fullscreen smart|ignore|leave_fullscreen
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>popup_during_fullscreen smart
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="焦点环绕"><a class="header" href="#焦点环绕">焦点环绕</a></h1>
+<p>默认情况下，当在具有多个窗口或子容器的容器中时，当尝试将焦点移动到容器边缘上时（并且该方向没有其他容器）—— 焦点环绕，相反的窗口将被聚焦。</p>
+<p>如果需要，你可以通过将 <code>focus_wrapping</code> 配置指令设置为值 <code>no</code> 来禁用此行为。</p>
+<p>启用后，如果指定方向上有另一个窗口或容器，则默认情况下不会发生焦点环绕，而是将焦点设置在该窗口或容器上。这是默认行为，因此你可以导航到所有窗口而无需使用 <code>focus parent</code>。</p>
+<p>如果你希望焦点始终环绕并且你知道使用 <code>focus parent</code> 切换到不同的容器，则可以将 <code>focus_wrapping</code> 设置为值 <code>force</code>。</p>
+<p>要限制当前工作空间内的焦点，请将 <code>focus_wrapping</code> 设置为工作空间的值。
+你将需要使用 <code>focus parent</code>，直到选择工作区以使用焦点命令切换到不同的工作区（工作区命令仍将按预期工作）。</p>
+<p><strong>语法：</strong></p>
+<pre><code>focus_wrapping yes|no|force|workspace
+
+# 旧语法，和 &quot;focus_wrapping force&quot; 等价
+force_focus_wrapping yes
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 禁用焦点环绕
+focus_wrapping no
+
+# 强制焦点环绕
+focus_wrapping force
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="强行多荧幕"><a class="header" href="#强行多荧幕">强行多荧幕</a></h1>
+<p>正如 https://i3wm.org/docs/multi-monitor.html 中深入解释的那样，一些 X11 视频驱动程序（尤其是 nVidia 二进制驱动程序）仅提供对 Xinerama 的支持，而不是 RandR。在这种情况下，必须明确告知 i3 使用劣质的 Xinerama API，因此不支持动态重新配置屏幕（它们在启动时仅读取一次，仅此而已）。</p>
+<p>对于无法修改 <code>~/.xsession</code> 以添加 <code>--force-xinerama</code> 命令行参数的人，提供了一个配置选项：</p>
+<p><strong>语法：</strong></p>
+<pre><code>force_xinerama yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>force_xinerama yes
+</code></pre>
+<p>另请注意，使用 Xinerama 时，你的输出名称不是描述性的（如 HDMI1），而是从 0 开始计数：xinerama-0、xinerama-1……</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="当切换当前工作区时自动来回切换"><a class="header" href="#当切换当前工作区时自动来回切换">当切换当前工作区时自动来回切换</a></h1>
+<p>当切换到当前聚焦的工作空间时，此配置指令启用自动 <code>workspace back_and_forth</code>（参见 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%88%87%E6%8D%A2%EF%BC%88%E5%B7%B2%E5%91%BD%E5%90%8D%EF%BC%89%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%87%B3%E6%96%B0%E5%B7%A5%E4%BD%9C%E5%8C%BA.html">back_and_forth</a>）。</p>
+<p>例如：假设你在工作区“1：www”并使用 mod+2 切换到“2：IM”，因为有人向你发送了一条消息。你现在不需要记住你是从哪里切换过来的，你只需再次按 $mod+2 即可切换回“1: www”。</p>
+<p><strong>语法：</strong></p>
+<pre><code>workspace_auto_back_and_forth yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>workspace_auto_back_and_forth yes
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="延迟工作区变化紧急提示重置"><a class="header" href="#延迟工作区变化紧急提示重置">延迟工作区变化紧急提示重置</a></h1>
+<p>如果另一个工作区上的应用程序设置了紧急提示，切换到该工作区可能会导致应用程序立即获得焦点，这也意味着窗口装饰颜色将立即重置为 <code>client.focused</code>。
+这可能会导致难以判断最初是哪个窗口引发了事件。</p>
+<p>为了防止这种情况，你可以使用 <code>force_display_urgency_hint</code> 指令告诉 i3 延迟重置紧急状态一定时间。
+将该值设置为 0 将禁用此功能。</p>
+<p>默认是 500 ms.</p>
+<p><strong>语法：</strong></p>
+<pre><code>force_display_urgency_hint &lt;timeout&gt; ms
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>force_display_urgency_hint 500 ms
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="聚焦窗口活动"><a class="header" href="#聚焦窗口活动">聚焦窗口活动</a></h1>
+<p>如果一个窗口被激活，例如，通过 <code>google-chrome www.google.com</code>，它可能会请求获得焦点。
+这可能不是优选的，你可以配置不同的反应。</p>
+<p>请注意，这可能不会影响正在打开的窗口。要防止新窗口被聚焦，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E6%89%93%E5%BC%80%E7%AA%97%E5%8F%A3%E4%B8%8D%E8%81%9A%E7%84%A6.html">no_focus</a>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>focus_on_window_activation smart|urgent|focus|none
+</code></pre>
+<p>不同模式的作用如下：</p>
+<p><code>smart</code></p>
+<p>这是默认行为。如果请求焦点的窗口位于活动工作区上，它将获得焦点。否则，将设置紧急提示。</p>
+<p><code>urgent</code></p>
+<p>窗口将始终标记为紧急，但焦点不会被窃取。</p>
+<p><code>focus</code></p>
+<p>该窗口将始终处于焦点状态，不会被标记为紧急。</p>
+<p><code>none</code></p>
+<p>该窗口既不会被聚焦，也不会被标记为紧急。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="在窗口装饰绘制标记"><a class="header" href="#在窗口装饰绘制标记">在窗口装饰绘制标记</a></h1>
+<p>如果激活，窗口上的标记（见 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%B1%BB%E4%BC%BCVIM%E7%9A%84%E6%A0%87%E8%AE%B0%EF%BC%88mark%E5%92%8Cgoto%EF%BC%89.html">vim_like_marks</a>）会在它们的窗口装饰中绘制。
+但是，即使激活此选项，也不会绘制名称中以下划线 (_) 开头的任何标记。</p>
+<p>此选项的默认值为 <code>yes</code>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>show_marks yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>show_marks yes
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="连续行"><a class="header" href="#连续行">连续行</a></h1>
+<p>配置文件支持换行，这意味着当您以反斜杠字符 (<code>\</code>) 结束一行时，解析器将忽略换行符。此功能可用于创建更具可读性的配置文件。注释行无法连续。</p>
+<p><strong>例子：</strong></p>
+<pre><code>bindsym Mod1+f \
+fullscreen toggle
+
+# 此行不连续 \
+bindsym Mod1+F fullscreen toggle
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="配置-i3bar"><a class="header" href="#配置-i3bar">配置 i3bar</a></h1>
 <p>你显示器底部的条栏是由一个叫 i3bar 的独立进程绘制的。将 “i3 用户界面” 的这一部分放在一个单独的进程中，有几个好处：</p>
 <ol>

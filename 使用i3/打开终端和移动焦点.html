@@ -145,9 +145,9 @@
                     <main>
                         <h1 id="打开终端和移动焦点"><a class="header" href="#打开终端和移动焦点">打开终端和移动焦点</a></h1>
 <p>打开新终端是一个非常基本的操作。默认情况下，这个操作的按键绑定是 <code>$mod + Enter</code>，即默认配置中的 Alt + Enter（<code>Mod1 + Enter</code>）。按下 <code>$mod + Enter</code> 打开一个新终端，它将填满屏幕上的整个可用空间。</p>
-<p><img src="https://i3wm.org/docs/single_terminal.png" alt="" /></p>
+<p><img src="./single_terminal.png" alt="" /></p>
 <p>如果此时打开另一个终端，i3 会将其放置在当前终端的旁边，并将屏幕大小分成两半。i3 会取决显示器的设置，将创建的窗口放在现有窗口的旁边（宽屏显示器）或其下方（旋转显示器）。</p>
-<p><img src="https://i3wm.org/docs/two_terminals.png" alt="" /></p>
+<p><img src="./two_terminals.png" alt="" /></p>
 <p>要在两个终端之间移动焦点，可以使用你可能从 <code>vi</code> 编辑器那儿知道的方向快捷键。然而，在 i3 中，这类快捷键将使用八基本键（也称导位键，即 <code>A</code>、<code>S</code>、<code>D</code>、<code>F</code> 和 <code>J</code>、<code>K</code>、<code>L</code>、<code>;</code> 这一排八个按键 —— 译者注；在 <code>vi</code> 中，为了和大多数键盘布局兼容，这些快捷键向左移了一位）。因此，<code>$mod + j</code> 是往左，<code>$mod + k</code> 是往下，<code>$mod + l</code> 是往上而 <code>$mod + ;</code> 是往右。所以，要在终端间切换，请使用 <code>$mod + k</code> 或 <code>$mod + l</code>。当然，箭头方向键也是可以使用的。</p>
 <p>现在，工作区（它包含两个终端）已经在特定方向上被拆分了（默认为水平）。就像工作区一样，每个窗口都可以再次被水平或垂直地拆分。“窗口”这个术语是指实际包含了 X11 窗口（如终端或浏览器）的容器，“拆分容器”则表示包含了一个或多个窗口的容器。</p>
 <p>TODO：“树”的图片</p>

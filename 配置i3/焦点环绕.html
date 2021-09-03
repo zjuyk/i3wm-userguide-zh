@@ -144,6 +144,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="焦点环绕"><a class="header" href="#焦点环绕">焦点环绕</a></h1>
+<p>默认情况下，当在具有多个窗口或子容器的容器中时，当尝试将焦点移动到容器边缘上时（并且该方向没有其他容器）—— 焦点环绕，相反的窗口将被聚焦。</p>
+<p>如果需要，你可以通过将 <code>focus_wrapping</code> 配置指令设置为值 <code>no</code> 来禁用此行为。</p>
+<p>启用后，如果指定方向上有另一个窗口或容器，则默认情况下不会发生焦点环绕，而是将焦点设置在该窗口或容器上。这是默认行为，因此你可以导航到所有窗口而无需使用 <code>focus parent</code>。</p>
+<p>如果你希望焦点始终环绕并且你知道使用 <code>focus parent</code> 切换到不同的容器，则可以将 <code>focus_wrapping</code> 设置为值 <code>force</code>。</p>
+<p>要限制当前工作空间内的焦点，请将 <code>focus_wrapping</code> 设置为工作空间的值。
+你将需要使用 <code>focus parent</code>，直到选择工作区以使用焦点命令切换到不同的工作区（工作区命令仍将按预期工作）。</p>
+<p><strong>语法：</strong></p>
+<pre><code>focus_wrapping yes|no|force|workspace
+
+# 旧语法，和 &quot;focus_wrapping force&quot; 等价
+force_focus_wrapping yes
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 禁用焦点环绕
+focus_wrapping no
+
+# 强制焦点环绕
+focus_wrapping force
+</code></pre>
 
                     </main>
 

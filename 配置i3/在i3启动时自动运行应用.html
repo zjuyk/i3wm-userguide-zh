@@ -144,6 +144,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="在-i3-启动时自动运行应用"><a class="header" href="#在-i3-启动时自动运行应用">在 i3 启动时自动运行应用</a></h1>
+<p>通过在按键绑定时使用 <code>exec</code> 关键字，你可以配置 i3 在初始启动时将执行哪些命令。
+<code>exec</code> 命令不会在重新启动 i3 时运行，如果你需要在重新启动 i3 时也运行命令，则应使用 <code>exec_always</code> 关键字。这些命令将按顺序运行。</p>
+<p>有关 ; （分号）和 ,（逗号）的特殊含义的详细信息，请参见 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E9%93%BE%E6%8E%A5">命令列表#命令链接</a>：它们在 i3 中将命令链接在一起，因此如果它们出现在你的命令中，你需要使用带引号的字符串（如 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%88exec%EF%BC%89.html">exec_quoting</a> 中所示）。</p>
+<p><strong>语法：</strong></p>
+<pre><code>exec [--no-startup-id] &lt;command&gt;
+exec_always [--no-startup-id] &lt;command&gt;
+</code></pre>
+<p><strong>示例：</strong></p>
+<pre><code>exec chromium
+exec_always ~/my_script.sh
+
+# 执行终端仿真器 urxvt，忽略启动通知
+exec --no-startup-id urxvt
+</code></pre>
+<p>参数 --no-startup-id 在 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%88exec%EF%BC%89.html">exec</a> 有详细介绍。</p>
 
                     </main>
 

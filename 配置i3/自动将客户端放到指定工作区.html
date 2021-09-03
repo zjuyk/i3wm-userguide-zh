@@ -144,6 +144,72 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="自动将客户端放到指定工作区"><a class="header" href="#自动将客户端放到指定工作区">自动将客户端放到指定工作区</a></h1>
+<p>要自动在特定工作区上显示特定窗口，你可以直接分配。
+你可以使用任何标准来匹配窗口，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E6%9D%A1%E4%BB%B6">命令列表#命令条件</a>。
+<code>assign</code> 和 <code>for_window &lt;criteria&gt; move to workspace</code> 的区别在于
+前者只会在应用程序映射窗口时执行（映射意味着实际将其显示在屏幕上）而后者将在符合指定条件的窗口将其属性更改为某些内容时执行。</p>
+<p>因此，建议你尽可能匹配窗口类（和实例，如果合适）而不是窗口标题，因为某些应用程序首先创建它们的窗口，然后担心设置正确的标题。
+例如 Vimperator 的 Firefox，
+窗口启动时被命名为 Firefox，只有当 Vimperator 被加载时，标题才会改变。
+由于 i3 会在应用程序映射窗口后立即获取标题，因此在这种情况下，你必须在 <code>Firefox</code> 上进行匹配。
+另一个已知问题是 Spotify，它在映射窗口时不会设置类提示，这意味着你必须使用 <code>for_window</code> 规则将 Spotify 分配给特定的工作区。
+最后，不支持使用 <code>assign [tiling]</code> 和 <code>assign [floating]</code>。</p>
+<p>你还可以指定一个窗口以显示在特定输出上。
+你可以使用 RandR 名称（例如 <code>VGA1</code>）或与当前聚焦的工作区（例如 <code>left</code> 和 <code>down</code>）的输出相关的名称。</p>
+<p>分配由 i3 按照它们在配置文件中出现的顺序进行处理。
+第一次匹配窗口的分配规则直接生效，不考虑后面的分配。</p>
+<p><strong>语法：</strong></p>
+<pre><code>assign &lt;criteria&gt; [→] [workspace] [number] &lt;workspace&gt;
+assign &lt;criteria&gt; [→] output left|right|up|down|primary|&lt;output&gt;
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code># 将 URxvt 终端分配到第二个工作空间
+assign [class=&quot;URxvt&quot;] 2
+
+# 相同但更精确（精确匹配而不是子字符串）
+assign [class=&quot;^URxvt$&quot;] 2
+
+# 相同但有个漂亮的箭头 :)
+assign [class=&quot;^URxvt$&quot;] → 2
+
+# 分配到已命名的工作空间
+assign [class=&quot;^URxvt$&quot;] → work
+
+# 分配到第二个工作空间，不考虑名字
+assign [class=&quot;^URxvt$&quot;] → number 2
+
+# 你也可以指定数字+名字。如果第二个工作空间存在的话
+# assign will skip the text part.
+assign [class=&quot;^URxvt$&quot;] → number &quot;2: work&quot;
+
+# 启动 urxvt -name irssi
+assign [class=&quot;^URxvt$&quot; instance=&quot;^irssi$&quot;] → 3
+
+# 将 URxvt 分配给当前的输出屏幕右侧
+assign [class=&quot;^URxvt$&quot;] → output right
+
+# 将 URxvt 分配到主输出屏幕
+assign [class=&quot;^URxvt$&quot;] → output primary
+</code></pre>
+<p>请注意，你可能尚未配置主输出。为此，请运行：</p>
+<pre><code>xrandr --output &lt;output&gt; --primary
+</code></pre>
+<p>此外，箭头不是必需的，它看起来不错:-)。如果你决定使用它，它必须是一个 UTF-8 编码的箭头，而不是 -&gt; 或类似的东西。</p>
+<p>要获取类和实例，你可以使用 <code>xprop</code>。单击窗口后，你将看到以下输出：</p>
+<p><strong>xprop:</strong></p>
+<pre><code>WM_CLASS(STRING) = &quot;irssi&quot;, &quot;URxvt&quot;
+</code></pre>
+<p>WM_CLASS 的第一部分是实例（本例中为“irssi”），第二部分是类（本例中为“URxvt”）。</p>
+<p>如果你在分配时遇到任何问题，请务必先检查 i3 日志文件（请参阅 https://i3wm.org/docs/debugging.html）。它包括有关匹配过程的更多详细信息以及启动时窗口的实际类、实例和标题。</p>
+<p>请注意，如果你只想在特定工作区上启动应用程序一次，但不想永久分配它的所有实例，
+则可以在配置文件中使用 i3 的启动通知支持（请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%88exec%EF%BC%89.html">exec</a>）通过以下方式：</p>
+<p><strong>在工作区 3 上启动 iceweasel（一次）：</strong></p>
+<pre><code># 在工作区 3 上启动 iceweasel，然后切换回工作区 1
+# (作为命令行工具，i3-msg 不支持启动通知，因此请使用 exec --no-startup-id。)
+# (使用 i3 的 exec 命令启动 iceweasel 使 i3 创建一个启动通知上下文，如果没有它，iceweasel 窗口
+# 不能匹配到启动命令的工作区。）
+exec --no-startup-id i3-msg 'workspace 3; exec iceweasel; workspace 1'
+</code></pre>
 
                     </main>
 

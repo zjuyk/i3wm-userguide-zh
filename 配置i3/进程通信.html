@@ -144,6 +144,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="进程通信"><a class="header" href="#进程通信">进程通信</a></h1>
+<p>i3 使用 Unix 套接字来提供 IPC 接口。这允许第三方程序从 i3 获取信息，例如当前工作区（以显示工作区栏），并控制 i3。</p>
+<p>IPC 套接字默认启用，如果目录可用，将在 <code>$XDG_RUNTIME_DIR/i3/ipc-socket.%p</code> 中创建，如果没有则使用 <code>/tmp/i3-%u.XXXXXX/ipc-socket.%p</code>，其中 <code>%u</code> 是你的 UNIX 用户名，<code>%p</code> 是 i3 的 PID，XXXXXX 是来自可移植文件名字符集的随机字符串（请参阅 mkdtemp(3)）。</p>
+<p>你可以通过环境变量 I3SOCK 或指定 ipc-socket 指令来覆盖默认路径。但是，这是不提倡，因为 i3 默认情况下会做正确的事情。
+如果你决定更改它，强烈建议将其设置为你的主目录中的某个位置，以免其他用户无法创建该目录。</p>
+<p><strong>例子：</strong></p>
+<pre><code>ipc-socket ~/.i3/i3-ipc.sock
+</code></pre>
+<p>然后，你可以使用 <code>i3-msg</code> 应用程序执行 <a href="../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">命令列表</a> 中列出的任何命令。</p>
 
                     </main>
 

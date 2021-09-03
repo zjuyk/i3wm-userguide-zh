@@ -144,6 +144,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="全屏模式下的弹出窗口"><a class="header" href="#全屏模式下的弹出窗口">全屏模式下的弹出窗口</a></h1>
+<p>当处于全屏模式时，某些应用程序仍会打开弹出窗口（以 Xpdf 为例）。这是因为这些应用程序可能不知道它们处于全屏模式（它们不检查相应的提示）。在这种情况下，可以做三件事：</p>
+<ol>
+<li>
+<p>如果仅属于全屏应用程序，则显示弹出窗口。这是默认设置，对于大多数用户来说应该是合理的行为。</p>
+</li>
+<li>
+<p>只需忽略弹出窗口（不要映射它）。当你处于全屏模式时，这不会打扰你。但是，某些应用程序可能对此反应不佳（死锁，直到你退出全屏）。</p>
+</li>
+<li>
+<p>离开全屏模式。</p>
+</li>
+</ol>
+<p><strong>语法：</strong></p>
+<pre><code>popup_during_fullscreen smart|ignore|leave_fullscreen
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>popup_during_fullscreen smart
+</code></pre>
 
                     </main>
 

@@ -144,6 +144,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="强行多荧幕"><a class="header" href="#强行多荧幕">强行多荧幕</a></h1>
+<p>正如 https://i3wm.org/docs/multi-monitor.html 中深入解释的那样，一些 X11 视频驱动程序（尤其是 nVidia 二进制驱动程序）仅提供对 Xinerama 的支持，而不是 RandR。在这种情况下，必须明确告知 i3 使用劣质的 Xinerama API，因此不支持动态重新配置屏幕（它们在启动时仅读取一次，仅此而已）。</p>
+<p>对于无法修改 <code>~/.xsession</code> 以添加 <code>--force-xinerama</code> 命令行参数的人，提供了一个配置选项：</p>
+<p><strong>语法：</strong></p>
+<pre><code>force_xinerama yes|no
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>force_xinerama yes
+</code></pre>
+<p>另请注意，使用 Xinerama 时，你的输出名称不是描述性的（如 HDMI1），而是从 0 开始计数：xinerama-0、xinerama-1……</p>
 
                     </main>
 

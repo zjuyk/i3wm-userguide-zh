@@ -144,6 +144,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="延迟工作区变化紧急提示重置"><a class="header" href="#延迟工作区变化紧急提示重置">延迟工作区变化紧急提示重置</a></h1>
+<p>如果另一个工作区上的应用程序设置了紧急提示，切换到该工作区可能会导致应用程序立即获得焦点，这也意味着窗口装饰颜色将立即重置为 <code>client.focused</code>。
+这可能会导致难以判断最初是哪个窗口引发了事件。</p>
+<p>为了防止这种情况，你可以使用 <code>force_display_urgency_hint</code> 指令告诉 i3 延迟重置紧急状态一定时间。
+将该值设置为 0 将禁用此功能。</p>
+<p>默认是 500 ms.</p>
+<p><strong>语法：</strong></p>
+<pre><code>force_display_urgency_hint &lt;timeout&gt; ms
+</code></pre>
+<p><strong>例子：</strong></p>
+<pre><code>force_display_urgency_hint 500 ms
+</code></pre>
 
                     </main>
 

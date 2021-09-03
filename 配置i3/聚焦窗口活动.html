@@ -144,6 +144,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="聚焦窗口活动"><a class="header" href="#聚焦窗口活动">聚焦窗口活动</a></h1>
+<p>如果一个窗口被激活，例如，通过 <code>google-chrome www.google.com</code>，它可能会请求获得焦点。
+这可能不是优选的，你可以配置不同的反应。</p>
+<p>请注意，这可能不会影响正在打开的窗口。要防止新窗口被聚焦，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E6%89%93%E5%BC%80%E7%AA%97%E5%8F%A3%E4%B8%8D%E8%81%9A%E7%84%A6.html">no_focus</a>。</p>
+<p><strong>语法：</strong></p>
+<pre><code>focus_on_window_activation smart|urgent|focus|none
+</code></pre>
+<p>不同模式的作用如下：</p>
+<p><code>smart</code></p>
+<p>这是默认行为。如果请求焦点的窗口位于活动工作区上，它将获得焦点。否则，将设置紧急提示。</p>
+<p><code>urgent</code></p>
+<p>窗口将始终标记为紧急，但焦点不会被窃取。</p>
+<p><code>focus</code></p>
+<p>该窗口将始终处于焦点状态，不会被标记为紧急。</p>
+<p><code>none</code></p>
+<p>该窗口既不会被聚焦，也不会被标记为紧急。</p>
 
                     </main>
 

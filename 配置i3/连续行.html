@@ -144,6 +144,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="连续行"><a class="header" href="#连续行">连续行</a></h1>
+<p>配置文件支持换行，这意味着当您以反斜杠字符 (<code>\</code>) 结束一行时，解析器将忽略换行符。此功能可用于创建更具可读性的配置文件。注释行无法连续。</p>
+<p><strong>例子：</strong></p>
+<pre><code>bindsym Mod1+f \
+fullscreen toggle
+
+# 此行不连续 \
+bindsym Mod1+F fullscreen toggle
+</code></pre>
 
                     </main>
 
