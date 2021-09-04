@@ -3,6 +3,8 @@
 <img src="https://img.shields.io/github/workflow/status/zjuyk/i3wm-userguide-zh/Deploy mdbook/master" />
 <img src="https://img.shields.io/github/contributors-anon/zjuyk/i3wm-userguide-zh" />
 <img src="https://img.shields.io/github/last-commit/zjuyk/i3wm-userguide-zh" />
+<img src="https://img.shields.io/badge/translated-100%25-blue" />
+<img src="https://img.shields.io/badge/version-4.19-infomational" />
 </p>
 
 ### 翻译进度：
