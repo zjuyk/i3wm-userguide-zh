@@ -1,6 +1,6 @@
 <h1 align="center">I3wm 简体中文使用说明书</h1>
 <p align="center">
-<img src="https://img.shields.io/github/workflow/status/zjuyk/i3wm-userguide-zh/Deploy mdbook/master" />
+<img src="https://img.shields.io/github/actions/workflow/status/zjuyk/i3wm-userguide-zh/main.yml?branch=master" />
 <img src="https://img.shields.io/github/contributors-anon/zjuyk/i3wm-userguide-zh" />
 <img src="https://img.shields.io/github/last-commit/zjuyk/i3wm-userguide-zh" />
 <img src="https://img.shields.io/badge/translated-100%25-blue" />
