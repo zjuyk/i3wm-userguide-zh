@@ -7,6 +7,8 @@
 <img src="https://img.shields.io/badge/version-4.19-infomational" />
 </p>
 
+注：我不再使用 i3wm 了，所以文档不再维护
+
 ### 翻译进度：
 
 - [x] [默认按键绑定](./src/默认按键绑定.md)
