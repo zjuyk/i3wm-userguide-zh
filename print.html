@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="zh" class="sidebar-visible no-js light">
+<html lang="zh" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>i3wm 用户说明书</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,7 +32,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -62,42 +62,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded affix "><a href="介绍.html">介绍</a></li><li class="chapter-item expanded "><a href="默认按键绑定.html"><strong aria-hidden="true">1.</strong> 默认按键绑定</a></li><li class="chapter-item expanded "><a href="使用i3/使用i3.html"><strong aria-hidden="true">2.</strong> 使用 i3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="使用i3/打开终端和移动焦点.html"><strong aria-hidden="true">2.1.</strong> 打开终端和移动焦点</a></li><li class="chapter-item expanded "><a href="使用i3/改变容器布局.html"><strong aria-hidden="true">2.2.</strong> 改变容器布局</a></li><li class="chapter-item expanded "><a href="使用i3/为窗口切换全屏模式.html"><strong aria-hidden="true">2.3.</strong> 为窗口切换全屏模式</a></li><li class="chapter-item expanded "><a href="使用i3/打开其他应用.html"><strong aria-hidden="true">2.4.</strong> 打开其他应用</a></li><li class="chapter-item expanded "><a href="使用i3/关闭窗口.html"><strong aria-hidden="true">2.5.</strong> 关闭窗口</a></li><li class="chapter-item expanded "><a href="使用i3/使用工作区.html"><strong aria-hidden="true">2.6.</strong> 使用工作区</a></li><li class="chapter-item expanded "><a href="使用i3/移动窗口到工作区.html"><strong aria-hidden="true">2.7.</strong> 移动窗口到工作区</a></li><li class="chapter-item expanded "><a href="使用i3/调整大小.html"><strong aria-hidden="true">2.8.</strong> 调整大小</a></li><li class="chapter-item expanded "><a href="使用i3/原地重启i3.html"><strong aria-hidden="true">2.9.</strong> 原地重启 i3</a></li><li class="chapter-item expanded "><a href="使用i3/退出i3.html"><strong aria-hidden="true">2.10.</strong> 退出 i3</a></li><li class="chapter-item expanded "><a href="使用i3/浮动模式.html"><strong aria-hidden="true">2.11.</strong> 浮动模式</a></li></ol></li><li class="chapter-item expanded "><a href="树/树.html"><strong aria-hidden="true">3.</strong> 树</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="树/由容器构成的树.html"><strong aria-hidden="true">3.1.</strong> 由容器构成的树</a></li><li class="chapter-item expanded "><a href="树/方向与切分容器.html"><strong aria-hidden="true">3.2.</strong> 方向与切分容器</a></li><li class="chapter-item expanded "><a href="树/聚焦父容器.html"><strong aria-hidden="true">3.3.</strong> 聚焦父容器</a></li><li class="chapter-item expanded "><a href="树/隐式容器.html"><strong aria-hidden="true">3.4.</strong> 隐式容器</a></li></ol></li><li class="chapter-item expanded "><a href="配置i3/配置i3.html"><strong aria-hidden="true">4.</strong> 配置 i3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="配置i3/注释.html"><strong aria-hidden="true">4.1.</strong> 注释</a></li><li class="chapter-item expanded "><a href="配置i3/字体.html"><strong aria-hidden="true">4.2.</strong> 字体</a></li><li class="chapter-item expanded "><a href="配置i3/键盘绑定.html"><strong aria-hidden="true">4.3.</strong> 键盘绑定</a></li><li class="chapter-item expanded "><a href="配置i3/鼠标绑定.html"><strong aria-hidden="true">4.4.</strong> 鼠标绑定</a></li><li class="chapter-item expanded "><a href="配置i3/绑定模式.html"><strong aria-hidden="true">4.5.</strong> 绑定模式</a></li><li class="chapter-item expanded "><a href="配置i3/浮动修饰键.html"><strong aria-hidden="true">4.6.</strong> 浮动修饰键</a></li><li class="chapter-item expanded "><a href="配置i3/限制浮动窗口大小.html"><strong aria-hidden="true">4.7.</strong> 限制浮动窗口大小</a></li><li class="chapter-item expanded "><a href="配置i3/新工作区方向.html"><strong aria-hidden="true">4.8.</strong> 新工作区方向</a></li><li class="chapter-item expanded "><a href="配置i3/新工作区容器布局模式.html"><strong aria-hidden="true">4.9.</strong> 新工作区容器布局模式</a></li><li class="chapter-item expanded "><a href="配置i3/窗口标题对齐.html"><strong aria-hidden="true">4.10.</strong> 窗口标题对齐</a></li><li class="chapter-item expanded "><a href="配置i3/新窗口默认边框样式.html"><strong aria-hidden="true">4.11.</strong> 新窗口默认边框样式</a></li><li class="chapter-item expanded "><a href="配置i3/靠近屏幕边缘隐藏边框.html"><strong aria-hidden="true">4.12.</strong> 靠近屏幕边缘隐藏边框</a></li><li class="chapter-item expanded "><a href="配置i3/针对窗口专用命令（for_window）.html"><strong aria-hidden="true">4.13.</strong> 针对窗口专用命令（for_window）</a></li><li class="chapter-item expanded "><a href="配置i3/打开窗口不聚焦.html"><strong aria-hidden="true">4.14.</strong> 打开窗口不聚焦</a></li><li class="chapter-item expanded "><a href="配置i3/变量.html"><strong aria-hidden="true">4.15.</strong> 变量</a></li><li class="chapter-item expanded "><a href="配置i3/X资源.html"><strong aria-hidden="true">4.16.</strong> X 资源</a></li><li class="chapter-item expanded "><a href="配置i3/自动将客户端放到指定工作区.html"><strong aria-hidden="true">4.17.</strong> 自动将客户端放到指定工作区</a></li><li class="chapter-item expanded "><a href="配置i3/在i3启动时自动运行应用.html"><strong aria-hidden="true">4.18.</strong> 在 i3 启动时自动运行应用</a></li><li class="chapter-item expanded "><a href="配置i3/自动将工作区放到指定显示屏.html"><strong aria-hidden="true">4.19.</strong> 自动将工作区放到指定显示屏</a></li><li class="chapter-item expanded "><a href="配置i3/改变颜色.html"><strong aria-hidden="true">4.20.</strong> 改变颜色</a></li><li class="chapter-item expanded "><a href="配置i3/进程通信.html"><strong aria-hidden="true">4.21.</strong> 进程通信</a></li><li class="chapter-item expanded "><a href="配置i3/焦点跟随鼠标.html"><strong aria-hidden="true">4.22.</strong> 焦点跟随鼠标</a></li><li class="chapter-item expanded "><a href="配置i3/鼠标活动.html"><strong aria-hidden="true">4.23.</strong> 鼠标活动</a></li><li class="chapter-item expanded "><a href="配置i3/全屏模式下的弹出窗口.html"><strong aria-hidden="true">4.24.</strong> 全屏模式下的弹出窗口</a></li><li class="chapter-item expanded "><a href="配置i3/焦点环绕.html"><strong aria-hidden="true">4.25.</strong> 焦点环绕</a></li><li class="chapter-item expanded "><a href="配置i3/强行多荧幕.html"><strong aria-hidden="true">4.26.</strong> 强行多荧幕</a></li><li class="chapter-item expanded "><a href="配置i3/当切换当前工作区时自动来回切换.html"><strong aria-hidden="true">4.27.</strong> 当切换当前工作区时自动来回切换</a></li><li class="chapter-item expanded "><a href="配置i3/延迟工作区变化紧急提示重置.html"><strong aria-hidden="true">4.28.</strong> 延迟工作区变化紧急提示重置</a></li><li class="chapter-item expanded "><a href="配置i3/聚焦窗口活动.html"><strong aria-hidden="true">4.29.</strong> 聚焦窗口活动</a></li><li class="chapter-item expanded "><a href="配置i3/在窗口装饰绘制标记.html"><strong aria-hidden="true">4.30.</strong> 在窗口装饰绘制标记</a></li><li class="chapter-item expanded "><a href="配置i3/连续行.html"><strong aria-hidden="true">4.31.</strong> 连续行</a></li></ol></li><li class="chapter-item expanded "><a href="配置i3bar/.md.html"><strong aria-hidden="true">5.</strong> 配置 i3bar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="配置i3bar/i3bar命令.html"><strong aria-hidden="true">5.1.</strong> i3bar 命令</a></li><li class="chapter-item expanded "><a href="配置i3bar/状态栏命令.html"><strong aria-hidden="true">5.2.</strong> 状态栏命令</a></li><li class="chapter-item expanded "><a href="配置i3bar/显示模式.html"><strong aria-hidden="true">5.3.</strong> 显示模式</a></li><li class="chapter-item expanded "><a href="配置i3bar/鼠标按键命令.html"><strong aria-hidden="true">5.4.</strong> 鼠标按键命令</a></li><li class="chapter-item expanded "><a href="配置i3bar/Bar编号.html"><strong aria-hidden="true">5.5.</strong> Bar 编号</a></li><li class="chapter-item expanded "><a href="配置i3bar/位置.html"><strong aria-hidden="true">5.6.</strong> 位置</a></li><li class="chapter-item expanded "><a href="配置i3bar/输出.html"><strong aria-hidden="true">5.7.</strong> 输出</a></li><li class="chapter-item expanded "><a href="配置i3bar/托盘输出.html"><strong aria-hidden="true">5.8.</strong> 托盘输出</a></li><li class="chapter-item expanded "><a href="配置i3bar/托盘内边距.html"><strong aria-hidden="true">5.9.</strong> 托盘内边距</a></li><li class="chapter-item expanded "><a href="配置i3bar/字体.html"><strong aria-hidden="true">5.10.</strong> 字体</a></li><li class="chapter-item expanded "><a href="配置i3bar/自定义分隔符.html"><strong aria-hidden="true">5.11.</strong> 自定义分隔符</a></li><li class="chapter-item expanded "><a href="配置i3bar/工作区按钮.html"><strong aria-hidden="true">5.12.</strong> 工作区按钮</a></li><li class="chapter-item expanded "><a href="配置i3bar/工作区按钮最小宽度.html"><strong aria-hidden="true">5.13.</strong> 工作区按钮最小宽度</a></li><li class="chapter-item expanded "><a href="配置i3bar/去除工作区数字和名字.html"><strong aria-hidden="true">5.14.</strong> 去除工作区数字和名字</a></li><li class="chapter-item expanded "><a href="配置i3bar/绑定模式指示器.html"><strong aria-hidden="true">5.15.</strong> 绑定模式指示器</a></li><li class="chapter-item expanded "><a href="配置i3bar/颜色.html"><strong aria-hidden="true">5.16.</strong> 颜色</a></li><li class="chapter-item expanded "><a href="配置i3bar/透明度.html"><strong aria-hidden="true">5.17.</strong> 透明度</a></li></ol></li><li class="chapter-item expanded "><a href="命令列表/命令列表.html"><strong aria-hidden="true">6.</strong> 命令列表</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="命令列表/运行应用（exec）.html"><strong aria-hidden="true">6.1.</strong> 运行应用（exec）</a></li><li class="chapter-item expanded "><a href="命令列表/切分容器.html"><strong aria-hidden="true">6.2.</strong> 切分容器</a></li><li class="chapter-item expanded "><a href="命令列表/操纵布局.html"><strong aria-hidden="true">6.3.</strong> 操纵布局</a></li><li class="chapter-item expanded "><a href="命令列表/聚焦容器.html"><strong aria-hidden="true">6.4.</strong> 聚焦容器</a></li><li class="chapter-item expanded "><a href="命令列表/移动容器.html"><strong aria-hidden="true">6.5.</strong> 移动容器</a></li><li class="chapter-item expanded "><a href="命令列表/交换容器.html"><strong aria-hidden="true">6.6.</strong> 交换容器</a></li><li class="chapter-item expanded "><a href="命令列表/固定浮动窗口.html"><strong aria-hidden="true">6.7.</strong> 固定浮动窗口</a></li><li class="chapter-item expanded "><a href="命令列表/切换（已命名）工作区和移动至新工作区.html"><strong aria-hidden="true">6.8.</strong> 切换（已命名）工作区和移动至新工作区</a></li><li class="chapter-item expanded "><a href="命令列表/移动工作区到另一不同屏幕.html"><strong aria-hidden="true">6.9.</strong> 移动工作区到另一不同屏幕</a></li><li class="chapter-item expanded "><a href="命令列表/移动容器或工作区到RandR输出.html"><strong aria-hidden="true">6.10.</strong> 移动容器或工作区到 RandR 输出</a></li><li class="chapter-item expanded "><a href="命令列表/移动容器和窗口到标记区.html"><strong aria-hidden="true">6.11.</strong> 移动容器和窗口到标记区</a></li><li class="chapter-item expanded "><a href="命令列表/改变窗口和容器大小.html"><strong aria-hidden="true">6.12.</strong> 改变窗口和容器大小</a></li><li class="chapter-item expanded "><a href="命令列表/跳转到特定窗口.html"><strong aria-hidden="true">6.13.</strong> 跳转到特定窗口</a></li><li class="chapter-item expanded "><a href="命令列表/类似VIM的标记（mark和goto）.html"><strong aria-hidden="true">6.14.</strong> 类似 VIM 的标记（mark 和 goto）</a></li><li class="chapter-item expanded "><a href="命令列表/窗口标题格式.html"><strong aria-hidden="true">6.15.</strong> 窗口标题格式</a></li><li class="chapter-item expanded "><a href="命令列表/改变边框样式.html"><strong aria-hidden="true">6.16.</strong> 改变边框样式</a></li><li class="chapter-item expanded "><a href="命令列表/启用共享内存日志.html"><strong aria-hidden="true">6.17.</strong> 启用共享内存日志</a></li><li class="chapter-item expanded "><a href="命令列表/启用调试日志.html"><strong aria-hidden="true">6.18.</strong> 启用调试日志</a></li><li class="chapter-item expanded "><a href="命令列表/重载重启和退出.html"><strong aria-hidden="true">6.19.</strong> 重载重启和退出</a></li><li class="chapter-item expanded "><a href="命令列表/Scratchpad.html"><strong aria-hidden="true">6.20.</strong> Scratchpad</a></li><li class="chapter-item expanded "><a href="命令列表/Nop.html"><strong aria-hidden="true">6.21.</strong> Nop</a></li><li class="chapter-item expanded "><a href="命令列表/i3bar控制.html"><strong aria-hidden="true">6.22.</strong> i3bar 控制</a></li></ol></li><li class="chapter-item expanded "><a href="多显示器/多显示器.html"><strong aria-hidden="true">7.</strong> 多显示器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="多显示器/配置显示器.html"><strong aria-hidden="true">7.1.</strong> 配置显示器</a></li><li class="chapter-item expanded "><a href="多显示器/多显示器环境下的有趣设置.html"><strong aria-hidden="true">7.2.</strong> 多显示器环境下的有趣设置</a></li></ol></li><li class="chapter-item expanded "><a href="i3和你的其他软件/i3和你的其他软件.html"><strong aria-hidden="true">8.</strong> i3 和你的其他软件</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="i3和你的其他软件/显示状态栏.html"><strong aria-hidden="true">8.1.</strong> 显示状态栏</a></li><li class="chapter-item expanded "><a href="i3和你的其他软件/做展示（多显示器）.html"><strong aria-hidden="true">8.2.</strong> 做展示（多显示器）</a></li><li class="chapter-item expanded "><a href="i3和你的其他软件/高分辨率（HIDPI）.html"><strong aria-hidden="true">8.3.</strong> 高分辨率（HIDPI）</a></li></ol></li><li class="chapter-item expanded "><a href="贡献者.html">贡献者</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -427,14 +456,14 @@ mode &lt;name&gt;
 # 用 f 打开 firefox，用 t 打开 thunderbird
 # 用回车或 Esc 键返回默认模式
 set $mode_launcher Launch: [f]irefox [t]hunderbird
-bindsym $mod+o mode &quot;$mode_launcher&quot;
+bindsym $mod+o mode "$mode_launcher"
 
-mode &quot;$mode_launcher&quot; {
+mode "$mode_launcher" {
     bindsym f exec firefox
     bindsym t exec thunderbird
 
-    bindsym Escape mode &quot;default&quot;
-    bindsym Return mode &quot;default&quot;
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="浮动修饰键"><a class="header" href="#浮动修饰键">浮动修饰键</a></h1>
@@ -536,14 +565,14 @@ hide_edge_borders vertical
 </code></pre>
 <p><strong>例子</strong>：</p>
 <pre><code># 对所有的 XTerm 窗口开启浮动模式
-for_window [class=&quot;XTerm&quot;] floating enable
+for_window [class="XTerm"] floating enable
 
 # 使所有的 urxvt 窗口的边框为 1 像素：
-for_window [class=&quot;urxvt&quot;] border pixel 1
+for_window [class="urxvt"] border pixel 1
 
 # 一个很少用到但是很有趣的例子：
 # 当我切换到 `~/work` 目录时使所有的窗口浮动
-for_window [title=&quot;x200: ~/work&quot;] floating enable
+for_window [title="x200: ~/work"] floating enable
 </code></pre>
 <p>有效标准与命令的标准相同，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html#%E5%91%BD%E4%BB%A4%E6%9D%A1%E4%BB%B6">命令列表#命令条件</a>。在运行时只能执行命令，不能执行配置指令，请参阅 <a href="%E9%85%8D%E7%BD%AEi3/../%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8.html">命令列表</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="打开窗口不聚焦"><a class="header" href="#打开窗口不聚焦">打开窗口不聚焦</a></h1>
@@ -556,7 +585,7 @@ for_window [title=&quot;x200: ~/work&quot;] floating enable
 <pre><code>no_focus &lt;criteria&gt;
 </code></pre>
 <p><strong>例子：</strong></p>
-<pre><code>no_focus [window_role=&quot;pop-up&quot;]
+<pre><code>no_focus [window_role="pop-up"]
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="变量"><a class="header" href="#变量">变量</a></h1>
 <p>正如你在关于键盘绑定的部分中学到的那样，你将必须配置大量包含修饰键的绑定。
@@ -611,32 +640,32 @@ assign &lt;criteria&gt; [→] output left|right|up|down|primary|&lt;output&gt;
 </code></pre>
 <p><strong>例子：</strong></p>
 <pre><code># 将 URxvt 终端分配到第二个工作空间
-assign [class=&quot;URxvt&quot;] 2
+assign [class="URxvt"] 2
 
 # 相同但更精确（精确匹配而不是子字符串）
-assign [class=&quot;^URxvt$&quot;] 2
+assign [class="^URxvt$"] 2
 
 # 相同但有个漂亮的箭头 :)
-assign [class=&quot;^URxvt$&quot;] → 2
+assign [class="^URxvt$"] → 2
 
 # 分配到已命名的工作空间
-assign [class=&quot;^URxvt$&quot;] → work
+assign [class="^URxvt$"] → work
 
 # 分配到第二个工作空间，不考虑名字
-assign [class=&quot;^URxvt$&quot;] → number 2
+assign [class="^URxvt$"] → number 2
 
 # 你也可以指定数字+名字。如果第二个工作空间存在的话
 # assign will skip the text part.
-assign [class=&quot;^URxvt$&quot;] → number &quot;2: work&quot;
+assign [class="^URxvt$"] → number "2: work"
 
 # 启动 urxvt -name irssi
-assign [class=&quot;^URxvt$&quot; instance=&quot;^irssi$&quot;] → 3
+assign [class="^URxvt$" instance="^irssi$"] → 3
 
 # 将 URxvt 分配给当前的输出屏幕右侧
-assign [class=&quot;^URxvt$&quot;] → output right
+assign [class="^URxvt$"] → output right
 
 # 将 URxvt 分配到主输出屏幕
-assign [class=&quot;^URxvt$&quot;] → output primary
+assign [class="^URxvt$"] → output primary
 </code></pre>
 <p>请注意，你可能尚未配置主输出。为此，请运行：</p>
 <pre><code>xrandr --output &lt;output&gt; --primary
@@ -644,7 +673,7 @@ assign [class=&quot;^URxvt$&quot;] → output primary
 <p>此外，箭头不是必需的，它看起来不错:-)。如果你决定使用它，它必须是一个 UTF-8 编码的箭头，而不是 -&gt; 或类似的东西。</p>
 <p>要获取类和实例，你可以使用 <code>xprop</code>。单击窗口后，你将看到以下输出：</p>
 <p><strong>xprop:</strong></p>
-<pre><code>WM_CLASS(STRING) = &quot;irssi&quot;, &quot;URxvt&quot;
+<pre><code>WM_CLASS(STRING) = "irssi", "URxvt"
 </code></pre>
 <p>WM_CLASS 的第一部分是实例（本例中为“irssi”），第二部分是类（本例中为“URxvt”）。</p>
 <p>如果你在分配时遇到任何问题，请务必先检查 i3 日志文件（请参阅 https://i3wm.org/docs/debugging.html）。它包括有关匹配过程的更多详细信息以及启动时窗口的实际类、实例和标题。</p>
@@ -694,7 +723,7 @@ exec --no-startup-id urxvt
 <pre><code>workspace 1 output LVDS1
 workspace 2 output primary
 workspace 5 output VGA1 LVDS1
-workspace &quot;2: vim&quot; output VGA1
+workspace "2: vim" output VGA1
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变颜色"><a class="header" href="#改变颜色">改变颜色</a></h1>
 <p>你可以更改 i3 用于绘制窗口装饰的所有颜色。</p>
@@ -784,7 +813,7 @@ client.background       #ffffff
 <p><strong>语法：</strong></p>
 <pre><code>focus_wrapping yes|no|force|workspace
 
-# 旧语法，和 &quot;focus_wrapping force&quot; 等价
+# 旧语法，和 "focus_wrapping force" 等价
 force_focus_wrapping yes
 </code></pre>
 <p><strong>例子：</strong></p>
@@ -868,7 +897,7 @@ bindsym Mod1+F fullscreen toggle
 你可以直接删除 i3bar 的配置，然后使用你喜欢的替代品。</p>
 </li>
 <li>
-<p>它遵循 UNIX 的理念，即 &quot;让每个程序做好一件事&quot;。i3 很擅长管理好你的每一个窗口，
+<p>它遵循 UNIX 的理念，即 "让每个程序做好一件事"。i3 很擅长管理好你的每一个窗口，
 i3bar 则擅长在每个显示器上显示一个栏（除非你对它进行其他配置）。</p>
 </li>
 <li>
@@ -1093,7 +1122,7 @@ tray_padding 0
 </code></pre>
 <p><strong>例子：</strong></p>
 <pre><code>bar {
-    separator_symbol &quot;:|:&quot;
+    separator_symbol ":|:"
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="工作区按钮"><a class="header" href="#工作区按钮">工作区按钮</a></h1>
@@ -1218,16 +1247,16 @@ i3-msg border none
 <p>当作用域用于多条命令时，应使用 <code>,</code>（逗号）而不是分号来分隔它们。判断标准只适用到下一个分号之前，所以如果你使用分号来分隔命令，只有第一个命令会对被匹配的窗口执行。</p>
 <p>举例：</p>
 <pre><code># 如果你想杀死所有 class 是 Firefox 的窗口，使用：
-bindsym $mod+x [class=&quot;Firefox&quot;] kill
+bindsym $mod+x [class="Firefox"] kill
 
 # 同上，除了匹配时忽略大小写
-bindsym $mod+x [class=&quot;(?i)firefox&quot;] kill
+bindsym $mod+x [class="(?i)firefox"] kill
 
 # 只杀死 Firefox 的关于对话框
-bindsym $mod+x [class=&quot;Firefox&quot; window_role=&quot;About&quot;] kill
+bindsym $mod+x [class="Firefox" window_role="About"] kill
 
 # 打开浮动模式并移动容器到工作区 4
-for_window [class=&quot;^evil-app$&quot;] floating enable, move container to workspace 4
+for_window [class="^evil-app$"] floating enable, move container to workspace 4
 
 # 移动所有浮动窗口到 scratchpad
 bindsym $mod+x [floating] move scratchpad
@@ -1246,7 +1275,7 @@ bindsym $mod+x [floating] move scratchpad
 <p><strong>title</strong>:<br>
 比较 X11 窗口标题（_NET_WM_NAME 或者默认值 WM_NAME）。使用特殊值 <code>__focused__</code> 匹配窗口标题和目前拥有焦点的窗口相同的所有窗口。</p>
 <p><strong>urgent</strong>:<br>
-比较窗口的紧急状况。值可以是 &quot;latest&quot; 或者 &quot;oldest&quot;，分别匹配最新的和最旧的紧急窗口。</p>
+比较窗口的紧急状况。值可以是 "latest" 或者 "oldest"，分别匹配最新的和最旧的紧急窗口。</p>
 <p><strong>workspace</strong>:<br>
 比较窗口所在工作区的名字。使用特殊值 <code>__focused__</code> 匹配目前拥有焦点的工作区中的所有窗口。</p>
 <p><strong>con_mark</strong>:<br>
@@ -1256,11 +1285,11 @@ bindsym $mod+x [floating] move scratchpad
 <p><strong>floating</strong>:<br>
 只匹配浮动窗口。这个判断标准没有值。</p>
 <p><strong>floating_from</strong>:<br>
-和 <code>floating</code> 相似但这个判断标准有两个可能的值：&quot;auto&quot; 和 &quot;user&quot;。当值是 &quot;auto&quot; 时，只有打开时就自动是浮动状态的窗口会被匹配。当值是 &quot;user&quot; 时，只有被用户改变为浮动的窗口会被匹配。</p>
+和 <code>floating</code> 相似但这个判断标准有两个可能的值："auto" 和 "user"。当值是 "auto" 时，只有打开时就自动是浮动状态的窗口会被匹配。当值是 "user" 时，只有被用户改变为浮动的窗口会被匹配。</p>
 <p><strong>tiling</strong>:<br>
 只匹配平铺窗口。这个判断标准没有值。</p>
 <p><strong>tiling_from</strong>:<br>
-和 <code>tiling</code> 相似但这个判断标准有两个可能的值：&quot;auto&quot; 和 &quot;user&quot;。当值是 &quot;auto&quot; 时，只有打开时就自动是平铺状态的窗口会被匹配。当值是 &quot;user&quot; 时，只有被用户改变为平铺的窗口会被匹配。</p>
+和 <code>tiling</code> 相似但这个判断标准有两个可能的值："auto" 和 "user"。当值是 "auto" 时，只有打开时就自动是平铺状态的窗口会被匹配。当值是 "user" 时，只有被用户改变为平铺的窗口会被匹配。</p>
 <p>判断标准 <code>class</code>, <code>instance</code>, <code>role</code>, <code>title</code>, <code>workspace</code> 和 <code>mark</code> 都是正则表达式（PCRE）。如何使用请见 <code>pcresyntax(3)</code> 或 <code>perldoc perlre</code>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="运行应用exec"><a class="header" href="#运行应用exec">运行应用（exec）</a></h1>
 <p>如果你不能实际启动任何应用程序，那么窗口管理器有什么用呢？exec 命令通过将你指定的命令传递给 shell 来启动一个应用程序。这意味着你可以使用通配符，并将会在 <code>$PATH</code> 中搜索程序。</p>
@@ -1277,11 +1306,11 @@ bindsym $mod+Return exec --no-startup-id urxvt
 <p><code>--no-startup-id</code> 参数禁用了对这个 exec 命令的启动通知支持。通过使用启动通知，i3 可以确保程序的窗口在你使用 exec 命令时所在的工作区中出现。同时，它还会在应用程序启动时将 X11 光标改为 watch（一个时钟）。所以，如果一个应用程序没有支持启动通知（不过大多数使用 GTK 和 Qt 的应用程序似乎都支持），将会出现 60 秒的时钟光标。</p>
 <p>如果要执行的命令包含 <code>;</code>（分号）或 <code>,</code>（逗号），那么整个命令必须被引号包裹。例如，要为 shell 命令 <code>notify-send Hello, i3</code> 设置一个绑定，你可以在你的配置文件中添加这样一个条目：</p>
 <pre><code># 运行一个包含逗号的命令
-bindsym $mod+p exec &quot;notify-send Hello, i3&quot;
+bindsym $mod+p exec "notify-send Hello, i3"
 </code></pre>
 <p>如果一个带有逗号和/或分号的命令本身需要引号，你必须用双反斜线转义内部引号，像这样：</p>
 <pre><code># 运行一个包含逗号、分号和引号的命令
-bindsym $mod+p exec &quot;notify-send \\&quot;Hello, i3; from $USER\\&quot;&quot;
+bindsym $mod+p exec "notify-send \\"Hello, i3; from $USER\\""
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="切分容器"><a class="header" href="#切分容器">切分容器</a></h1>
 <p>split 命令使当前窗口成为一个分割容器。分割容器可以包含多个窗口。根据分割容器的布局，新的窗口会被放在当前窗口的右边（splith 横向分割），或者下面（splitv 纵向分割）。</p>
@@ -1359,7 +1388,7 @@ focus output left|right|up|down|primary|&lt;output&gt;
 </code></pre>
 <p>举例：</p>
 <pre><code># 聚焦于 firefox
-bindsym $mod+F1 [class=&quot;Firefox&quot;] focus
+bindsym $mod+F1 [class="Firefox"] focus
 
 # 聚焦于左、下、上、右边的容器
 bindsym $mod+j focus left
@@ -1434,11 +1463,11 @@ bindsym $mod+m move position mouse
 <pre><code>swap container with id|con_id|mark &lt;参数&gt;
 </code></pre>
 <p>举例：</p>
-<pre><code># 交换聚焦的容器和标记为 &quot;swapee&quot; 的容器
+<pre><code># 交换聚焦的容器和标记为 "swapee" 的容器
 swap container with mark swapee
 
-# 交换标记为 &quot;A&quot; 和 &quot;B&quot; 的容器
-[con_mark=&quot;^A$&quot;] swap container with mark B
+# 交换标记为 "A" 和 "B" 的容器
+[con_mark="^A$"] swap container with mark B
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="固定浮动窗口"><a class="header" href="#固定浮动窗口">固定浮动窗口</a></h1>
 <p>如果你想让一个窗口固定在显示器上，即使你切换到另一个工作区，它还留在屏幕上，那么你可以使用 <code>sticky</code> 命令。例如，这对记事本、媒体播放器或视频聊天窗口很有用。</p>
@@ -1471,7 +1500,7 @@ move [window|container] [to] workspace prev|next|current
 <p>举例：</p>
 <pre><code>bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3:&lt;span foreground=&quot;red&quot;&gt;vim&lt;/span&gt;
+bindsym $mod+3 workspace 3:&lt;span foreground="red"&gt;vim&lt;/span&gt;
 ...
 
 bindsym $mod+Shift+1 move container to workspace 1
@@ -1486,7 +1515,7 @@ bindsym $mod+Shift+b move container to workspace back_and_forth
 bindsym $mod+x move workspace to output right
 
 # 移动 firefox 到当前工作区
-bindsym $mod+F1 [class=&quot;Firefox&quot;] move workspace current
+bindsym $mod+F1 [class="Firefox"] move workspace current
 </code></pre>
 <h2 id="命名的工作区"><a class="header" href="#命名的工作区">命名的工作区</a></h2>
 <p>工作区用名字来标识。所以你可以可以在 workspace 命令中使用任意名字，而不只是数字：</p>
@@ -1498,7 +1527,7 @@ bindsym $mod+F1 [class=&quot;Firefox&quot;] move workspace current
 bindsym $mod+2 workspace 2: www
 ...
 </code></pre>
-<p>注意，在这种情况下工作区将被命名为 &quot;1: mail&quot;。i3 以一种稍微特殊的方式处理以数字开头的工作区名称。通常情况下，命名的工作区是按照它们出现的顺序排序的。当它们以数字开头时，i3 将按数字排序。另外，你能用 <code>workspace number 1</code> 来切换到以数字 1 开头的工作区，而不管它的名字是什么。这在你动态改变工作区名称的情况下非常有用。要结合两个命令，你可以使用 <code>workspace number 1: mail</code> 来指定一个默认名字，如果目前没有以 &quot;1&quot; 开头的工作区的话。</p>
+<p>注意，在这种情况下工作区将被命名为 "1: mail"。i3 以一种稍微特殊的方式处理以数字开头的工作区名称。通常情况下，命名的工作区是按照它们出现的顺序排序的。当它们以数字开头时，i3 将按数字排序。另外，你能用 <code>workspace number 1</code> 来切换到以数字 1 开头的工作区，而不管它的名字是什么。这在你动态改变工作区名称的情况下非常有用。要结合两个命令，你可以使用 <code>workspace number 1: mail</code> 来指定一个默认名字，如果目前没有以 "1" 开头的工作区的话。</p>
 <h2 id="重命名工作区"><a class="header" href="#重命名工作区">重命名工作区</a></h2>
 <p>你可以重命名工作区。如果你从默认的编号的工作区开始做你的工作，并在之后重命名工作区以反映它们上的实际内容，这可能是有用的。你也可以省略旧的名字来重命名当前聚焦的工作区，如果你想在 <code>i3-input</code> 中使用重命名命令，这很方便。</p>
 <p>格式：</p>
@@ -1507,18 +1536,18 @@ rename workspace to &lt;新名字&gt;
 </code></pre>
 <p>举例：</p>
 <pre><code>i3-msg 'rename workspace 5 to 6'
-i3-msg 'rename workspace 1 to &quot;1: www&quot;'
-i3-msg 'rename workspace &quot;1: www&quot; to &quot;10: www&quot;'
-i3-msg 'rename workspace to &quot;2: mail&quot;'
-bindsym $mod+r exec i3-input -F 'rename workspace to &quot;%s&quot;' -P 'New name: '
+i3-msg 'rename workspace 1 to "1: www"'
+i3-msg 'rename workspace "1: www" to "10: www"'
+i3-msg 'rename workspace to "2: mail"'
+bindsym $mod+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 </code></pre>
 <p>如果你想在保持切换命令稳定的同时按需重命名工作空间，你可以使用这样的设置。</p>
-<pre><code>bindsym $mod+1 workspace number &quot;1: www&quot;
-bindsym $mod+2 workspace number &quot;2: mail&quot;
+<pre><code>bindsym $mod+1 workspace number "1: www"
+bindsym $mod+2 workspace number "2: mail"
 ...
 </code></pre>
-<p>如果工作区不存在，命令 <code>workspace number &quot;1: mail&quot;</code> 将会创建名为 &quot;1: mail&quot; 的工作区。</p>
-<p>如果编号为 1 的工作区存在，此命令将切换到这个工作区并忽略名字。所以即使这个工作区被重命名为了 &quot;1: web&quot;，上面的命令仍然会切换到它。</p>
+<p>如果工作区不存在，命令 <code>workspace number "1: mail"</code> 将会创建名为 "1: mail" 的工作区。</p>
+<p>如果编号为 1 的工作区存在，此命令将切换到这个工作区并忽略名字。所以即使这个工作区被重命名为了 "1: web"，上面的命令仍然会切换到它。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="移动工作区到另一不同屏幕"><a class="header" href="#移动工作区到另一不同屏幕">移动工作区到另一不同屏幕</a></h1>
 <p>对于如何移动容器/工作区到一个不同的 RandR 输出，见<a href="%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/%E7%A7%BB%E5%8A%A8%E5%AE%B9%E5%99%A8%E6%88%96%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%88%B0RandR%E8%BE%93%E5%87%BA.html">移动容器或工作区到 RandR 输出</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="移动容器或工作区到-randr-输出"><a class="header" href="#移动容器或工作区到-randr-输出">移动容器或工作区到 RandR 输出</a></h1>
@@ -1546,7 +1575,7 @@ bindsym $mod+x move container to output primary
 <pre><code>move window|container to mark &lt;标记&gt;
 </code></pre>
 <p>举例：</p>
-<pre><code>for_window [instance=&quot;tabme&quot;] move window to mark target
+<pre><code>for_window [instance="tabme"] move window to mark target
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变窗口和容器大小"><a class="header" href="#改变窗口和容器大小">改变窗口和容器大小</a></h1>
 <p>如果要使用键盘调整容器/窗口的大小，可以使用 <code>resize</code> 命令：</p>
@@ -1561,17 +1590,17 @@ resize set [width] &lt;width&gt; [px | ppt] [height] &lt;height&gt; [px | ppt]
 <p>注意 <code>resize set</code>: <width> 或 <height> 的值为 0 表示“不沿此方向调整大小”。</p>
 <p>建议在专用绑定模式下定义用于调整大小的绑定。有关更多上下文，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%BC%8F.html">绑定模式</a> 和 i3 <a href="https://github.com/i3/i3/blob/next/etc/config.keycodes">默认配置</a>中的示例。</p>
 <p><strong>例子：</strong></p>
-<pre><code>for_window [class=&quot;urxvt&quot;] resize set 640 480
+<pre><code>for_window [class="urxvt"] resize set 640 480
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="跳转到特定窗口"><a class="header" href="#跳转到特定窗口">跳转到特定窗口</a></h1>
 <p>通常在多显示器环境中，你会希望快速跳转到特定窗口。例如，在工作区 3 上工作时，你可能想要跳转到邮件客户端，向你的老板发送电子邮件，告知你已经实现了一些重要目标。与其弄清楚如何导航到邮件客户端，不如使用快捷方式。你可以使用 <code>focus</code> 命令。</p>
 <p><strong>语法：</strong></p>
-<pre><code>[class=&quot;class&quot;] focus
-[title=&quot;title&quot;] focus
+<pre><code>[class="class"] focus
+[title="title"] focus
 </code></pre>
 <p><strong>例子：</strong></p>
 <pre><code># 进入下一个打开的 VIM 实例
-bindsym $mod+a [class=&quot;urxvt&quot; title=&quot;VIM&quot;] focus
+bindsym $mod+a [class="urxvt" title="VIM"] focus
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="类似-vim-的标记mark-和-goto"><a class="header" href="#类似-vim-的标记mark-和-goto">类似 VIM 的标记（mark 和 goto）</a></h1>
 <p>此功能类似于跳转功能：它允许你直接跳转到特定窗口（这意味着切换到适当的工作区并将焦点设置到窗口）。
@@ -1589,7 +1618,7 @@ bindsym $mod+a [class=&quot;urxvt&quot; title=&quot;VIM&quot;] focus
 <p>如果你不想在窗口装饰中显示标记，请参阅 <a href="https://zjuyk.site/i3wm-userguide-zh/%E9%85%8D%E7%BD%AEi3/%E5%9C%A8%E7%AA%97%E5%8F%A3%E8%A3%85%E9%A5%B0%E7%BB%98%E5%88%B6%E6%A0%87%E8%AE%B0.html">显示标记</a>。</p>
 <p><strong>语法：</strong></p>
 <pre><code>mark [--add|--replace] [--toggle] &lt;identifier&gt;
-[con_mark=&quot;identifier&quot;] focus
+[con_mark="identifier"] focus
 unmark &lt;identifier&gt;
 </code></pre>
 <p>你可以使用 <code>i3-input</code> 提示输入标记名称，然后使用 <code>mark</code> 和 <code>focus</code> 命令创建并跳转到自定义标记：</p>
@@ -1598,7 +1627,7 @@ unmark &lt;identifier&gt;
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 
 # 读取 1 个字符并转到带有该字符的窗口
-bindsym $mod+g exec i3-input -F '[con_mark=&quot;%s&quot;] focus' -l 1 -P 'Goto: '
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 </code></pre>
 <p>或者，如果你不想弄乱 <code>i3-input</code>，你可以为一组特定的标签创建单独的绑定，然后只使用这些标签：</p>
 <p><strong>例子（在终端）：</strong></p>
@@ -1606,13 +1635,13 @@ bindsym $mod+g exec i3-input -F '[con_mark=&quot;%s&quot;] focus' -l 1 -P 'Goto:
 mark irssi
 
 # 从任何有它的容器中删除标记“irssi”
-'[con_mark=&quot;irssi&quot;] focus'
+'[con_mark="irssi"] focus'
 
-# remove the mark &quot;irssi&quot; from whichever container has it
+# remove the mark "irssi" from whichever container has it
 unmark irssi
 
 # 删除所有 firefox 窗口上的所有标记
-[class=&quot;(?i)firefox&quot;] unmark
+[class="(?i)firefox"] unmark
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="窗口标题格式"><a class="header" href="#窗口标题格式">窗口标题格式</a></h1>
 <p>默认情况下，i3 将简单地打印 X11 窗口标题。
@@ -1630,13 +1659,13 @@ unmark irssi
 </code></pre>
 <p><strong>例子：</strong></p>
 <pre><code># 给焦点窗口一个前缀
-bindsym $mod+p title_format &quot;Important | %title&quot;
+bindsym $mod+p title_format "Important | %title"
 
 # 以粗体打印所有窗口标题
-for_window [class=&quot;.*&quot;] title_format &quot;&lt;b&gt;%title&lt;/b&gt;&quot;
+for_window [class=".*"] title_format "&lt;b&gt;%title&lt;/b&gt;"
 
 # 以红色打印 Firefox 窗口的窗口标题
-for_window [class=&quot;(?i)firefox&quot;] title_format &quot;&lt;span foreground='red'&gt;%title&lt;/span&gt;&quot;
+for_window [class="(?i)firefox"] title_format "&lt;span foreground='red'&gt;%title&lt;/span&gt;"
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="改变边框样式"><a class="header" href="#改变边框样式">改变边框样式</a></h1>
 <p>要更改当前客户端的边框，可以使用 <code>border normal</code> 使用普通边框（包括窗口标题），<code>border pixel 1</code> 使用 1 像素边框（无窗口标题）和 <code>border none</code> 使客户端无边框。</p>
@@ -1646,7 +1675,7 @@ for_window [class=&quot;(?i)firefox&quot;] title_format &quot;&lt;span foregroun
 <pre><code>border normal|pixel|toggle [&lt;n&gt;]
 border none
 
-# 旧语法，相当于 &quot;border pixel 1&quot;
+# 旧语法，相当于 "border pixel 1"
 border 1pixel
 </code></pre>
 <p><strong>例子：</strong></p>
@@ -1712,7 +1741,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # 显示 sup-mail 暂存窗口，如果有的话。
-bindsym mod4+s [title=&quot;^Sup ::&quot;] scratchpad show
+bindsym mod4+s [title="^Sup ::"] scratchpad show
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nop"><a class="header" href="#nop">Nop</a></h1>
 <p>有一个无操作命令 <code>nop</code> 允许你覆盖默认行为。这对于禁用鼠标中键单击时的焦点更改很有用。</p>
@@ -1754,7 +1783,7 @@ bindsym $mod+Shift+b bar mode invisible bar-1
 <p>当你有一个以上的显示器时，每个显示器将得到一个初始工作区。第一个显示器得到 1，第二个得到 2，第三个得到 3。当你切换到其它显示器上的工作区时，i3 将先切换到该显示器，然后再切换到该工作区。这样一来，你就不需要用特定的快捷键来切换到一个显示器，也不需要记住你把哪个工作区放在哪个显示器上。新的工作空间将在当前活动的显示器上打开。不会存在一个没有工作区的显示器。</p>
 <p>使用全局工作区的想法是基于这样的观察：大多数用户在他们额外显示器上的工作区个数通常非常有限。它们通常被用于一个特定的任务（如浏览器、shell）或者用于监视一些东西（如邮件、IRC、系统日志……）。因此，在一个显示器上使用一个工作区，而在其他显示器上使用所有其余的工作区往往是说得通的。然而，由于你可以在 i3 中创建无限数量的工作空间，并将它们与特定的屏幕绑定，所以你可以通过改变配置（例如使用 modes）来模拟每个屏幕有几个工作空间的“传统”方式。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="配置显示器"><a class="header" href="#配置显示器">配置显示器</a></h1>
-<p>如果你以前从未使用过多显示器，为了帮助你开始工作，这里有一个关于xrandr选项的简短概述，你可能会感兴趣。获取当前屏幕配置的概览总是很有用的。只要运行 &quot;xrandr&quot;，你就会得到类似的输出：</p>
+<p>如果你以前从未使用过多显示器，为了帮助你开始工作，这里有一个关于xrandr选项的简短概述，你可能会感兴趣。获取当前屏幕配置的概览总是很有用的。只要运行 "xrandr"，你就会得到类似的输出：</p>
 <pre><code>$ xrandr
 Screen 0: minimum 320 x 200, current 1280 x 800, maximum 8192 x 8192
 VGA1 disconnected (normal left inverted right x axis y axis)
@@ -1768,12 +1797,12 @@ LVDS1 connected 1280x800+0+0 (normal left inverted right x axis y axis) 261mm x 
    640x400        85.1
    640x350        85.1
 </code></pre>
-<p>这里有几件事很重要。你可以看到 <code>LVDS1</code> 被连接了（当然，它是内部显示器），但 <code>VGA1</code> 没有。如果你有一个显示器连接到了端口，但 xrandr 仍然显示 &quot;disconnected&quot;，你应该检查你的连接线、显示器或图形驱动程序。</p>
+<p>这里有几件事很重要。你可以看到 <code>LVDS1</code> 被连接了（当然，它是内部显示器），但 <code>VGA1</code> 没有。如果你有一个显示器连接到了端口，但 xrandr 仍然显示 "disconnected"，你应该检查你的连接线、显示器或图形驱动程序。</p>
 <p>你可以在第一行末尾看到的最大分辨率是显示器的最大组合分辨率。默认情况下，它通常太低，必须通过编辑 <code>/etc/X11/xorg.conf</code> 来更改。</p>
 <p>下面假设你连接了 <code>VGA1</code>，想把它作为一个额外的屏幕使用：</p>
 <pre><code>xrandr --output VGA1 --auto --left-of LVDS1
 </code></pre>
-<p>这个命令使 xrandr 尝试找到 <code>VGA1</code> 设备的原始分辨率，并将其配置在你的内部显示器的左边。当再次运行 &quot;xrandr&quot; 时，输出将看起来像这样：</p>
+<p>这个命令使 xrandr 尝试找到 <code>VGA1</code> 设备的原始分辨率，并将其配置在你的内部显示器的左边。当再次运行 "xrandr" 时，输出将看起来像这样：</p>
 <pre><code>$ xrandr
 Screen 0: minimum 320 x 200, current 2560 x 1024, maximum 8192 x 8192
 VGA1 connected 1280x1024+0+0 (normal left inverted right x axis y axis) 338mm x 270mm
@@ -1835,7 +1864,7 @@ LVDS1 connected 1280x800+1280+0 (normal left inverted right x axis y axis) 261mm
 <p>有关如何在 Linux 桌面的各个部分启用缩放的详细信息，请参阅 <a href="https://wiki.archlinux.org/index.php/HiDPI">https://wiki.archlinux.org/index.php/HiDPI</a>。i3 会从 Xft.dpi 属性读取所需的 DPI 值。该属性默认为 96 DPI，因此要实现 200% 缩放，你需要在 <code>~/.Xresources</code> 中设置 Xft.dpi: 192。</p>
 <p>如果你是刚得到新显示器的 i3 用户，请仔细确认：</p>
 <ul>
-<li>你在 i3 配置中使用了可缩放字体（以 &quot;pango:&quot; 开头）。</li>
+<li>你在 i3 配置中使用了可缩放字体（以 "pango:" 开头）。</li>
 <li>你正在使用支持缩放的终端模拟器。你可以暂时切换到 gnome-terminal，它以支持开箱即用的扩展而闻名，直到你弄清楚如何在你最喜欢的终端模拟器中调整字体大小。</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="贡献者"><a class="header" href="#贡献者">贡献者</a></h1>

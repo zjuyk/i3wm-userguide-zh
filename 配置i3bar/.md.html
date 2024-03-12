@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh" class="sidebar-visible no-js light">
+<html lang="zh" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
@@ -31,7 +31,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -61,42 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded affix "><a href="../介绍.html">介绍</a></li><li class="chapter-item expanded "><a href="../默认按键绑定.html"><strong aria-hidden="true">1.</strong> 默认按键绑定</a></li><li class="chapter-item expanded "><a href="../使用i3/使用i3.html"><strong aria-hidden="true">2.</strong> 使用 i3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../使用i3/打开终端和移动焦点.html"><strong aria-hidden="true">2.1.</strong> 打开终端和移动焦点</a></li><li class="chapter-item expanded "><a href="../使用i3/改变容器布局.html"><strong aria-hidden="true">2.2.</strong> 改变容器布局</a></li><li class="chapter-item expanded "><a href="../使用i3/为窗口切换全屏模式.html"><strong aria-hidden="true">2.3.</strong> 为窗口切换全屏模式</a></li><li class="chapter-item expanded "><a href="../使用i3/打开其他应用.html"><strong aria-hidden="true">2.4.</strong> 打开其他应用</a></li><li class="chapter-item expanded "><a href="../使用i3/关闭窗口.html"><strong aria-hidden="true">2.5.</strong> 关闭窗口</a></li><li class="chapter-item expanded "><a href="../使用i3/使用工作区.html"><strong aria-hidden="true">2.6.</strong> 使用工作区</a></li><li class="chapter-item expanded "><a href="../使用i3/移动窗口到工作区.html"><strong aria-hidden="true">2.7.</strong> 移动窗口到工作区</a></li><li class="chapter-item expanded "><a href="../使用i3/调整大小.html"><strong aria-hidden="true">2.8.</strong> 调整大小</a></li><li class="chapter-item expanded "><a href="../使用i3/原地重启i3.html"><strong aria-hidden="true">2.9.</strong> 原地重启 i3</a></li><li class="chapter-item expanded "><a href="../使用i3/退出i3.html"><strong aria-hidden="true">2.10.</strong> 退出 i3</a></li><li class="chapter-item expanded "><a href="../使用i3/浮动模式.html"><strong aria-hidden="true">2.11.</strong> 浮动模式</a></li></ol></li><li class="chapter-item expanded "><a href="../树/树.html"><strong aria-hidden="true">3.</strong> 树</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../树/由容器构成的树.html"><strong aria-hidden="true">3.1.</strong> 由容器构成的树</a></li><li class="chapter-item expanded "><a href="../树/方向与切分容器.html"><strong aria-hidden="true">3.2.</strong> 方向与切分容器</a></li><li class="chapter-item expanded "><a href="../树/聚焦父容器.html"><strong aria-hidden="true">3.3.</strong> 聚焦父容器</a></li><li class="chapter-item expanded "><a href="../树/隐式容器.html"><strong aria-hidden="true">3.4.</strong> 隐式容器</a></li></ol></li><li class="chapter-item expanded "><a href="../配置i3/配置i3.html"><strong aria-hidden="true">4.</strong> 配置 i3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../配置i3/注释.html"><strong aria-hidden="true">4.1.</strong> 注释</a></li><li class="chapter-item expanded "><a href="../配置i3/字体.html"><strong aria-hidden="true">4.2.</strong> 字体</a></li><li class="chapter-item expanded "><a href="../配置i3/键盘绑定.html"><strong aria-hidden="true">4.3.</strong> 键盘绑定</a></li><li class="chapter-item expanded "><a href="../配置i3/鼠标绑定.html"><strong aria-hidden="true">4.4.</strong> 鼠标绑定</a></li><li class="chapter-item expanded "><a href="../配置i3/绑定模式.html"><strong aria-hidden="true">4.5.</strong> 绑定模式</a></li><li class="chapter-item expanded "><a href="../配置i3/浮动修饰键.html"><strong aria-hidden="true">4.6.</strong> 浮动修饰键</a></li><li class="chapter-item expanded "><a href="../配置i3/限制浮动窗口大小.html"><strong aria-hidden="true">4.7.</strong> 限制浮动窗口大小</a></li><li class="chapter-item expanded "><a href="../配置i3/新工作区方向.html"><strong aria-hidden="true">4.8.</strong> 新工作区方向</a></li><li class="chapter-item expanded "><a href="../配置i3/新工作区容器布局模式.html"><strong aria-hidden="true">4.9.</strong> 新工作区容器布局模式</a></li><li class="chapter-item expanded "><a href="../配置i3/窗口标题对齐.html"><strong aria-hidden="true">4.10.</strong> 窗口标题对齐</a></li><li class="chapter-item expanded "><a href="../配置i3/新窗口默认边框样式.html"><strong aria-hidden="true">4.11.</strong> 新窗口默认边框样式</a></li><li class="chapter-item expanded "><a href="../配置i3/靠近屏幕边缘隐藏边框.html"><strong aria-hidden="true">4.12.</strong> 靠近屏幕边缘隐藏边框</a></li><li class="chapter-item expanded "><a href="../配置i3/针对窗口专用命令（for_window）.html"><strong aria-hidden="true">4.13.</strong> 针对窗口专用命令（for_window）</a></li><li class="chapter-item expanded "><a href="../配置i3/打开窗口不聚焦.html"><strong aria-hidden="true">4.14.</strong> 打开窗口不聚焦</a></li><li class="chapter-item expanded "><a href="../配置i3/变量.html"><strong aria-hidden="true">4.15.</strong> 变量</a></li><li class="chapter-item expanded "><a href="../配置i3/X资源.html"><strong aria-hidden="true">4.16.</strong> X 资源</a></li><li class="chapter-item expanded "><a href="../配置i3/自动将客户端放到指定工作区.html"><strong aria-hidden="true">4.17.</strong> 自动将客户端放到指定工作区</a></li><li class="chapter-item expanded "><a href="../配置i3/在i3启动时自动运行应用.html"><strong aria-hidden="true">4.18.</strong> 在 i3 启动时自动运行应用</a></li><li class="chapter-item expanded "><a href="../配置i3/自动将工作区放到指定显示屏.html"><strong aria-hidden="true">4.19.</strong> 自动将工作区放到指定显示屏</a></li><li class="chapter-item expanded "><a href="../配置i3/改变颜色.html"><strong aria-hidden="true">4.20.</strong> 改变颜色</a></li><li class="chapter-item expanded "><a href="../配置i3/进程通信.html"><strong aria-hidden="true">4.21.</strong> 进程通信</a></li><li class="chapter-item expanded "><a href="../配置i3/焦点跟随鼠标.html"><strong aria-hidden="true">4.22.</strong> 焦点跟随鼠标</a></li><li class="chapter-item expanded "><a href="../配置i3/鼠标活动.html"><strong aria-hidden="true">4.23.</strong> 鼠标活动</a></li><li class="chapter-item expanded "><a href="../配置i3/全屏模式下的弹出窗口.html"><strong aria-hidden="true">4.24.</strong> 全屏模式下的弹出窗口</a></li><li class="chapter-item expanded "><a href="../配置i3/焦点环绕.html"><strong aria-hidden="true">4.25.</strong> 焦点环绕</a></li><li class="chapter-item expanded "><a href="../配置i3/强行多荧幕.html"><strong aria-hidden="true">4.26.</strong> 强行多荧幕</a></li><li class="chapter-item expanded "><a href="../配置i3/当切换当前工作区时自动来回切换.html"><strong aria-hidden="true">4.27.</strong> 当切换当前工作区时自动来回切换</a></li><li class="chapter-item expanded "><a href="../配置i3/延迟工作区变化紧急提示重置.html"><strong aria-hidden="true">4.28.</strong> 延迟工作区变化紧急提示重置</a></li><li class="chapter-item expanded "><a href="../配置i3/聚焦窗口活动.html"><strong aria-hidden="true">4.29.</strong> 聚焦窗口活动</a></li><li class="chapter-item expanded "><a href="../配置i3/在窗口装饰绘制标记.html"><strong aria-hidden="true">4.30.</strong> 在窗口装饰绘制标记</a></li><li class="chapter-item expanded "><a href="../配置i3/连续行.html"><strong aria-hidden="true">4.31.</strong> 连续行</a></li></ol></li><li class="chapter-item expanded "><a href="../配置i3bar/.md.html" class="active"><strong aria-hidden="true">5.</strong> 配置 i3bar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../配置i3bar/i3bar命令.html"><strong aria-hidden="true">5.1.</strong> i3bar 命令</a></li><li class="chapter-item expanded "><a href="../配置i3bar/状态栏命令.html"><strong aria-hidden="true">5.2.</strong> 状态栏命令</a></li><li class="chapter-item expanded "><a href="../配置i3bar/显示模式.html"><strong aria-hidden="true">5.3.</strong> 显示模式</a></li><li class="chapter-item expanded "><a href="../配置i3bar/鼠标按键命令.html"><strong aria-hidden="true">5.4.</strong> 鼠标按键命令</a></li><li class="chapter-item expanded "><a href="../配置i3bar/Bar编号.html"><strong aria-hidden="true">5.5.</strong> Bar 编号</a></li><li class="chapter-item expanded "><a href="../配置i3bar/位置.html"><strong aria-hidden="true">5.6.</strong> 位置</a></li><li class="chapter-item expanded "><a href="../配置i3bar/输出.html"><strong aria-hidden="true">5.7.</strong> 输出</a></li><li class="chapter-item expanded "><a href="../配置i3bar/托盘输出.html"><strong aria-hidden="true">5.8.</strong> 托盘输出</a></li><li class="chapter-item expanded "><a href="../配置i3bar/托盘内边距.html"><strong aria-hidden="true">5.9.</strong> 托盘内边距</a></li><li class="chapter-item expanded "><a href="../配置i3bar/字体.html"><strong aria-hidden="true">5.10.</strong> 字体</a></li><li class="chapter-item expanded "><a href="../配置i3bar/自定义分隔符.html"><strong aria-hidden="true">5.11.</strong> 自定义分隔符</a></li><li class="chapter-item expanded "><a href="../配置i3bar/工作区按钮.html"><strong aria-hidden="true">5.12.</strong> 工作区按钮</a></li><li class="chapter-item expanded "><a href="../配置i3bar/工作区按钮最小宽度.html"><strong aria-hidden="true">5.13.</strong> 工作区按钮最小宽度</a></li><li class="chapter-item expanded "><a href="../配置i3bar/去除工作区数字和名字.html"><strong aria-hidden="true">5.14.</strong> 去除工作区数字和名字</a></li><li class="chapter-item expanded "><a href="../配置i3bar/绑定模式指示器.html"><strong aria-hidden="true">5.15.</strong> 绑定模式指示器</a></li><li class="chapter-item expanded "><a href="../配置i3bar/颜色.html"><strong aria-hidden="true">5.16.</strong> 颜色</a></li><li class="chapter-item expanded "><a href="../配置i3bar/透明度.html"><strong aria-hidden="true">5.17.</strong> 透明度</a></li></ol></li><li class="chapter-item expanded "><a href="../命令列表/命令列表.html"><strong aria-hidden="true">6.</strong> 命令列表</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../命令列表/运行应用（exec）.html"><strong aria-hidden="true">6.1.</strong> 运行应用（exec）</a></li><li class="chapter-item expanded "><a href="../命令列表/切分容器.html"><strong aria-hidden="true">6.2.</strong> 切分容器</a></li><li class="chapter-item expanded "><a href="../命令列表/操纵布局.html"><strong aria-hidden="true">6.3.</strong> 操纵布局</a></li><li class="chapter-item expanded "><a href="../命令列表/聚焦容器.html"><strong aria-hidden="true">6.4.</strong> 聚焦容器</a></li><li class="chapter-item expanded "><a href="../命令列表/移动容器.html"><strong aria-hidden="true">6.5.</strong> 移动容器</a></li><li class="chapter-item expanded "><a href="../命令列表/交换容器.html"><strong aria-hidden="true">6.6.</strong> 交换容器</a></li><li class="chapter-item expanded "><a href="../命令列表/固定浮动窗口.html"><strong aria-hidden="true">6.7.</strong> 固定浮动窗口</a></li><li class="chapter-item expanded "><a href="../命令列表/切换（已命名）工作区和移动至新工作区.html"><strong aria-hidden="true">6.8.</strong> 切换（已命名）工作区和移动至新工作区</a></li><li class="chapter-item expanded "><a href="../命令列表/移动工作区到另一不同屏幕.html"><strong aria-hidden="true">6.9.</strong> 移动工作区到另一不同屏幕</a></li><li class="chapter-item expanded "><a href="../命令列表/移动容器或工作区到RandR输出.html"><strong aria-hidden="true">6.10.</strong> 移动容器或工作区到 RandR 输出</a></li><li class="chapter-item expanded "><a href="../命令列表/移动容器和窗口到标记区.html"><strong aria-hidden="true">6.11.</strong> 移动容器和窗口到标记区</a></li><li class="chapter-item expanded "><a href="../命令列表/改变窗口和容器大小.html"><strong aria-hidden="true">6.12.</strong> 改变窗口和容器大小</a></li><li class="chapter-item expanded "><a href="../命令列表/跳转到特定窗口.html"><strong aria-hidden="true">6.13.</strong> 跳转到特定窗口</a></li><li class="chapter-item expanded "><a href="../命令列表/类似VIM的标记（mark和goto）.html"><strong aria-hidden="true">6.14.</strong> 类似 VIM 的标记（mark 和 goto）</a></li><li class="chapter-item expanded "><a href="../命令列表/窗口标题格式.html"><strong aria-hidden="true">6.15.</strong> 窗口标题格式</a></li><li class="chapter-item expanded "><a href="../命令列表/改变边框样式.html"><strong aria-hidden="true">6.16.</strong> 改变边框样式</a></li><li class="chapter-item expanded "><a href="../命令列表/启用共享内存日志.html"><strong aria-hidden="true">6.17.</strong> 启用共享内存日志</a></li><li class="chapter-item expanded "><a href="../命令列表/启用调试日志.html"><strong aria-hidden="true">6.18.</strong> 启用调试日志</a></li><li class="chapter-item expanded "><a href="../命令列表/重载重启和退出.html"><strong aria-hidden="true">6.19.</strong> 重载重启和退出</a></li><li class="chapter-item expanded "><a href="../命令列表/Scratchpad.html"><strong aria-hidden="true">6.20.</strong> Scratchpad</a></li><li class="chapter-item expanded "><a href="../命令列表/Nop.html"><strong aria-hidden="true">6.21.</strong> Nop</a></li><li class="chapter-item expanded "><a href="../命令列表/i3bar控制.html"><strong aria-hidden="true">6.22.</strong> i3bar 控制</a></li></ol></li><li class="chapter-item expanded "><a href="../多显示器/多显示器.html"><strong aria-hidden="true">7.</strong> 多显示器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../多显示器/配置显示器.html"><strong aria-hidden="true">7.1.</strong> 配置显示器</a></li><li class="chapter-item expanded "><a href="../多显示器/多显示器环境下的有趣设置.html"><strong aria-hidden="true">7.2.</strong> 多显示器环境下的有趣设置</a></li></ol></li><li class="chapter-item expanded "><a href="../i3和你的其他软件/i3和你的其他软件.html"><strong aria-hidden="true">8.</strong> i3 和你的其他软件</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../i3和你的其他软件/显示状态栏.html"><strong aria-hidden="true">8.1.</strong> 显示状态栏</a></li><li class="chapter-item expanded "><a href="../i3和你的其他软件/做展示（多显示器）.html"><strong aria-hidden="true">8.2.</strong> 做展示（多显示器）</a></li><li class="chapter-item expanded "><a href="../i3和你的其他软件/高分辨率（HIDPI）.html"><strong aria-hidden="true">8.3.</strong> 高分辨率（HIDPI）</a></li></ol></li><li class="chapter-item expanded "><a href="../贡献者.html">贡献者</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -152,7 +181,7 @@
 你可以直接删除 i3bar 的配置，然后使用你喜欢的替代品。</p>
 </li>
 <li>
-<p>它遵循 UNIX 的理念，即 &quot;让每个程序做好一件事&quot;。i3 很擅长管理好你的每一个窗口，
+<p>它遵循 UNIX 的理念，即 "让每个程序做好一件事"。i3 很擅长管理好你的每一个窗口，
 i3bar 则擅长在每个显示器上显示一个栏（除非你对它进行其他配置）。</p>
 </li>
 <li>
@@ -177,7 +206,7 @@ i3bar 则擅长在每个显示器上显示一个栏（除非你对它进行其�
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../配置i3bar/i3bar命令.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../配置i3bar/i3bar命令.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -191,7 +220,7 @@ i3bar 则擅长在每个显示器上显示一个栏（除非你对它进行其�
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../配置i3bar/i3bar命令.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../配置i3bar/i3bar命令.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
